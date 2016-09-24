@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
+<project name="ad" basedir=".">
+	<!-- importing of file which is to contain properties -->
+	<import file=".properties.xml"/>
+	<!-- MySQL connection properties -->
+	<!--property name="mysql-host" value="localhost"/>
+	<property name="mysql-port" value="3306"/>
+	<property name="mysql-user" value="root"/>
+	<property name="mysql-password" value="root"/>
+	<property name="mysql-jdbc-url" value="jdbc:mysql://${mysql-host}:${mysql-port}?useUnicode=true&amp;characterEncoding=UTF-8"/-->
+	<!-- Tomcat connection properties -->
+	<property name="tomcat-bin-dir" value="${tomcat-dir}/bin"/>
+	<property name="tomcat-host" value="localhost"/>
+	<property name="tomcat-port" value="80"/>
+	<property name="tomcat-user" value="root"/>
+	<property name="tomcat-password" value="root"/>
+	<property name="tomcat-manager-url" value="http://${tomcat-host}:${tomcat-port}/manager/text"/>
+	<!-- web-application properties -->
+	<property name="deploy-path" value="/ad"/>
+
+	<!-- targets for database processing -->
+	<!--target name="Init data base">
+		<sql driver="com.mysql.jdbc.Driver"
+				url="${mysql-jdbc-url}"
+				userid="${mysql-user}"
+				password="${mysql-password}"
+				encoding="utf8">
+			<classpath>
+				<pathelement location="web/WEB-INF/lib/mysql-connector-java-5.1.17-bin.jar"/>
+			</classpath>
+			<sort>
+				<fileset dir="sql" includes="*.sql"/>
+			</sort>
+		</sql>
+	</target-->
+
+	<!-- targets for web-application processing -->
+	<taskdef name="reload" classname="org.apache.catalina.ant.ReloadTask">
+		<classpath>
+			<fileset dir="${tomcat-dir}/lib">
+				<include name="catalina-ant.jar"/>
+				<include name="tomcat-coyote.jar"/>
+				<include name="tomcat-util.jar"/>
+			</fileset>
+			<fileset dir="${tomcat-bin-dir}">
+				<include name="tomcat-juli.jar"/>
+			</fileset>
+		</classpath>
+	</taskdef>
+	<target name="Update">
+		<reload
+			url="${tomcat-manager-url}"
+			username="${tomcat-user}"
+			password="${tomcat-password}"
+			path="${deploy-path}"/>
+	</target>
+</project>
