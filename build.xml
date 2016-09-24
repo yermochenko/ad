@@ -3,21 +3,9 @@
 <project name="ad" basedir=".">
 	<!-- importing of file which is to contain properties -->
 	<import file=".properties.xml"/>
-	<!-- MySQL connection properties -->
-	<!--property name="mysql-host" value="localhost"/>
-	<property name="mysql-port" value="3306"/>
-	<property name="mysql-user" value="root"/>
-	<property name="mysql-password" value="root"/>
-	<property name="mysql-jdbc-url" value="jdbc:mysql://${mysql-host}:${mysql-port}?useUnicode=true&amp;characterEncoding=UTF-8"/-->
-	<!-- Tomcat connection properties -->
+	<property name="mysql-jdbc-url" value="jdbc:mysql://${mysql-host}:${mysql-port}?useUnicode=true&amp;characterEncoding=UTF-8"/>
 	<property name="tomcat-bin-dir" value="${tomcat-dir}/bin"/>
-	<property name="tomcat-host" value="localhost"/>
-	<property name="tomcat-port" value="80"/>
-	<property name="tomcat-user" value="root"/>
-	<property name="tomcat-password" value="root"/>
 	<property name="tomcat-manager-url" value="http://${tomcat-host}:${tomcat-port}/manager/text"/>
-	<!-- web-application properties -->
-	<property name="deploy-path" value="/ad"/>
 
 	<!-- targets for database processing -->
 	<!--target name="Init data base">
