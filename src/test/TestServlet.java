@@ -10,6 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 public class TestServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.getWriter().println("<HTML><BODY>Main page</BODY></HTML>");
+		resp.getWriter().println("<HTML><BODY>...Main page</BODY></HTML>");
 	}
 }
