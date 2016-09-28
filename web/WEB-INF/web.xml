@@ -4,9 +4,8 @@
 
 	<servlet>
 		<servlet-name>MainPage</servlet-name>
-		<servlet-class>ad.MainPage</servlet-class>
+		<servlet-class>ad.servlets.MainPage</servlet-class>
 	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>MainPage</servlet-name>
 		<url-pattern>/index.html</url-pattern>
@@ -14,9 +13,8 @@
 		
 	<servlet>
 		<servlet-name>CurriculumsServlet</servlet-name>
-		<servlet-class>ad.CurriculumsServlet</servlet-class>
+		<servlet-class>ad.servlets.CurriculumsServlet</servlet-class>
 	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>CurriculumsServlet</servlet-name>
 		<url-pattern>/curriculums.html</url-pattern>
@@ -24,9 +22,8 @@
 		
 	<servlet>
 		<servlet-name>CurriculumDisciplinesServlet</servlet-name>
-		<servlet-class>ad.CurriculumDisciplinesServlet</servlet-class>
+		<servlet-class>ad.servlets.CurriculumDisciplinesServlet</servlet-class>
 	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>CurriculumDisciplinesServlet</servlet-name>
 		<url-pattern>/curriculumdisciplines.html</url-pattern>
@@ -34,19 +31,26 @@
 		
 	<servlet>
 		<servlet-name>DisciplinesServlet</servlet-name>
-		<servlet-class>ad.DisciplinesServlet</servlet-class>
+		<servlet-class>ad.servlets.disciplinesservlets.DisciplinesServlet</servlet-class>
 	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>DisciplinesServlet</servlet-name>
 		<url-pattern>/disciplines.html</url-pattern>
 		</servlet-mapping>
 		
 	<servlet>
-		<servlet-name>SpecialtiesServlet</servlet-name>
-		<servlet-class>ad.SpecialtiesServlet</servlet-class>
+		<servlet-name>ViewDisciplinesServlet</servlet-name>
+		<servlet-class>ad.servlets.disciplinesservlets.ViewDisciplinesServlet</servlet-class>
 	</servlet>
-
+	<servlet-mapping>
+		<servlet-name>ViewDisciplinesServlet</servlet-name>
+		<url-pattern>/WEB-INF/disciplines.html</url-pattern>
+		</servlet-mapping>
+		
+	<servlet>
+		<servlet-name>SpecialtiesServlet</servlet-name>
+		<servlet-class>ad.servlets.SpecialtiesServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>SpecialtiesServlet</servlet-name>
 		<url-pattern>/specialties.html</url-pattern>

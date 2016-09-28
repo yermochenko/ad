@@ -1,4 +1,4 @@
-package ad;
+package ad.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,12 +20,12 @@ public class MainPage extends HttpServlet {
         w.println("<TITLE>Документооборот кафедры</TITLE>");
         w.println("</HEAD>");
         w.println("<BODY>");
-        w.println("<FORM>");
-        w.println("<BUTTON formaction=\"disciplines.html\" formtarget=\"_blank\">Дисциплины</BUTTON>");
-        w.println("<BUTTON formaction=\"curriculumdisciplines.html\" formtarget=\"_blank\">Дисциплины учебных планов</BUTTON>");
-        w.println("<BUTTON formaction=\"specialties.html\" formtarget=\"_blank\">Специальности</BUTTON>");
-        w.println("<BUTTON formaction=\"curriculums.html\" formtarget=\"_blank\">Учебные планы</BUTTON>");
-        w.println("</FORM>");
+        w.println("<CENTER><FORM>");
+        w.println("<BUTTON formaction=\"disciplines.html\">Дисциплины</BUTTON>");
+        w.println("<BUTTON formaction=\"curriculumdisciplines.html\">Дисциплины учебных планов</BUTTON>");
+        w.println("<BUTTON formaction=\"specialties.html\">Специальности</BUTTON>");
+        w.println("<BUTTON formaction=\"curriculums.html\">Учебные планы</BUTTON>");
+        w.println("</FORM></CENTER>");
         w.println("</BODY>");
         w.println("</HTML>");
 	}

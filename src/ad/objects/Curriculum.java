@@ -1,4 +1,4 @@
-package ad;
+package ad.objects;
 
 import java.util.Collection;
 import java.util.HashMap;

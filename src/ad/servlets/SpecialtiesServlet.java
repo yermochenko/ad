@@ -1,4 +1,4 @@
-package ad;
+package ad.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class DisciplinesServlet extends HttpServlet {
+public class SpecialtiesServlet extends HttpServlet {
 	 @Override
-	    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+	 protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 	                                    throws ServletException, IOException {
 	        resp.setCharacterEncoding("UTF-8");
 	        PrintWriter w = resp.getWriter();
@@ -18,11 +18,11 @@ public class DisciplinesServlet extends HttpServlet {
 	        w.println("<HEAD>");
 	        w.println("<META http-equiv=\"Content-Type\"");
 	        w.println("      content=\"text/html; charset=UTF-8\"/>");
-	        w.println("<TITLE>Дисциплины</TITLE>");
+	        w.println("<TITLE>Специальности</TITLE>");
 	        w.println("</HEAD>");
 	        w.println("<BODY>");
-	        w.println("<P>DisciplinesPage...</P>");
-	        w.println("<FORM><BUTTON formaction=\"index.html\">Назад</BUTTON></FORM>");
+	        w.println("<P>SpecialtiesPage...</P>");
+	        w.println("<FORM><BUTTON formaction=\"index.html\">Вернуться на главную страницу</BUTTON></FORM>");
 	        w.println("</BODY>");
 	        w.println("</HTML>");
 	    }

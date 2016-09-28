@@ -1,4 +1,4 @@
-package ad;
+package ad.objects;
 
 public class CurriculumDiscipline {
 	private Integer Id;

@@ -1,4 +1,4 @@
-package ad;
+package ad.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,7 +22,7 @@ public class CurriculumDisciplinesServlet extends HttpServlet {
         w.println("</HEAD>");
         w.println("<BODY>");
         w.println("<P>CurriculumDisciplinesPage...</P>");
-        w.println("<FORM><BUTTON formaction=\"index.html\">Назад</BUTTON></FORM>");
+        w.println("<FORM><BUTTON formaction=\"index.html\">Вернуться на главную страницу</BUTTON></FORM>");
         w.println("</BODY>");
         w.println("</HTML>");
     }
