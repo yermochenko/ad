@@ -30,6 +30,42 @@
 		</servlet-mapping>
 		
 	<servlet>
+		<servlet-name>DisciplinesCheckServlet</servlet-name>
+		<servlet-class>ad.servlets.disciplinesservlets.DisciplinesCheckServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DisciplinesCheckServlet</servlet-name>
+		<url-pattern>/check.html</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DisciplinesDeleteServlet</servlet-name>
+		<servlet-class>ad.servlets.disciplinesservlets.DisciplinesDeleteServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DisciplinesDeleteServlet</servlet-name>
+		<url-pattern>/delete.html</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DisciplinesEditServlet</servlet-name>
+		<servlet-class>ad.servlets.disciplinesservlets.DisciplinesEditServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DisciplinesEditServlet</servlet-name>
+		<url-pattern>/edit.html</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DisciplinesSaveservlet</servlet-name>
+		<servlet-class>ad.servlets.disciplinesservlets.DisciplinesSaveServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DisciplinesSaveservlet</servlet-name>
+		<url-pattern>/save.html</url-pattern>
+	</servlet-mapping>
+		
+	<servlet>
 		<servlet-name>DisciplinesServlet</servlet-name>
 		<servlet-class>ad.servlets.disciplinesservlets.DisciplinesServlet</servlet-class>
 	</servlet>
@@ -37,6 +73,15 @@
 		<servlet-name>DisciplinesServlet</servlet-name>
 		<url-pattern>/disciplines.html</url-pattern>
 		</servlet-mapping>
+		
+	<servlet>
+		<servlet-name>ViewDisciplinesEditServlet</servlet-name>
+		<servlet-class>ad.servlets.disciplinesservlets.ViewDisciplinesEditServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewDisciplinesEditServlet</servlet-name>
+		<url-pattern>/WEB-INF/edit.html</url-pattern>
+	</servlet-mapping>
 		
 	<servlet>
 		<servlet-name>ViewDisciplinesServlet</servlet-name>

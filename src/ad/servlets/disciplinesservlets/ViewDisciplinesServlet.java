@@ -33,34 +33,32 @@ public class ViewDisciplinesServlet extends HttpServlet {
         w.println("</STYLE>");
         w.println("</HEAD>");
         w.println("<BODY>");
+        w.println("<FORM  action=\"edit.html\" method=\"post\">");
         if(!disciplines.isEmpty()){
-        	w.println("<FORM method=\"post\">");
         	w.println("<CENTER>");
         	w.println("<TABLE>");
-        	w.println("<TR><TH>&nbsp;</TH><TH>ID</TH><TH>Название</TH><TH>Сокращенное название</TH></TR>");
+        	w.println("<TR><TH>ID</TH><TH>Название</TH><TH>Сокращенное название</TH></TR>");
         	for(ad.objects.Discipline discipline : disciplines){
         		w.print("<TR>");
-        		w.printf("<TD><CENTER><INPUT type=\"checkbox\" name=\"id\" value=\"%d\"></CENTER></TD>", discipline.getId());
-        		w.printf("<TD><CENTER>%d</CENTER></TD>", discipline.getId());
+        		w.printf("<TD><CENTER><A href=\"edit.html?id=%d\">%d</A></CENTER></TD>", discipline.getId(), discipline.getId());
         		w.printf("<TD><CENTER>%s</CENTER></TD>", discipline.getName());
         		w.printf("<TD><CENTER>%s</CENTER></TD>", discipline.getShortName());
         		w.print("</TR>");
         	}
         	w.println("</TABLE>");
-        	w.println("<CENTER>");
-        	w.println("</FORM>");
+        	w.println("</CENTER>");
         }
         else{
         	w.println("<P>Список дисциплин пока пуст.</P>");
         }
+        w.println("</FORM>");
         w.println("<CENTER>");
         w.println("<P>");
-        w.println("<BUTTON>Добавить</BUTTON>");
-        if(!disciplines.isEmpty()){
-        	w.println("<BUTTON>Удалить</BUTTON>");
-        }
-        w.println("");
-        w.println("<BUTTON formaction=\"index.html\">Вернуться на главную страницу</BUTTON></P>");
+        w.println("<FORM>");
+        w.println("<BUTTON formaction=\"edit.html\">Добавить</BUTTON>");
+        w.println("<BUTTON formaction=\"index.html\">Вернуться на главную страницу</BUTTON>");
+        w.println("</FORM>");
+        w.println("</P>");
         w.println("</CENTER>");
         w.println("</BODY>");
         w.println("</HTML>");

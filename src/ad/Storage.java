@@ -53,4 +53,10 @@ public class Storage {
 		Discipline.setId(Id);
 		Disciplines.put(Id, Discipline);
 	}
+	public static void deleteDisciplineById(Integer Id){
+		Disciplines.remove(Id);
+	}
+	public static void updateDiscipline(ad.objects.Discipline Discipline){
+		Disciplines.put(Discipline.getId(), Discipline);
+	}
 }
