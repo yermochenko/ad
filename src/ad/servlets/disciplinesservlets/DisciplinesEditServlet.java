@@ -14,8 +14,8 @@ public class DisciplinesEditServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
                                     throws ServletException, IOException {
 		try{
-			Integer Id=Integer.parseInt(req.getParameter("id"));
-			ad.objects.Discipline discipline=Storage.getDisciplineById(Id);
+			Integer id=Integer.parseInt(req.getParameter("id"));
+			ad.objects.Discipline discipline=Storage.getDisciplineById(id);
 			req.setAttribute("discipline", discipline);
 		} catch(NumberFormatException e) {}
 		getServletContext().getRequestDispatcher("/WEB-INF/edit.html").forward(req, resp);

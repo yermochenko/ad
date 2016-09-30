@@ -1,80 +1,78 @@
 package ad.objects;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class Specialty {
-	private Integer Id;
-	private String Code;
-	private String Name;
-	private String ShortName;
-	private String Qualification;
-	private String SpecialtyDirection;
-	private Specialty Parent;
-	private Map <Integer, Specialty> Children;
+	private Integer id;
+	private String code;
+	private String name;
+	private String shortname;
+	private String qualification;
+	private String specialtyDirection;
+	private Specialty parent;
+	private List <Specialty> children;
 	
 	public Integer getId(){
-		return Id;
+		return id;
 	}
-	public void setId(Integer Id){
-		this.Id=Id;
+	public void setId(Integer id){
+		this.id=id;
 	}
 	
 	public String getCode(){
-		return Code;
+		return code;
 	}
-	public void setCode(String Code){
-		this.Code=Code;
+	public void setCode(String code){
+		this.code=code;
 	}
 	
 	public String getName(){
-		return Name;
+		return name;
 	}
-	public void setName(String Name){
-		this.Name=Name;
+	public void setName(String name){
+		this.name=name;
 	}
 	
 	public String getShortName(){
-		return ShortName;
+		return shortname;
 	}
-	public void setShortName(String ShortName){
-		this.ShortName=ShortName;
+	public void setShortName(String shortname){
+		this.shortname=shortname;
 	}
 	
 	public String getQualification(){
-		return Qualification;
+		return qualification;
 	}
-	public void setQualification(String Qualification){
-		this.Qualification=Qualification;
+	public void setQualification(String qualification){
+		this.qualification=qualification;
 	}
 	
 	public String getSpecialtyDirection(){
-		return SpecialtyDirection;
+		return specialtyDirection;
 	}
-	public void setSpecialtyDirection(String SpecialtyDirection){
-		this.SpecialtyDirection=SpecialtyDirection;
+	public void setSpecialtyDirection(String specialtyDirection){
+		this.specialtyDirection=specialtyDirection;
 	}
 	
 	public Specialty getParent(){
-		return Parent;
+		return parent;
 	}
-	public void setParent(Specialty Parent){
-		this.Parent=Parent;
+	public void setParent(Specialty parent){
+		this.parent=parent;
 	}
 	
-	public void initialize(){
-		if(Children!=null){
-			Children=new HashMap<>();
+	public List <Specialty> getAllChildren(){
+		return children;
+	}
+	public void addChild(Specialty child){
+		children.add(child);
+	}
+	public void deleteChildById(Integer id){
+		for(Specialty child : children){
+			if(child.getId()==id){
+				children.remove(child);
+				break;
+			}
 		}
-	}
-	public Collection <Specialty> getAllChildren(){
-		return Children.values();
-	}
-	public void addChild(Specialty Child){
-		Children.put(Child.getId(), Child);
-	}
-	public void deleteChildById(Integer Id){
-		Children.remove(Id);
 	}
 }

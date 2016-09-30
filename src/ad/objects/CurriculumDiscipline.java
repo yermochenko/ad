@@ -1,36 +1,36 @@
 package ad.objects;
 
 public class CurriculumDiscipline {
-	private Integer Id;
-	private Curriculum Curriculum;
-	private Discipline Discipline;
-	private Integer Semester;
+	private Integer id;
+	private Curriculum curriculum;
+	private Discipline discipline;
+	private Integer semester;
 	
 	public Integer getId(){
-		return Id;
+		return id;
 	}
-	public void setId(Integer Id){
-		this.Id=Id;
+	public void setId(Integer id){
+		this.id=id;
 	}
 	
 	public Curriculum getCurriculum(){
-		return Curriculum;
+		return curriculum;
 	}
-	public void setCurriculum(Curriculum Curriculum){
-		this.Curriculum=Curriculum;
+	public void setCurriculum(Curriculum curriculum){
+		this.curriculum=curriculum;
 	}
 	
 	public Discipline getDiscipline(){
-		return Discipline;
+		return discipline;
 	}
-	public void setDiscipline(Discipline Discipline){
-		this.Discipline=Discipline;
+	public void setDiscipline(Discipline discipline){
+		this.discipline=discipline;
 	}
 	
 	public Integer getSemester(){
-		return Semester;
+		return semester;
 	}
-	public void setSemester(Integer Semester){
-		this.Semester=Semester;
+	public void setSemester(Integer semester){
+		this.semester=semester;
 	}
 }

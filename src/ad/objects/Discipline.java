@@ -1,28 +1,28 @@
 package ad.objects;
 
 public class Discipline {
-	private Integer Id;
-	private String Name;
-	private String ShortName;
+	private Integer id;
+	private String name;
+	private String shortname;
 	
 	public Integer getId(){
-		return Id;
+		return id;
 	}
-	public void setId(Integer Id){
-		this.Id=Id;
+	public void setId(Integer id){
+		this.id=id;
 	}
 	
 	public String getName(){
-		return Name;
+		return name;
 	}
-	public void setName(String Name){
-		this.Name=Name;
+	public void setName(String name){
+		this.name=name;
 	}
 	
 	public String getShortName(){
-		return ShortName;
+		return shortname;
 	}
-	public void setShortName(String ShortName){
-		this.ShortName=ShortName;
+	public void setShortName(String shortname){
+		this.shortname=shortname;
 	}
 }

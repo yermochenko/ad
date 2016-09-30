@@ -1,48 +1,46 @@
 package ad.objects;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class Curriculum {
-	private Integer Id;
-	private Specialty Specialty;
-	private Integer Year;
-	private Map <Integer, CurriculumDiscipline> CurriculumDisciplines;
+	private Integer id;
+	private Specialty specialty;
+	private Integer year;
+	private List <CurriculumDiscipline> curriculumDisciplines;
 	
 	public Integer getId(){
-		return Id;
+		return id;
 	}
-	public void setId(Integer Id){
-		this.Id=Id;
+	public void setId(Integer id){
+		this.id=id;
 	}
 	
 	public Integer getYear(){
-		return Year;
+		return year;
 	}
-	public void setYear(Integer Year){
-		this.Year=Year;
+	public void setYear(Integer year){
+		this.year=year;
 	}
 	
 	public Specialty getSpecialty(){
-		return Specialty;
+		return specialty;
 	}
-	public void setSpecialty(Specialty Specialty){
-		this.Specialty=Specialty;
+	public void setSpecialty(Specialty specialty){
+		this.specialty=specialty;
 	}
 	
-	public void initialize(){
-		if(CurriculumDisciplines!=null){
-			CurriculumDisciplines=new HashMap<>();
+	public List <CurriculumDiscipline> getAllCurriculumDisciplines(){
+		return curriculumDisciplines;
+	}
+	public void addCurriculumDiscipline(CurriculumDiscipline curriculumDiscipline){
+		curriculumDisciplines.add(curriculumDiscipline);
+	}
+	public void deleteCurriculumDisciplineById(Integer id){
+		for(CurriculumDiscipline curriculumDiscipline : curriculumDisciplines){
+			if(curriculumDiscipline.getId()==id){
+				curriculumDisciplines.remove(curriculumDiscipline);
+				break;
+			}
 		}
-	}
-	public Collection <CurriculumDiscipline> getAllCurriculumDisciplines(){
-		return CurriculumDisciplines.values();
-	}
-	public void addCurriculumDiscipline(CurriculumDiscipline CurriculumDiscipline){
-		CurriculumDisciplines.put(CurriculumDiscipline.getId(), CurriculumDiscipline);
-	}
-	public void deleteCurriculumDisciplineById(Integer Id){
-		CurriculumDisciplines.remove(Id);
 	}
 }
