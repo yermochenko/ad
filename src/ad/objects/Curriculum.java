@@ -1,12 +1,20 @@
 package ad.objects;
 
 import java.util.List;
-
+/*
+* Учебные планы
+* List <CurriculumDiscipline> curriculumDisciplines - список дисциплин
+* */
 public class Curriculum {
 	private Integer id;
 	private Specialty specialty;
 	private Integer year;
 	private List <CurriculumDiscipline> curriculumDisciplines;
+
+	public Curriculum(Specialty specialty, Integer year){
+		this.specialty = specialty;
+		this.year = year;
+	}
 	
 	public Integer getId(){
 		return id;

@@ -1,10 +1,19 @@
 package ad.objects;
 
+/*
+* Дисциплина учебного плана
+* */
 public class CurriculumDiscipline {
 	private Integer id;
 	private Curriculum curriculum;
 	private Discipline discipline;
 	private Integer semester;
+
+	public CurriculumDiscipline(Curriculum curriculum,Discipline discipline,Integer semester){
+		this.curriculum = curriculum;
+		this.discipline = discipline;
+		this.semester = semester;
+	}
 	
 	public Integer getId(){
 		return id;

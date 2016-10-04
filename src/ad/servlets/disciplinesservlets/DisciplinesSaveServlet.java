@@ -12,9 +12,9 @@ public class DisciplinesSaveServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		ad.objects.Discipline discipline=new ad.objects.Discipline();
-		discipline.setName(req.getParameter("name"));
-		discipline.setShortName(req.getParameter("shortname"));
+		ad.objects.Discipline discipline=new ad.objects.Discipline(req.getParameter("name"),req.getParameter("shortname"));
+		//discipline.setName(req.getParameter("name"));
+		//discipline.setShortName(req.getParameter("shortname"));
 		try {
             discipline.setId(Integer.parseInt(req.getParameter("id")));
         } catch(NumberFormatException e) {}

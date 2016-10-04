@@ -2,6 +2,12 @@ package ad.objects;
 
 import java.util.List;
 
+/*
+* Специальность
+* String specialtyDirection - направление специальности
+* Specialty parent - родительская специальность
+* List <Specialty> children - список дочерних
+* */
 public class Specialty {
 	private Integer id;
 	private String code;
@@ -11,7 +17,16 @@ public class Specialty {
 	private String specialtyDirection;
 	private Specialty parent;
 	private List <Specialty> children;
-	
+
+	public Specialty(String code, String name, String shortname, String qualification, String specialtyDirection, Specialty parent){
+		this.code = code;
+		this.name = name;
+		this.shortname = shortname;
+		this.qualification = qualification;
+		this.specialtyDirection = specialtyDirection;
+		this.parent = parent;
+	}
+
 	public Integer getId(){
 		return id;
 	}

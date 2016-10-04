@@ -1,10 +1,18 @@
 package ad.objects;
 
+/*
+* Дисциплины
+* */
 public class Discipline {
 	private Integer id;
 	private String name;
 	private String shortname;
-	
+
+	public Discipline(String name, String shortname){
+		this.name = name;
+		this.shortname = shortname;
+	}
+
 	public Integer getId(){
 		return id;
 	}

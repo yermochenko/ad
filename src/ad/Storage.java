@@ -12,9 +12,7 @@ public class Storage {
 	private static Map <Integer, ad.objects.Discipline> disciplines=new HashMap<>();
 	private static Map <Integer, ad.objects.Specialty> specialties=new HashMap<>();
 	static{
-		ad.objects.Discipline discipline=new ad.objects.Discipline();
-		discipline.setName("Web-программирование");
-		discipline.setShortName("WП");
+		ad.objects.Discipline discipline=new ad.objects.Discipline("Web-programming","WP");
 		createDiscipline(discipline);
 	}
 	
