@@ -27,10 +27,10 @@ public class ViewDisciplinesEditServlet extends HttpServlet {
         	w.printf("<INPUT type=\"hidden\" name=\"id\" value=\"%d\">\n", discipline.getId());
         }
         w.println("<P>Название</P>");
-        w.printf("<INPUT type=\"text\" name=\"name\" value=\"%s\">\n",
+        w.printf("<INPUT type=\"text\" name=\"name\" value=\"%s\" required>\n",
                 discipline != null ? discipline.getName() : new String());
         w.println("<P>Сокращенное название</P>");
-        w.printf("<INPUT type=\"text\" name=\"shortname\" value=\"%s\">\n",
+        w.printf("<INPUT type=\"text\" name=\"shortname\" value=\"%s\" required>\n",
                 discipline != null ? discipline.getShortName() : new String());
         w.println("<P>");
         w.println("<BUTTON type=\"submit\">Сохранить</BUTTON>");
