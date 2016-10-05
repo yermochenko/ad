@@ -18,6 +18,6 @@ public class DisciplinesEditServlet extends HttpServlet {
 			ad.objects.Discipline discipline=Storage.getDisciplineById(id);
 			req.setAttribute("discipline", discipline);
 		} catch(NumberFormatException e) {}
-		getServletContext().getRequestDispatcher("/WEB-INF/edit.html").forward(req, resp);
+		getServletContext().getRequestDispatcher("/WEB-INF/jsp/editdiscipline.jsp").forward(req, resp);
 	}
 }

@@ -53,15 +53,15 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DisciplinesEditServlet</servlet-name>
-		<url-pattern>/edit.html</url-pattern>
+		<url-pattern>/editdiscipline.html</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>DisciplinesSaveservlet</servlet-name>
+		<servlet-name>DisciplinesSaveServlet</servlet-name>
 		<servlet-class>ad.servlets.disciplinesservlets.DisciplinesSaveServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>DisciplinesSaveservlet</servlet-name>
+		<servlet-name>DisciplinesSaveServlet</servlet-name>
 		<url-pattern>/save.html</url-pattern>
 	</servlet-mapping>
 		
@@ -74,7 +74,7 @@
 		<url-pattern>/disciplines.html</url-pattern>
 		</servlet-mapping>
 		
-	<servlet>
+	<!--servlet>
 		<servlet-name>ViewDisciplinesEditServlet</servlet-name>
 		<servlet-class>ad.servlets.disciplinesservlets.ViewDisciplinesEditServlet</servlet-class>
 	</servlet>
@@ -90,7 +90,7 @@
 	<servlet-mapping>
 		<servlet-name>ViewDisciplinesServlet</servlet-name>
 		<url-pattern>/WEB-INF/disciplines.html</url-pattern>
-		</servlet-mapping>
+		</servlet-mapping-->
 		
 	<servlet>
 		<servlet-name>SpecialtiesServlet</servlet-name>

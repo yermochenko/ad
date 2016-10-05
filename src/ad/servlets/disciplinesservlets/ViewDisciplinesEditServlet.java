@@ -19,27 +19,27 @@ public class ViewDisciplinesEditServlet extends HttpServlet {
         w.println("<HEAD>");
         w.println("<META http-equiv=\"Content-Type\"");
         w.println("      content=\"text/html; charset=UTF-8\" />");
-        w.println("<TITLE>Редактирование дисциплины</TITLE>");
+        w.println("<TITLE>Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РґРёСЃС†РёРїР»РёРЅС‹</TITLE>");
         w.println("</HEAD>");
         w.println("<BODY>");
         w.println("<FORM action=\"check.html\" method=\"post\">");
         if(discipline!=null){
         	w.printf("<INPUT type=\"hidden\" name=\"id\" value=\"%d\">\n", discipline.getId());
         }
-        w.println("<P>Название</P>");
+        w.println("<P>РќР°Р·РІР°РЅРёРµ</P>");
         w.printf("<INPUT type=\"text\" name=\"name\" value=\"%s\" required>\n",
                 discipline != null ? discipline.getName() : new String());
-        w.println("<P>Сокращенное название</P>");
+        w.println("<P>РЎРѕРєСЂР°С‰РµРЅРЅРѕРµ РЅР°Р·РІР°РЅРёРµ</P>");
         w.printf("<INPUT type=\"text\" name=\"shortname\" value=\"%s\" required>\n",
                 discipline != null ? discipline.getShortName() : new String());
         w.println("<P>");
-        w.println("<BUTTON type=\"submit\">Сохранить</BUTTON>");
+        w.println("<BUTTON type=\"submit\">РЎРѕС…СЂР°РЅРёС‚СЊ</BUTTON>");
         if(discipline!=null){
-        	w.printf("<BUTTON formaction=\"delete.html?id=%d\">Удалить</BUTTON>", discipline.getId());
+        	w.printf("<BUTTON formaction=\"delete.html?id=%d\">РЈРґР°Р»РёС‚СЊ</BUTTON>", discipline.getId());
         }
         w.println("</P>");
         w.println("</FORM>");
-        w.println("<P><FORM><BUTTON formaction=\"disciplines.html\">Вернуться назад</BUTTON></FORM></P>");
+        w.println("<P><FORM><BUTTON formaction=\"disciplines.html\">Р’РµСЂРЅСѓС‚СЊСЃСЏ РЅР°Р·Р°Рґ</BUTTON></FORM></P>");
         w.println("</BODY>");
         w.println("</HTML>");
 	}

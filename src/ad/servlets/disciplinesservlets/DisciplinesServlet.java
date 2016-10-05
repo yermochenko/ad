@@ -14,6 +14,6 @@ public class DisciplinesServlet extends HttpServlet {
 	                                    throws ServletException, IOException {
 	        Collection <ad.objects.Discipline> disciplines=ad.Storage.getAllDisciplines();
 	        req.setAttribute("disciplines", disciplines);
-	        getServletContext().getRequestDispatcher("/WEB-INF/disciplines.html").forward(req,  resp);
+	        getServletContext().getRequestDispatcher("/WEB-INF/jsp/disciplines.jsp").forward(req,  resp);
 	    }
 }
