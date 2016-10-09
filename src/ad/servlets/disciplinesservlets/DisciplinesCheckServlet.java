@@ -15,7 +15,6 @@ public class DisciplinesCheckServlet extends HttpServlet {
             throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
-        PrintWriter w = resp.getWriter();
         int correct=0;
         String name=req.getParameter("name");
         String shortname=req.getParameter("shortname");
@@ -26,7 +25,7 @@ public class DisciplinesCheckServlet extends HttpServlet {
         else{
         	for(ad.objects.Discipline discipline : disciplines){
         		if(name.equalsIgnoreCase(discipline.getName())){
-        			if( (req.getParameter("id")==null) || (Integer.parseInt(req.getParameter("id"))!=discipline.getId())){
+        			if( (req.getParameter("id")==null) || req.getParameter("id").equals("") || (Integer.parseInt(req.getParameter("id"))!=discipline.getId())){
         				correct+=1;
         				break;
         			}
@@ -39,7 +38,7 @@ public class DisciplinesCheckServlet extends HttpServlet {
         else{
         	for(ad.objects.Discipline discipline : disciplines){
         		if(shortname.equalsIgnoreCase(discipline.getShortName())){
-        			if( (req.getParameter("id")==null) || (Integer.parseInt(req.getParameter("id"))!=discipline.getId())){
+        			if( (req.getParameter("id")==null) || req.getParameter("id").equals("") || (Integer.parseInt(req.getParameter("id"))!=discipline.getId())){
         				correct+=1;
         				break;
         			}
@@ -51,31 +50,8 @@ public class DisciplinesCheckServlet extends HttpServlet {
             .forward(req, resp);
         }
         else{
-            w.println("<HTML>");
-            w.println("<HEAD>");
-            w.println("<META http-equiv=\"Content-Type\"");
-            w.println("      content=\"text/html; charset=UTF-8\" />");
-            w.println("<TITLE>Редактирование дисциплины</TITLE>");
-            w.println("</HEAD>");
-            w.println("<BODY>");
-            w.println("<FORM action=\"check.html\" method=\"post\">");
-            if(req.getParameter("id")!=null){
-            	w.printf("<INPUT type=\"hidden\" name=\"id\" value=\"%d\">\n", Integer.parseInt(req.getParameter("id")));
-            }
-            w.println("<P>Название</P>");
-            w.printf("<INPUT type=\"text\" name=\"name\" value=\"%s\">\n", name);
-            w.println("<P>Сокращенное название</P>");
-            w.printf("<INPUT type=\"text\" name=\"shortname\" value=\"%s\">\n",shortname);
-            w.println("<P>");
-            w.println("<BUTTON type=\"submit\">Сохранить</BUTTON>");
-            if(req.getParameter("id")!=null){
-            	w.printf("<BUTTON formaction=\"delete.html?id=%s\">Удалить</BUTTON>", req.getParameter("id"));
-            }
-            w.println("</P>");
-            w.println("</FORM>");
-            w.println("<P><FORM><BUTTON formaction=\"disciplines.html\">Вернуться назад</BUTTON></FORM></P>");
-            w.println("</BODY>");
-            w.println("</HTML>");
+        	req.setAttribute("check", false);
+        	resp.sendRedirect(req.getContextPath() + "/editdiscipline.html");
         }
 	}
 }

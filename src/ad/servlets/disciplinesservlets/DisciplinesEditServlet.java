@@ -11,13 +11,15 @@ import ad.Storage;
 
 public class DisciplinesEditServlet extends HttpServlet {
 	@Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-                                    throws ServletException, IOException {
-		try{
-			Integer id=Integer.parseInt(req.getParameter("id"));
-			ad.objects.Discipline discipline=Storage.getDisciplineById(id);
-			req.setAttribute("discipline", discipline);
-		} catch(NumberFormatException e) {}
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		try {
+			if (req.getParameter("check") == null || req.getParameter("check").equals("")) {
+				Integer id = Integer.parseInt(req.getParameter("id"));
+				ad.objects.Discipline discipline = Storage.getDisciplineById(id);
+				req.setAttribute("discipline", discipline);
+			}
+		} catch (NumberFormatException e) {
+		}
 		getServletContext().getRequestDispatcher("/WEB-INF/jsp/editdiscipline.jsp").forward(req, resp);
 	}
 }
