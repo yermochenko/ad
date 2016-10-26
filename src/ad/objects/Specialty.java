@@ -1,6 +1,6 @@
 package ad.objects;
 
-import java.util.List;
+import java.util.*;
 
 /*
 * Специальность
@@ -12,19 +12,30 @@ public class Specialty {
 	private Integer id;
 	private String code;
 	private String name;
-	private String shortname;
+	private String shortName;
 	private String qualification;
 	private String specialtyDirection;
 	private Specialty parent;
-	private List <Specialty> children;
+	private ArrayList<Specialty> children;
 
+	public Specialty(){
+		id=-1;
+		code = "";
+		name = "noname";
+		shortName = "";
+		qualification = "";
+		specialtyDirection = "";
+		//parent = new Specialty();
+		children = new ArrayList<>();
+	}
 	public Specialty(String code, String name, String shortname, String qualification, String specialtyDirection, Specialty parent){
 		this.code = code;
 		this.name = name;
-		this.shortname = shortname;
+		this.shortName = shortname;
 		this.qualification = qualification;
 		this.specialtyDirection = specialtyDirection;
 		this.parent = parent;
+		children = new ArrayList<>();
 	}
 
 	public Integer getId(){
@@ -47,14 +58,14 @@ public class Specialty {
 	public void setName(String name){
 		this.name=name;
 	}
-	
-	public String getShortName(){
-		return shortname;
+
+	public String getShortName() {
+		return shortName;
 	}
-	public void setShortName(String shortname){
-		this.shortname=shortname;
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
 	}
-	
+
 	public String getQualification(){
 		return qualification;
 	}
@@ -75,8 +86,8 @@ public class Specialty {
 	public void setParent(Specialty parent){
 		this.parent=parent;
 	}
-	
-	public List <Specialty> getAllChildren(){
+
+	public ArrayList<Specialty> getChildren() {
 		return children;
 	}
 	public void addChild(Specialty child){
@@ -89,5 +100,13 @@ public class Specialty {
 				break;
 			}
 		}
+	}
+	public void deleteChild(Specialty specialty){
+		children.remove(specialty);
+	}
+
+	@Override
+	public String toString() {
+		return name;
 	}
 }

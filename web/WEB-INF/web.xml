@@ -9,7 +9,7 @@
 	<servlet-mapping>
 		<servlet-name>MainPage</servlet-name>
 		<url-pattern>/index.html</url-pattern>
-		</servlet-mapping>
+	</servlet-mapping>
 		
 	<servlet>
 		<servlet-name>CurriculumsServlet</servlet-name>
@@ -28,7 +28,9 @@
 		<servlet-name>CurriculumDisciplinesServlet</servlet-name>
 		<url-pattern>/curriculumdisciplines.html</url-pattern>
 		</servlet-mapping>
-		
+		<!--
+			Дисциплина
+		-->
 	<servlet>
 		<servlet-name>DisciplinesCheckServlet</servlet-name>
 		<servlet-class>ad.servlets.disciplinesservlets.DisciplinesCheckServlet</servlet-class>
@@ -73,15 +75,44 @@
 		<servlet-name>DisciplinesServlet</servlet-name>
 		<url-pattern>/disciplines.html</url-pattern>
 		</servlet-mapping>
-		
+		<!--
+		Специальность
+		-->
 	<servlet>
 		<servlet-name>SpecialtiesServlet</servlet-name>
-		<servlet-class>ad.servlets.SpecialtiesServlet</servlet-class>
+		<servlet-class>ad.servlets.specialtyservlets.SpecialtiesServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>SpecialtiesServlet</servlet-name>
 		<url-pattern>/specialties.html</url-pattern>
 		</servlet-mapping>
+
+    <servlet>
+        <servlet-name>SpecialtiesEditServlet</servlet-name>
+        <servlet-class>ad.servlets.specialtyservlets.SpecialtiesEditServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SpecialtiesEditServlet</servlet-name>
+        <url-pattern>/editspecialities.html</url-pattern>
+    </servlet-mapping>
+
+	<servlet>
+		<servlet-name>SpecialtiesDeleteServlet</servlet-name>
+		<servlet-class>ad.servlets.specialtyservlets.SpecialtiesDeleteServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SpecialtiesDeleteServlet</servlet-name>
+		<url-pattern>/deleteSpecialty.html</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SpecialtiesSaveServlet</servlet-name>
+		<servlet-class>ad.servlets.specialtyservlets.SpecialtiesSaveServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SpecialtiesSaveServlet</servlet-name>
+		<url-pattern>/saveSpecialty.html</url-pattern>
+	</servlet-mapping>
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

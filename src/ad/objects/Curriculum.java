@@ -15,7 +15,8 @@ public class Curriculum {
 		this.specialty = specialty;
 		this.year = year;
 	}
-	
+
+
 	public Integer getId(){
 		return id;
 	}
