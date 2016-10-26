@@ -2,7 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib tagdir="/WEB-INF/tags" prefix="u"%>
-<u:html title="Редактирование дисциплины">
+<c:choose>
+	<c:when test="${not empty discipline}">
+		<c:set var="title" value="Редактирование дисциплины"/>
+	</c:when>
+	<c:otherwise>
+		<c:set var="title" value="Создание дисциплины"/>
+	</c:otherwise>
+</c:choose>
+<u:html title="${title}">
 <FORM action="check.html" method="post">
 	<c:choose>
 		<c:when test="${empty check}">
