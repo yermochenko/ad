@@ -114,6 +114,15 @@
 		<url-pattern>/saveSpecialty.html</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>SpecialtiesViewServlet</servlet-name>
+		<servlet-class>ad.servlets.specialtyservlets.SpecialtiesViewServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SpecialtiesViewServlet</servlet-name>
+		<url-pattern>/viewSpecialty.html</url-pattern>
+	</servlet-mapping>
+
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>

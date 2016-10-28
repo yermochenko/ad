@@ -30,9 +30,17 @@
                                 <TD>${special.shortName}</TD>
                                 <TD>${special.qualification}</TD>
                                 <TD>${special.specialtyDirection}</TD>
-                                <TD><A href="editspecialities.html?id=${special.parent.id}">${special.parent.toString()}</A></TD>
+                                <c:choose>
+                                    <c:when test="${not empty special.parent}">
+                                        <TD><A href="viewSpecialty.html?id=${special.parent.id}">${special.parent.toString()}</A></TD>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <TD>Нет родительской специальности</TD>
+                                    </c:otherwise>
+                                </c:choose>
                                 <TD>
                                     <select>
+                                        <option>Детки</option>
                                         <c:forEach var="child" items="${special.children}">
                                             <option>${child.id} ${child.name}</option>
                                         </c:forEach>

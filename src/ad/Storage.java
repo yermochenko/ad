@@ -17,7 +17,7 @@ public class Storage {
 		ad.objects.Discipline discipline=new ad.objects.Discipline("Web-programming","WP");
 		createDiscipline(discipline);
 
-		ad.objects.Specialty specialty = new ad.objects.Specialty("P","Программное обеспечение компьютерных систем","ПОКС","квалификация","направление",new Specialty());
+		ad.objects.Specialty specialty = new ad.objects.Specialty("P","Программное обеспечение компьютерных систем","ПОКС","квалификация","направление",null/*new Specialty()*/);
 		createSpecialty(specialty);
 	}
 	

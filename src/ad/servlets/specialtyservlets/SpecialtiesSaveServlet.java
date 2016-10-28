@@ -26,7 +26,7 @@ public class SpecialtiesSaveServlet extends HttpServlet {
             parent.addChild(specialty);
         }else{
             specialty = new ad.objects.Specialty(req.getParameter("code"), req.getParameter("name"),
-                    req.getParameter("shortName"), req.getParameter("qualification"), req.getParameter("specialtyDirection"), new Specialty());
+                    req.getParameter("shortName"), req.getParameter("qualification"), req.getParameter("specialtyDirection"), null);
         }
         /*
         * быдло

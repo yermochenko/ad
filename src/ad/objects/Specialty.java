@@ -15,7 +15,7 @@ public class Specialty {
 	private String shortName;
 	private String qualification;
 	private String specialtyDirection;
-	private Specialty parent;
+	private Specialty parent = null;
 	private ArrayList<Specialty> children;
 
 	public Specialty(){
