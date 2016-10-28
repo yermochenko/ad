@@ -13,6 +13,7 @@ public class Storage {
 	private static Map <Integer, ad.objects.CurriculumDiscipline> curriculumDisciplines=new HashMap<>();
 	private static Map <Integer, ad.objects.Discipline> disciplines=new HashMap<>();
 	private static Map <Integer, ad.objects.Specialty> specialties=new HashMap<>();
+
 	static{
 		ad.objects.Discipline discipline=new ad.objects.Discipline("Web-programming","WP");
 		createDiscipline(discipline);
@@ -20,7 +21,7 @@ public class Storage {
 		ad.objects.Specialty specialty = new ad.objects.Specialty("P","Программное обеспечение компьютерных систем","ПОКС","квалификация","направление",null/*new Specialty()*/);
 		createSpecialty(specialty);
 	}
-	
+
 	public static Collection <ad.objects.Curriculum> getAllCurriculums(){
 		return curriculums.values();
 	}
