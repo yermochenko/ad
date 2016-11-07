@@ -32,6 +32,7 @@ public class Storage {
 		Storage.jdbcUser = jdbcUser;
 		Storage.jdbcPassword = jdbcPassword;
 	}
+	
 	private static Connection getConnection() throws SQLException {
 		return DriverManager.getConnection(jdbcUrl, jdbcUser, jdbcPassword);
 	}

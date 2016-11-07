@@ -17,13 +17,11 @@ public class MainPage extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-
 		try {
 			Storage.init(DRIVER, URL, USER, PASSWORD);
 		} catch (ClassNotFoundException e) {
 			throw new ServletException(e);
 		}
-
 	}
 
 	@Override

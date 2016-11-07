@@ -121,10 +121,12 @@
 		<servlet-name>SpecialtiesSaveServlet</servlet-name>
 		<url-pattern>/saveSpecialty.html</url-pattern>
 	</servlet-mapping>
+	
 	<error-page>
 		<exception-type>javax.servlet.ServletException</exception-type>
 		<location>/WEB-INF/jsp/error.jsp</location>
 	</error-page>
+	
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>

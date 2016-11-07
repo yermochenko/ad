@@ -16,9 +16,11 @@ public class DisciplinesServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+			
 			Collection<Discipline> disciplines = Storage.getAllDisciplines();
 			req.setAttribute("disciplines", disciplines);
 			getServletContext().getRequestDispatcher("/WEB-INF/jsp/disciplines.jsp").forward(req, resp);
+			
 		} catch (SQLException e) {
 			throw new ServletException(e);
 		}

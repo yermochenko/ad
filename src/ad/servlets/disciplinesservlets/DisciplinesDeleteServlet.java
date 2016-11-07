@@ -14,8 +14,10 @@ public class DisciplinesDeleteServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+			
 			Storage.deleteDisciplineById(Integer.parseInt(req.getParameter("id")));
 			resp.sendRedirect(req.getContextPath() + "/disciplines.html");
+			
 		} catch (NumberFormatException e) {
 		} catch (SQLException e) {
 			throw new ServletException(e);
