@@ -31,17 +31,16 @@ public class Storage {
 		Storage.jdbcUrl = jdbcUrl;
 		Storage.jdbcUser = jdbcUser;
 		Storage.jdbcPassword = jdbcPassword;
-	}
-	
+	}	
 	private static Connection getConnection() throws SQLException {
 		return DriverManager.getConnection(jdbcUrl, jdbcUser, jdbcPassword);
 	}
-	
+
 	static{
 		Specialty specialty = new Specialty("P","Программное обеспечение компьютерных систем","ПОКС","квалификация","направление",new Specialty());
 		createSpecialty(specialty);
 	}
-	
+
 	public static Collection <ad.objects.Curriculum> getAllCurriculums(){
 		return curriculums.values();
 	}

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-	version="3.1">
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 	<display-name>Документооборот кафедры</display-name>
 
 	<servlet>
@@ -12,7 +10,7 @@
 		<servlet-name>MainPage</servlet-name>
 		<url-pattern>/index.html</url-pattern>
 	</servlet-mapping>
-
+		
 	<servlet>
 		<servlet-name>CurriculumsServlet</servlet-name>
 		<servlet-class>ad.servlets.CurriculumsServlet</servlet-class>
@@ -20,92 +18,87 @@
 	<servlet-mapping>
 		<servlet-name>CurriculumsServlet</servlet-name>
 		<url-pattern>/curriculums.html</url-pattern>
-	</servlet-mapping>
-
+		</servlet-mapping>
+		
 	<servlet>
 		<servlet-name>CurriculumDisciplinesServlet</servlet-name>
-		<servlet-class>ad.servlets.CurriculumDisciplinesServlet
-		</servlet-class>
+		<servlet-class>ad.servlets.CurriculumDisciplinesServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>CurriculumDisciplinesServlet</servlet-name>
 		<url-pattern>/curriculumdisciplines.html</url-pattern>
-	</servlet-mapping>
-	<!-- Дисциплина -->
+		</servlet-mapping>
+		<!--
+			Дисциплина
+		-->
 	<servlet>
 		<servlet-name>DisciplinesCheckServlet</servlet-name>
-		<servlet-class>ad.servlets.disciplinesservlets.DisciplinesCheckServlet
-		</servlet-class>
+		<servlet-class>ad.servlets.disciplinesservlets.DisciplinesCheckServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DisciplinesCheckServlet</servlet-name>
 		<url-pattern>/check.html</url-pattern>
 	</servlet-mapping>
-
+	
 	<servlet>
 		<servlet-name>DisciplinesDeleteServlet</servlet-name>
-		<servlet-class>ad.servlets.disciplinesservlets.DisciplinesDeleteServlet
-		</servlet-class>
+		<servlet-class>ad.servlets.disciplinesservlets.DisciplinesDeleteServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DisciplinesDeleteServlet</servlet-name>
 		<url-pattern>/delete.html</url-pattern>
 	</servlet-mapping>
-
+	
 	<servlet>
 		<servlet-name>DisciplinesEditServlet</servlet-name>
-		<servlet-class>ad.servlets.disciplinesservlets.DisciplinesEditServlet
-		</servlet-class>
+		<servlet-class>ad.servlets.disciplinesservlets.DisciplinesEditServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DisciplinesEditServlet</servlet-name>
 		<url-pattern>/editdiscipline.html</url-pattern>
 	</servlet-mapping>
-
+	
 	<servlet>
 		<servlet-name>DisciplinesSaveServlet</servlet-name>
-		<servlet-class>ad.servlets.disciplinesservlets.DisciplinesSaveServlet
-		</servlet-class>
+		<servlet-class>ad.servlets.disciplinesservlets.DisciplinesSaveServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DisciplinesSaveServlet</servlet-name>
 		<url-pattern>/save.html</url-pattern>
 	</servlet-mapping>
-
+		
 	<servlet>
 		<servlet-name>DisciplinesServlet</servlet-name>
-		<servlet-class>ad.servlets.disciplinesservlets.DisciplinesServlet
-		</servlet-class>
+		<servlet-class>ad.servlets.disciplinesservlets.DisciplinesServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DisciplinesServlet</servlet-name>
 		<url-pattern>/disciplines.html</url-pattern>
-	</servlet-mapping>
-	<!-- Специальность -->
+		</servlet-mapping>
+		<!--
+		Специальность
+		-->
 	<servlet>
 		<servlet-name>SpecialtiesServlet</servlet-name>
-		<servlet-class>ad.servlets.specialtyservlets.SpecialtiesServlet
-		</servlet-class>
+		<servlet-class>ad.servlets.specialtyservlets.SpecialtiesServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>SpecialtiesServlet</servlet-name>
 		<url-pattern>/specialties.html</url-pattern>
-	</servlet-mapping>
+		</servlet-mapping>
 
-	<servlet>
-		<servlet-name>SpecialtiesEditServlet</servlet-name>
-		<servlet-class>ad.servlets.specialtyservlets.SpecialtiesEditServlet
-		</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>SpecialtiesEditServlet</servlet-name>
-		<url-pattern>/editspecialities.html</url-pattern>
-	</servlet-mapping>
+    <servlet>
+        <servlet-name>SpecialtiesEditServlet</servlet-name>
+        <servlet-class>ad.servlets.specialtyservlets.SpecialtiesEditServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SpecialtiesEditServlet</servlet-name>
+        <url-pattern>/editspecialities.html</url-pattern>
+    </servlet-mapping>
 
 	<servlet>
 		<servlet-name>SpecialtiesDeleteServlet</servlet-name>
-		<servlet-class>ad.servlets.specialtyservlets.SpecialtiesDeleteServlet
-		</servlet-class>
+		<servlet-class>ad.servlets.specialtyservlets.SpecialtiesDeleteServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>SpecialtiesDeleteServlet</servlet-name>
@@ -114,19 +107,27 @@
 
 	<servlet>
 		<servlet-name>SpecialtiesSaveServlet</servlet-name>
-		<servlet-class>ad.servlets.specialtyservlets.SpecialtiesSaveServlet
-		</servlet-class>
+		<servlet-class>ad.servlets.specialtyservlets.SpecialtiesSaveServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>SpecialtiesSaveServlet</servlet-name>
 		<url-pattern>/saveSpecialty.html</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SpecialtiesViewServlet</servlet-name>
+		<servlet-class>ad.servlets.specialtyservlets.SpecialtiesViewServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SpecialtiesViewServlet</servlet-name>
+		<url-pattern>/viewSpecialty.html</url-pattern>
+	</servlet-mapping>
 	
-	<error-page>
-		<exception-type>javax.servlet.ServletException</exception-type>
-		<location>/WEB-INF/jsp/error.jsp</location>
-	</error-page>
-	
+	 <error-page>
+        <exception-type>javax.servlet.ServletException</exception-type>
+        <location>/WEB-INF/jsp/error.jsp</location>
+    </error-page>
+
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>

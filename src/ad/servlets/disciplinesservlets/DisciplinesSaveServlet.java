@@ -14,8 +14,7 @@ import ad.objects.Discipline;
 public class DisciplinesSaveServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		try {
-			
+		try {			
 			req.setCharacterEncoding("UTF-8");
 			Discipline discipline = new Discipline(req.getParameter("name"), req.getParameter("shortname"));
 			try {
@@ -27,8 +26,7 @@ public class DisciplinesSaveServlet extends HttpServlet {
 			} else {
 				Storage.updateDiscipline(discipline);
 			}
-			resp.sendRedirect(req.getContextPath() + "/disciplines.html");
-			
+			resp.sendRedirect(req.getContextPath() + "/disciplines.html");			
 		} catch (SQLException e) {
 			throw new ServletException(e);
 		}

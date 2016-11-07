@@ -15,10 +15,12 @@ public class SpecialtiesDeleteServlet extends HttpServlet {
             throws ServletException, IOException {
         try{
             Specialty specialty = Storage.getSpecialtyById(Integer.parseInt(req.getParameter("id")));
-            specialty.getParent().deleteChild(specialty);
+            if(specialty.getParent()!=null){
+                specialty.getParent().deleteChild(specialty);
+            }
 
             for (Specialty object: specialty.getChildren()) {
-                object.setParent(new Specialty());
+                object.setParent(null);
             }
 
             ad.Storage.deleteSpecialtyById(Integer.parseInt(req.getParameter("id")));
