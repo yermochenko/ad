@@ -7,6 +7,8 @@ public class Discipline {
 	private Integer id;
 	private String name;
 	private String shortname;
+	
+	public Discipline(){}
 
 	public Discipline(String name, String shortname){
 		this.name = name;

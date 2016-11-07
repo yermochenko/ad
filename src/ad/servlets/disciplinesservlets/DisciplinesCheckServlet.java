@@ -1,7 +1,7 @@
 package ad.servlets.disciplinesservlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.Collection;
 
 import javax.servlet.ServletException;
@@ -9,21 +9,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ad.Storage;
+import ad.objects.Discipline;
+
 public class DisciplinesCheckServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+		try{
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
         int correct=0;
         String name=req.getParameter("name");
         String shortname=req.getParameter("shortname");
-        Collection<ad.objects.Discipline> disciplines = ad.Storage.getAllDisciplines();
+        
+        Collection<Discipline> disciplines = Storage.getAllDisciplines();
+        
         if(name==null || name.equals("")){
         	correct+=1;
         }
         else{
-        	for(ad.objects.Discipline discipline : disciplines){
+        	for(Discipline discipline : disciplines){
         		if(name.equalsIgnoreCase(discipline.getName())){
         			if( (req.getParameter("id")==null) || req.getParameter("id").equals("") || (Integer.parseInt(req.getParameter("id"))!=discipline.getId())){
         				correct+=1;
@@ -36,7 +42,7 @@ public class DisciplinesCheckServlet extends HttpServlet {
         	correct+=1;
         }
         else{
-        	for(ad.objects.Discipline discipline : disciplines){
+        	for(Discipline discipline : disciplines){
         		if(shortname.equalsIgnoreCase(discipline.getShortName())){
         			if( (req.getParameter("id")==null) || req.getParameter("id").equals("") || (Integer.parseInt(req.getParameter("id"))!=discipline.getId())){
         				correct+=1;
@@ -52,6 +58,9 @@ public class DisciplinesCheckServlet extends HttpServlet {
         else{
         	req.setAttribute("check", false);
         	resp.sendRedirect(req.getContextPath() + "/editdiscipline.html");
+        }
+		}catch(SQLException e) {
+            throw new ServletException(e);
         }
 	}
 }
