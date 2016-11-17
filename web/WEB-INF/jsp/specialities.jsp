@@ -19,8 +19,6 @@
                             <TH>Сокращенное название</TH>
                             <TH>Квалификация</TH>
                             <TH>Направление специальности</TH>
-                            <TH>Родительская специальность</TH>
-                            <TH>Дочерние специальности</TH>
                         </TR>
                         <c:forEach var="special" items="${specialities}">
                             <TR>
@@ -30,22 +28,6 @@
                                 <TD>${special.shortName}</TD>
                                 <TD>${special.qualification}</TD>
                                 <TD>${special.specialtyDirection}</TD>
-                                <c:choose>
-                                    <c:when test="${not empty special.parent}">
-                                        <TD><A href="viewSpecialty.html?id=${special.parent.id}">${special.parent.toString()}</A></TD>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <TD>Нет родительской специальности</TD>
-                                    </c:otherwise>
-                                </c:choose>
-                                <TD>
-                                    <select>
-                                        <option>Детки</option>
-                                        <c:forEach var="child" items="${special.children}">
-                                            <option>${child.id} ${child.name}</option>
-                                        </c:forEach>
-                                    </select>
-                                </TD>
                             </TR>
                         </c:forEach>
                     </TABLE>

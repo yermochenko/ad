@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class SpecialtiesDeleteServlet extends HttpServlet {
     @Override
@@ -24,7 +25,9 @@ public class SpecialtiesDeleteServlet extends HttpServlet {
             }
 
             ad.Storage.deleteSpecialtyById(Integer.parseInt(req.getParameter("id")));
-        } catch(NumberFormatException e) {}
+        } catch(NumberFormatException e) {} catch (SQLException e) {
+            e.printStackTrace();
+        }
         resp.sendRedirect(req.getContextPath() + "/specialties.html");
     }
 }

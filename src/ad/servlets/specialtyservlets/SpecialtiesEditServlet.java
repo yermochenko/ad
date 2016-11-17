@@ -4,6 +4,7 @@ import ad.Storage;
 import ad.objects.Specialty;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Collection;
 
 import javax.servlet.ServletException;
@@ -22,8 +23,15 @@ public class SpecialtiesEditServlet extends HttpServlet {
 
             }
         } catch (NumberFormatException e) {
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        Collection<Specialty> specialities=ad.Storage.getAllSpecialties();
+        Collection<Specialty> specialities= null;
+        try {
+            specialities = Storage.getAllSpecialties();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         req.setAttribute("specialties", specialities);
         getServletContext().getRequestDispatcher("/WEB-INF/jsp/editspecialities.jsp").forward(req, resp);
     }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Collection;
 
 /**
@@ -24,6 +25,8 @@ public class SpecialtiesViewServlet extends HttpServlet {
 
             }
         } catch (NumberFormatException e) {
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         getServletContext().getRequestDispatcher("/WEB-INF/jsp/viewSpecialities.jsp").forward(req, resp);
     }

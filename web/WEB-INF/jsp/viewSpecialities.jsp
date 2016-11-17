@@ -28,15 +28,6 @@
                     <TH>Направление специальности</TH>
                     <TH>${specialty.specialtyDirection}</TH>
                 </TR>
-                <TR>
-                    <TH>Дочерние специальности</TH>
-                    <TH><select>
-                            <c:forEach var="child" items="${specialty.children}">
-                                <option>${child.id} ${child.name}</option>
-                            </c:forEach>
-                        </select>
-                    </TH>
-                </TR>
             </TABLE>
         </c:when>
         <c:otherwise>

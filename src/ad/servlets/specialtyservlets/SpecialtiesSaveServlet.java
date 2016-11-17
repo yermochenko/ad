@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class SpecialtiesSaveServlet extends HttpServlet {
     @Override
@@ -20,10 +21,12 @@ public class SpecialtiesSaveServlet extends HttpServlet {
         String [] sIndex = req.getParameter("select").split(" ");
         ad.objects.Specialty specialty;
         if(sIndex[0]!="") {
-            Specialty parent = Storage.getSpecialtyById(Integer.valueOf(sIndex[0]));
+            Specialty parent = new Specialty();
+            parent.setId(Integer.valueOf(sIndex[0]));
             specialty = new ad.objects.Specialty(req.getParameter("code"), req.getParameter("name"),
                     req.getParameter("shortName"), req.getParameter("qualification"), req.getParameter("specialtyDirection"), parent);
-            parent.addChild(specialty);
+           // specialty.setParentId(parent.getId());
+           // parent.addChild(specialty);
         }else{
             specialty = new ad.objects.Specialty(req.getParameter("code"), req.getParameter("name"),
                     req.getParameter("shortName"), req.getParameter("qualification"), req.getParameter("specialtyDirection"), null);
@@ -36,9 +39,17 @@ public class SpecialtiesSaveServlet extends HttpServlet {
             specialty.setId(Integer.parseInt(req.getParameter("id")));
         } catch(NumberFormatException e) {}
         if(specialty.getId() == null) {
-            ad.Storage.createSpecialty(specialty);
+            try {
+                Storage.createSpecialty(specialty);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         } else {
-            ad.Storage.updateSpecialty(specialty);
+            try {
+                Storage.updateSpecialty(specialty);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         resp.sendRedirect(req.getContextPath() + "/specialties.html");
     }
