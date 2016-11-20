@@ -6,10 +6,8 @@ import ad.objects.Specialty;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class Storage {
 	private static String jdbcUrl = null;
@@ -33,137 +31,7 @@ public class Storage {
 
 	}
 
-	public static void createDiscipline(Discipline discipline) throws SQLException{
-		String sql = "INSERT INTO disciplines (name, shortname) VALUES (?, ?)";
-		Connection c = null;
-		PreparedStatement s = null;
-		try {
-			c = getConnection();
-			s = c.prepareStatement(sql);
-			s.setString(1, discipline.getName());
-			s.setString(2, discipline.getShortName());
-			s.executeUpdate();
-		} finally {
-			try {
-				s.close();
-			} catch (NullPointerException | SQLException e) {
-			}
-			try {
-				c.close();
-			} catch (NullPointerException | SQLException e) {
-			}
-		}
-	}
-	public static void deleteDisciplineById(Integer id) throws SQLException{
-		String sql = "DELETE FROM disciplines WHERE id=?";
-		Connection c = null;
-		PreparedStatement s = null;
-		try {
-			c = getConnection();
-			s = c.prepareStatement(sql);
-			s.setInt(1, id);
-			s.executeUpdate();
-		} finally {
-			try {
-				s.close();
-			} catch (NullPointerException | SQLException e) {
-			}
-			try {
-				c.close();
-			} catch (NullPointerException | SQLException e) {
-			}
-		}
-	}
-	public static void updateDiscipline(Discipline discipline) throws SQLException{
-		String sql = "UPDATE disciplines SET name = ?, shortname = ? WHERE id = ?";
-		Connection c = null;
-		PreparedStatement s = null;
-		try {
-			c = getConnection();
-			s = c.prepareStatement(sql);
-			s.setString(1, discipline.getName());
-			s.setString(2, discipline.getShortName());
-			s.setInt(3, discipline.getId());
-			s.executeUpdate();
-		} finally {
-			try {
-				s.close();
-			} catch (NullPointerException | SQLException e) {
-			}
-			try {
-				c.close();
-			} catch (NullPointerException | SQLException e) {
-			}
-		}
-	}
-	public static Discipline getDisciplineById(Integer id) throws SQLException{
-		String sql = "SELECT id, name, shortname FROM disciplines WHERE id = ?";
-		Connection c = null;
-		PreparedStatement s = null;
-		ResultSet r = null;
-		try {
-			c = getConnection();
-			s = c.prepareStatement(sql);
-			s.setInt(1, id);
-			r = s.executeQuery();
-			Discipline discipline = null;
-			if (r.next()) {
-				discipline = new Discipline();
-				discipline.setId(r.getInt("id"));
-				discipline.setName(r.getString("name"));
-				discipline.setShortName(r.getString("shortname"));
-			}
-			return discipline;
-		} finally {
-			try {
-				r.close();
-			} catch (NullPointerException | SQLException e) {
-			}
-			try {
-				s.close();
-			} catch (NullPointerException | SQLException e) {
-			}
-			try {
-				c.close();
-			} catch (NullPointerException | SQLException e) {
-			}
-		}
-	}
-	public static Collection <Discipline> getAllDisciplines() throws SQLException{
-		String sql = "SELECT id, name, shortname FROM disciplines";
-		Connection c = null;
-		Statement s = null;
-		ResultSet r = null;
-		try {
-			c = getConnection();
-			s = c.createStatement();
-			r = s.executeQuery(sql);
-			Collection<Discipline> disciplines = new ArrayList<>();
-			while (r.next()) {
-				Discipline discipline=new Discipline();
-				discipline.setId(r.getInt("id"));
-				discipline.setName(r.getString("name"));
-				discipline.setShortName(r.getString("shortname"));
-				disciplines.add(discipline);
-			}
-			return disciplines;
-		} finally {
-			try {
-				r.close();
-			} catch (NullPointerException | SQLException e) {
-			}
-			try {
-				s.close();
-			} catch (NullPointerException | SQLException e) {
-			}
-			try {
-				c.close();
-			} catch (NullPointerException | SQLException e) {
-			}
-
-		}
-	}
-
+	
 	public static void createSpecialty(ad.objects.Specialty specialty) throws SQLException {
 		String sql = "INSERT INTO specialties (code, name, parent_id, qualification, shortname, specialty_direction) VALUES (?, ?, ?, ?, ?, ?)";
 		Connection c = null;

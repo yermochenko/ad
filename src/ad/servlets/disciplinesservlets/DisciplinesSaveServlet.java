@@ -1,6 +1,7 @@
 package ad.servlets.disciplinesservlets;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -8,7 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ad.Storage;
+import ad.Connector;
+import ad.DisciplineDaoImpl;
 import ad.objects.Discipline;
 
 public class DisciplinesSaveServlet extends HttpServlet {
@@ -21,11 +23,15 @@ public class DisciplinesSaveServlet extends HttpServlet {
 				discipline.setId(Integer.parseInt(req.getParameter("id")));
 			} catch (NumberFormatException e) {
 			}
+			Connection c=Connector.getConnection();
+			DisciplineDaoImpl dao=new DisciplineDaoImpl();
+			dao.setConnection(c);
 			if (discipline.getId() == null) {
-				Storage.createDiscipline(discipline);
+				dao.create(discipline);	
 			} else {
-				Storage.updateDiscipline(discipline);
+				dao.update(discipline);
 			}
+			c.close();
 			resp.sendRedirect(req.getContextPath() + "/disciplines.html");			
 		} catch (SQLException e) {
 			throw new ServletException(e);

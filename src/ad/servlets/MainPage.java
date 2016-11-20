@@ -18,6 +18,7 @@ public class MainPage extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		try {
+			Class.forName(DRIVER);
 			Storage.init(DRIVER, URL, USER, PASSWORD);
 		} catch (ClassNotFoundException e) {
 			throw new ServletException(e);

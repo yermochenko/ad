@@ -1,16 +1,9 @@
 package ad;
 
-import ad.objects.Discipline;
-import ad.objects.Specialty;
-
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.sql.Connection;
 
 abstract public class BasicStorage {
-	private Connection connection;
+	protected Connection connection;
 
 	public Connection getConnection() {
 		return connection;
