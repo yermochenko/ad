@@ -16,7 +16,6 @@ public class Specialty {
 	private String qualification;
 	private String specialtyDirection;
 	private Specialty parent = null;
-	private int parentId = 0;
 	private ArrayList<Specialty> children;
 
 	public Specialty(){
@@ -37,13 +36,6 @@ public class Specialty {
 		this.specialtyDirection = specialtyDirection;
 		this.parent = parent;
 		children = new ArrayList<>();
-	}
-
-	public int getParentId() {
-		return parentId;
-	}
-	public void setParentId(int parentId) {
-		this.parentId = parentId;
 	}
 
 	public Integer getId(){

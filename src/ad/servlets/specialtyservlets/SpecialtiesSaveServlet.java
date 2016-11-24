@@ -1,7 +1,9 @@
 package ad.servlets.specialtyservlets;
 
 
+import ad.Connector;
 import ad.Storage;
+import ad.dao.mysql.SpecialtyDaoImpl;
 import ad.objects.Specialty;
 
 import javax.servlet.ServletException;
@@ -9,12 +11,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 public class SpecialtiesSaveServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
+        SpecialtyDaoImpl sdao = new SpecialtyDaoImpl();
+        Connection c= null;
+        try {
+            c = Connector.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        sdao.setConnection(c);
         /*
         * быдло
         * */
@@ -40,13 +51,13 @@ public class SpecialtiesSaveServlet extends HttpServlet {
         } catch(NumberFormatException e) {}
         if(specialty.getId() == null) {
             try {
-                Storage.createSpecialty(specialty);
+                sdao.create(specialty);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         } else {
             try {
-                Storage.updateSpecialty(specialty);
+                sdao.update(specialty);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

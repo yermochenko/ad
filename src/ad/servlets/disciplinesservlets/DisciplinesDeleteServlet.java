@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ad.Connector;
-import ad.DisciplineDaoImpl;
+import ad.dao.mysql.DisciplineDaoImpl;
 
 public class DisciplinesDeleteServlet extends HttpServlet {
 	@Override

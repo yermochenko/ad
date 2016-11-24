@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ad.Storage;
+import ad.dao.mysql.DisciplineDaoImpl;
 import ad.objects.Discipline;
 
 public class DisciplinesCheckServlet extends HttpServlet {
@@ -22,8 +22,8 @@ public class DisciplinesCheckServlet extends HttpServlet {
         int correct=0;
         String name=req.getParameter("name");
         String shortname=req.getParameter("shortname");
-        
-        Collection<Discipline> disciplines = Storage.getAllDisciplines();
+		DisciplineDaoImpl dao=new DisciplineDaoImpl();
+        Collection<Discipline> disciplines = dao.readAll();
         
         if(name==null || name.equals("")){
         	correct+=1;

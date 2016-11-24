@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ad.Connector;
-import ad.DisciplineDaoImpl;
+import ad.dao.mysql.DisciplineDaoImpl;
 import ad.objects.Discipline;
 
 public class DisciplinesServlet extends HttpServlet {

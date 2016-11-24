@@ -1,4 +1,4 @@
-package ad;
+package ad.dao;
 
 public interface Dao <T> {
 	T read(int id) throws Exception;

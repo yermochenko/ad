@@ -1,4 +1,4 @@
-package ad;
+package ad.dao;
 
 import java.util.Collection;
 

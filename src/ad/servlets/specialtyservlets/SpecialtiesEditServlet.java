@@ -1,9 +1,12 @@
 package ad.servlets.specialtyservlets;
 
+import ad.Connector;
 import ad.Storage;
+import ad.dao.mysql.SpecialtyDaoImpl;
 import ad.objects.Specialty;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -15,20 +18,29 @@ import javax.servlet.http.HttpServletResponse;
 public class SpecialtiesEditServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         try {
+            SpecialtyDaoImpl sdao = new SpecialtyDaoImpl();
+            Connection c= Connector.getConnection();
+            sdao.setConnection(c);
             if (req.getParameter("check") == null || req.getParameter("check").equals("")) {
                 Integer id = Integer.parseInt(req.getParameter("id"));
-                ad.objects.Specialty specialty = Storage.getSpecialtyById(id);
+                ad.objects.Specialty specialty = sdao.read(id);
                 req.setAttribute("specialty", specialty);
 
             }
+            c.close();
         } catch (NumberFormatException e) {
         } catch (SQLException e) {
             e.printStackTrace();
         }
         Collection<Specialty> specialities= null;
         try {
-            specialities = Storage.getAllSpecialties();
+            SpecialtyDaoImpl sdao = new SpecialtyDaoImpl();
+            Connection c= Connector.getConnection();
+            sdao.setConnection(c);
+            specialities = sdao.readAll();
+            c.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

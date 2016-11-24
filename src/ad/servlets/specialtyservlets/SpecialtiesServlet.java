@@ -1,10 +1,13 @@
 package ad.servlets.specialtyservlets;
 
+import ad.Connector;
+import ad.dao.mysql.SpecialtyDaoImpl;
 import ad.objects.Discipline;
 import ad.objects.Specialty;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -18,8 +21,13 @@ public class SpecialtiesServlet extends HttpServlet {
 	 protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 	                                    throws ServletException, IOException {
 		 Collection<Specialty> specialities= null;
+
 		 try {
-			 specialities = ad.Storage.getAllSpecialties();
+			 SpecialtyDaoImpl sdao = new SpecialtyDaoImpl();
+			 Connection c= Connector.getConnection();
+			 sdao.setConnection(c);
+			 specialities = sdao.readAll();
+			 c.close();
 		 } catch (SQLException e) {
 			 e.printStackTrace();
 		 }

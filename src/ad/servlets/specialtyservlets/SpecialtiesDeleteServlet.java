@@ -1,13 +1,14 @@
 package ad.servlets.specialtyservlets;
 
-import ad.Storage;
+import ad.Connector;
+import ad.dao.mysql.SpecialtyDaoImpl;
 import ad.objects.Specialty;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 public class SpecialtiesDeleteServlet extends HttpServlet {
@@ -15,7 +16,11 @@ public class SpecialtiesDeleteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         try{
-            Specialty specialty = Storage.getSpecialtyById(Integer.parseInt(req.getParameter("id")));
+            SpecialtyDaoImpl sdao = new SpecialtyDaoImpl();
+            Connection c= Connector.getConnection();
+            sdao.setConnection(c);
+
+            Specialty specialty = sdao.read(Integer.parseInt(req.getParameter("id")));
             if(specialty.getParent()!=null){
                 specialty.getParent().deleteChild(specialty);
             }
@@ -24,7 +29,8 @@ public class SpecialtiesDeleteServlet extends HttpServlet {
                 object.setParent(null);
             }
 
-            ad.Storage.deleteSpecialtyById(Integer.parseInt(req.getParameter("id")));
+            sdao.delete(Integer.parseInt(req.getParameter("id")));
+            c.close();
         } catch(NumberFormatException e) {} catch (SQLException e) {
             e.printStackTrace();
         }

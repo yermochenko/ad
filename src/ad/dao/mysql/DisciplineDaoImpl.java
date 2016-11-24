@@ -1,4 +1,4 @@
-package ad;
+package ad.dao.mysql;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,9 +7,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import ad.BasicStorage;
+import ad.dao.DisciplineDao;
 import ad.objects.Discipline;
 
-public class DisciplineDaoImpl extends BasicStorage implements DisciplineDao{
+public class DisciplineDaoImpl extends BasicStorage implements DisciplineDao {
 	public Discipline read(int id) throws SQLException{
 		String sql = "SELECT id, name, shortname FROM disciplines WHERE id = ?";
 		PreparedStatement s = null;
