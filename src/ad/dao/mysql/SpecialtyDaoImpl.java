@@ -1,6 +1,5 @@
 package ad.dao.mysql;
 
-import ad.BasicStorage;
 import ad.dao.SpecialtyDao;
 import ad.objects.Specialty;
 import java.sql.*;

@@ -1,6 +1,6 @@
 package ad.servlets.specialtyservlets;
 
-import ad.Connector;
+import ad.dao.mysql.Connector;
 import ad.dao.mysql.SpecialtyDaoImpl;
 import ad.objects.Specialty;
 import javax.servlet.ServletException;

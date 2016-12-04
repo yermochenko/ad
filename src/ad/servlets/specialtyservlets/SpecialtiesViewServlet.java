@@ -1,9 +1,7 @@
 package ad.servlets.specialtyservlets;
 
-import ad.Connector;
-import ad.Storage;
+import ad.dao.mysql.Connector;
 import ad.dao.mysql.SpecialtyDaoImpl;
-import ad.objects.Specialty;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Collection;
 
 /**
  * Created by HomeInc on 28.10.2016.

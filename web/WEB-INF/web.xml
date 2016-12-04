@@ -122,7 +122,11 @@
 		<servlet-name>SpecialtiesViewServlet</servlet-name>
 		<url-pattern>/viewSpecialty.html</url-pattern>
 	</servlet-mapping>
-	
+
+	<listener>
+		<listener-class>ad.servlets.Initializator</listener-class>
+	</listener>
+
 	 <error-page>
         <exception-type>javax.servlet.ServletException</exception-type>
         <location>/WEB-INF/jsp/error.jsp</location>

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ad.Connector;
+import ad.dao.mysql.Connector;
 import ad.dao.mysql.DisciplineDaoImpl;
 import ad.objects.Discipline;
 

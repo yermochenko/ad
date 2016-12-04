@@ -1,12 +1,10 @@
 package ad.servlets.specialtyservlets;
 
-import ad.Connector;
+import ad.dao.mysql.Connector;
 import ad.dao.mysql.SpecialtyDaoImpl;
-import ad.objects.Discipline;
 import ad.objects.Specialty;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package ad;
+package ad.dao.mysql;
 
 import java.sql.Connection;
 
