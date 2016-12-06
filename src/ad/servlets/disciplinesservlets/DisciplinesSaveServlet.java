@@ -11,25 +11,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import ad.dao.mysql.Connector;
 import ad.dao.mysql.DisciplineDaoImpl;
-import ad.objects.Discipline;
+import ad.objects.bean.DisciplineImpl;
 
 public class DisciplinesSaveServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {			
 			req.setCharacterEncoding("UTF-8");
-			Discipline discipline = new Discipline(req.getParameter("name"), req.getParameter("shortname"));
+			DisciplineImpl disciplineImpl = new DisciplineImpl(req.getParameter("name"), req.getParameter("shortname"));
 			try {
-				discipline.setId(Integer.parseInt(req.getParameter("id")));
+				disciplineImpl.setId(Integer.parseInt(req.getParameter("id")));
 			} catch (NumberFormatException e) {
 			}
 			Connection c=Connector.getConnection();
 			DisciplineDaoImpl dao=new DisciplineDaoImpl();
 			dao.setConnection(c);
-			if (discipline.getId() == null) {
-				dao.create(discipline);	
+			if (disciplineImpl.getId() == null) {
+				dao.create(disciplineImpl);
 			} else {
-				dao.update(discipline);
+				dao.update(disciplineImpl);
 			}
 			c.close();
 			resp.sendRedirect(req.getContextPath() + "/disciplines.html");			

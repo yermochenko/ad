@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import ad.dao.DisciplineDao;
-import ad.objects.Discipline;
+import ad.objects.bean.DisciplineImpl;
 
 public class DisciplineDaoImpl extends BasicStorage implements DisciplineDao {
-	public Discipline read(int id) throws SQLException{
+	public DisciplineImpl read(int id) throws SQLException{
 		String sql = "SELECT id, name, shortname FROM disciplines WHERE id = ?";
 		PreparedStatement s = null;
 		ResultSet r = null;
@@ -19,14 +19,14 @@ public class DisciplineDaoImpl extends BasicStorage implements DisciplineDao {
 			s = connection.prepareStatement(sql);
 			s.setInt(1, id);
 			r = s.executeQuery();
-			Discipline discipline = null;
+			DisciplineImpl disciplineImpl = null;
 			if (r.next()) {
-				discipline = new Discipline();
-				discipline.setId(r.getInt("id"));
-				discipline.setName(r.getString("name"));
-				discipline.setShortName(r.getString("shortname"));
+				disciplineImpl = new DisciplineImpl();
+				disciplineImpl.setId(r.getInt("id"));
+				disciplineImpl.setName(r.getString("name"));
+				disciplineImpl.setShortName(r.getString("shortname"));
 			}
-			return discipline;
+			return disciplineImpl;
 		} finally {
 			try {
 				r.close();
@@ -39,13 +39,13 @@ public class DisciplineDaoImpl extends BasicStorage implements DisciplineDao {
 		}
 	}
 	
-	public int create(Discipline discipline) throws SQLException{
+	public int create(DisciplineImpl disciplineImpl) throws SQLException{
 		String sql = "INSERT INTO disciplines (name, shortname) VALUES (?, ?)";
 		PreparedStatement s = null;
 		try {
 			s = connection.prepareStatement(sql);
-			s.setString(1, discipline.getName());
-			s.setString(2, discipline.getShortName());
+			s.setString(1, disciplineImpl.getName());
+			s.setString(2, disciplineImpl.getShortName());
 			s.executeUpdate();
 		} finally {
 			try {
@@ -56,14 +56,14 @@ public class DisciplineDaoImpl extends BasicStorage implements DisciplineDao {
 		return 1;
 	}
 	
-	public void update(Discipline discipline) throws SQLException{
+	public void update(DisciplineImpl disciplineImpl) throws SQLException{
 		String sql = "UPDATE disciplines SET name = ?, shortname = ? WHERE id = ?";
 		PreparedStatement s = null;
 		try {
 			s = connection.prepareStatement(sql);
-			s.setString(1, discipline.getName());
-			s.setString(2, discipline.getShortName());
-			s.setInt(3, discipline.getId());
+			s.setString(1, disciplineImpl.getName());
+			s.setString(2, disciplineImpl.getShortName());
+			s.setInt(3, disciplineImpl.getId());
 			s.executeUpdate();
 		} finally {
 			try {
@@ -88,22 +88,22 @@ public class DisciplineDaoImpl extends BasicStorage implements DisciplineDao {
 		}
 	}
 	
-	public Collection <Discipline> readAll() throws SQLException{
+	public Collection <DisciplineImpl> readAll() throws SQLException{
 		String sql = "SELECT id, name, shortname FROM disciplines";
 		Statement s = null;
 		ResultSet r = null;
 		try {
 			s = connection.createStatement();
 			r = s.executeQuery(sql);
-			Collection<Discipline> disciplines = new ArrayList<>();
+			Collection<DisciplineImpl> disciplineImpls = new ArrayList<>();
 			while (r.next()) {
-				Discipline discipline=new Discipline();
-				discipline.setId(r.getInt("id"));
-				discipline.setName(r.getString("name"));
-				discipline.setShortName(r.getString("shortname"));
-				disciplines.add(discipline);
+				DisciplineImpl disciplineImpl =new DisciplineImpl();
+				disciplineImpl.setId(r.getInt("id"));
+				disciplineImpl.setName(r.getString("name"));
+				disciplineImpl.setShortName(r.getString("shortname"));
+				disciplineImpls.add(disciplineImpl);
 			}
-			return disciplines;
+			return disciplineImpls;
 		} finally {
 			try {
 				r.close();

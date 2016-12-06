@@ -3,7 +3,7 @@ package ad.servlets.specialtyservlets;
 
 import ad.dao.mysql.Connector;
 import ad.dao.mysql.SpecialtyDaoImpl;
-import ad.objects.Specialty;
+import ad.objects.bean.SpecialtyImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -29,16 +29,16 @@ public class SpecialtiesSaveServlet extends HttpServlet {
         * быдло
         * */
         String [] sIndex = req.getParameter("select").split(" ");
-        ad.objects.Specialty specialty;
+        SpecialtyImpl specialtyImpl;
         if(sIndex[0]!="") {
-            Specialty parent = new Specialty();
+            SpecialtyImpl parent = new SpecialtyImpl();
             parent.setId(Integer.valueOf(sIndex[0]));
-            specialty = new ad.objects.Specialty(req.getParameter("code"), req.getParameter("name"),
+            specialtyImpl = new SpecialtyImpl(req.getParameter("code"), req.getParameter("name"),
                     req.getParameter("shortName"), req.getParameter("qualification"), req.getParameter("specialtyDirection"), parent);
-           // specialty.setParentId(parent.getId());
-           // parent.addChild(specialty);
+           // specialtyImpl.setParentId(parent.getId());
+           // parent.addChild(specialtyImpl);
         }else{
-            specialty = new ad.objects.Specialty(req.getParameter("code"), req.getParameter("name"),
+            specialtyImpl = new SpecialtyImpl(req.getParameter("code"), req.getParameter("name"),
                     req.getParameter("shortName"), req.getParameter("qualification"), req.getParameter("specialtyDirection"), null);
         }
         /*
@@ -46,17 +46,17 @@ public class SpecialtiesSaveServlet extends HttpServlet {
         * */
 
         try {
-            specialty.setId(Integer.parseInt(req.getParameter("id")));
+            specialtyImpl.setId(Integer.parseInt(req.getParameter("id")));
         } catch(NumberFormatException e) {}
-        if(specialty.getId() == null) {
+        if(specialtyImpl.getId() == null) {
             try {
-                sdao.create(specialty);
+                sdao.create(specialtyImpl);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         } else {
             try {
-                sdao.update(specialty);
+                sdao.update(specialtyImpl);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

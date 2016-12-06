@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import ad.dao.mysql.Connector;
 import ad.dao.mysql.DisciplineDaoImpl;
-import ad.objects.Discipline;
+import ad.objects.bean.DisciplineImpl;
 
 public class DisciplinesServlet extends HttpServlet {
 	@Override
@@ -21,10 +21,10 @@ public class DisciplinesServlet extends HttpServlet {
 			Connection c=Connector.getConnection();
 			DisciplineDaoImpl dao=new DisciplineDaoImpl();
 			dao.setConnection(c);
-			Collection<Discipline> disciplines=dao.readAll();
+			Collection<DisciplineImpl> disciplineImpls =dao.readAll();
 			c.close();
-			req.setAttribute("disciplines", disciplines);
-			getServletContext().getRequestDispatcher("/WEB-INF/jsp/disciplines.jsp").forward(req, resp);			
+			req.setAttribute("disciplineImpls", disciplineImpls);
+			getServletContext().getRequestDispatcher("/WEB-INF/jsp/disciplines.jsp").forward(req, resp);
 		} catch (SQLException e) {
 			throw new ServletException(e);
 		}

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import ad.dao.mysql.Connector;
 import ad.dao.mysql.DisciplineDaoImpl;
-import ad.objects.Discipline;
+import ad.objects.bean.DisciplineImpl;
 
 public class DisciplinesEditServlet extends HttpServlet {
 	@Override
@@ -21,9 +21,9 @@ public class DisciplinesEditServlet extends HttpServlet {
 			Connection c=Connector.getConnection();
 			DisciplineDaoImpl dao=new DisciplineDaoImpl();
 			dao.setConnection(c);
-			Discipline discipline=dao.read(id);
+			DisciplineImpl disciplineImpl =dao.read(id);
 			c.close();
-			req.setAttribute("discipline", discipline);			
+			req.setAttribute("disciplineImpl", disciplineImpl);
 		} catch (NumberFormatException e) {
 		} catch (SQLException e) {
 			throw new ServletException(e);

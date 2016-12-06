@@ -8,13 +8,13 @@
         <c:choose>
             <c:when test="${empty check}">
                 <c:choose>
-                    <c:when test="${not empty specialty}">
-                        <INPUT type="hidden" name="id" value="${specialty.id}">
-                        <P>Код специальности: <INPUT type="text" name="code" value="${specialty.code}" required></P></P>
-                        <P>Название специальности: <INPUT type="text" name="name" value="${specialty.name}" required></P>
-                        <P>Сокращенное название: <INPUT type="text" name="shortName" value="${specialty.shortName}" required></P>
-                        <P>Квалификация: <INPUT type="text" name="qualification" value="${specialty.qualification}" required></P>
-                        <P>Направление специальности: <INPUT type="text" name="specialtyDirection" value="${specialty.specialtyDirection}" required></P>
+                    <c:when test="${not empty specialtyImpl}">
+                        <INPUT type="hidden" name="id" value="${specialtyImpl.id}">
+                        <P>Код специальности: <INPUT type="text" name="code" value="${specialtyImpl.code}" required></P></P>
+                        <P>Название специальности: <INPUT type="text" name="name" value="${specialtyImpl.name}" required></P>
+                        <P>Сокращенное название: <INPUT type="text" name="shortName" value="${specialtyImpl.shortName}" required></P>
+                        <P>Квалификация: <INPUT type="text" name="qualification" value="${specialtyImpl.qualification}" required></P>
+                        <P>Направление специальности: <INPUT type="text" name="specialtyDirection" value="${specialtyImpl.specialtyDirection}" required></P>
                     </c:when>
                     <c:otherwise>
                         <P>Код специальности: <INPUT type="text" name="code" value="" required></P></P>
@@ -26,16 +26,34 @@
                 </c:choose>
 
                 <select id="select" name="select">
-                    <option></option>
+                    <c:choose>
+                        <c:when test="${not empty specialtyImpl}">
+                            <c:choose>
+                                <c:when test="${not empty specialtyImpl.parent}">
+                                    <option>${specialtyImpl.parent.id} ${specialtyImpl.parent.name}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option></option>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:when>
+                        <c:otherwise>
+                            <option></option>
+                        </c:otherwise>
+                    </c:choose>
+
                     <c:forEach var="special" items="${specialties}">
-                        <option>${special.id} ${special.name}</option>
+                        <c:if test="${special.id != specialtyImpl.id}">
+                            <option>${special.id} ${special.name}</option>
+                        </c:if>
+
                     </c:forEach>
                 </select>
 
                 <P>
                     <BUTTON type="submit">Сохранить</BUTTON>
-                    <c:if test="${not empty specialty }">
-                        <BUTTON formaction="deleteSpecialty.html?id=${specialty.id}">Удалить</BUTTON>
+                    <c:if test="${not empty specialtyImpl }">
+                        <BUTTON formaction="deleteSpecialty.html?id=${specialtyImpl.id}">Удалить</BUTTON>
                     </c:if>
                 </P>
             </c:when>
@@ -51,7 +69,7 @@
                 <P>
                     <BUTTON type="submit">Сохранить</BUTTON>
                     <c:if test="${not empty id }">
-                        <BUTTON formaction="deleteSpecialty.html?id=${discipline.id}">Удалить</BUTTON>
+                        <BUTTON formaction="deleteSpecialty.html?id=${disciplineImpl.id}">Удалить</BUTTON>
                     </c:if>
                 </P>
             </c:otherwise>

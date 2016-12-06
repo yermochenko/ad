@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ad.dao.mysql.DisciplineDaoImpl;
-import ad.objects.Discipline;
+import ad.objects.bean.DisciplineImpl;
 
 public class DisciplinesCheckServlet extends HttpServlet {
 	@Override
@@ -23,15 +23,15 @@ public class DisciplinesCheckServlet extends HttpServlet {
         String name=req.getParameter("name");
         String shortname=req.getParameter("shortname");
 		DisciplineDaoImpl dao=new DisciplineDaoImpl();
-        Collection<Discipline> disciplines = dao.readAll();
+        Collection<DisciplineImpl> disciplineImpls = dao.readAll();
         
         if(name==null || name.equals("")){
         	correct+=1;
         }
         else{
-        	for(Discipline discipline : disciplines){
-        		if(name.equalsIgnoreCase(discipline.getName())){
-        			if( (req.getParameter("id")==null) || req.getParameter("id").equals("") || (Integer.parseInt(req.getParameter("id"))!=discipline.getId())){
+        	for(DisciplineImpl disciplineImpl : disciplineImpls){
+        		if(name.equalsIgnoreCase(disciplineImpl.getName())){
+        			if( (req.getParameter("id")==null) || req.getParameter("id").equals("") || (Integer.parseInt(req.getParameter("id"))!= disciplineImpl.getId())){
         				correct+=1;
         				break;
         			}
@@ -42,9 +42,9 @@ public class DisciplinesCheckServlet extends HttpServlet {
         	correct+=1;
         }
         else{
-        	for(Discipline discipline : disciplines){
-        		if(shortname.equalsIgnoreCase(discipline.getShortName())){
-        			if( (req.getParameter("id")==null) || req.getParameter("id").equals("") || (Integer.parseInt(req.getParameter("id"))!=discipline.getId())){
+        	for(DisciplineImpl disciplineImpl : disciplineImpls){
+        		if(shortname.equalsIgnoreCase(disciplineImpl.getShortName())){
+        			if( (req.getParameter("id")==null) || req.getParameter("id").equals("") || (Integer.parseInt(req.getParameter("id"))!= disciplineImpl.getId())){
         				correct+=1;
         				break;
         			}

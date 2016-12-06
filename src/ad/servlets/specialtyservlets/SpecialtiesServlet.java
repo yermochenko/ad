@@ -2,7 +2,7 @@ package ad.servlets.specialtyservlets;
 
 import ad.dao.mysql.Connector;
 import ad.dao.mysql.SpecialtyDaoImpl;
-import ad.objects.Specialty;
+import ad.objects.bean.SpecialtyImpl;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -18,7 +18,7 @@ public class SpecialtiesServlet extends HttpServlet {
 	 @Override
 	 protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 	                                    throws ServletException, IOException {
-		 Collection<Specialty> specialities= null;
+		 Collection<SpecialtyImpl> specialities= null;
 
 		 try {
 			 SpecialtyDaoImpl sdao = new SpecialtyDaoImpl();

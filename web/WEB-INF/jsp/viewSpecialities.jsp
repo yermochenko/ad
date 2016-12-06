@@ -5,28 +5,28 @@
 
 <u:html title="Обзор специальности" stylesheet="table.css">
     <c:choose>
-        <c:when test="${not empty specialty}">
+        <c:when test="${not empty specialtyImpl}">
             <%--<h1>${spetialty.name}</h1>--%>
             <TABLE align="center">
                 <TR>
                     <TH>Код специальности</TH>
-                    <TH>${specialty.code}</TH>
+                    <TH>${specialtyImpl.code}</TH>
                 </TR>
                 <TR>
                     <TH>Название специальности</TH>
-                    <TH>${specialty.name}</TH>
+                    <TH>${specialtyImpl.name}</TH>
                 </TR>
                 <TR>
                     <TH>Сокращенное название</TH>
-                    <TH>${specialty.shortName}</TH>
+                    <TH>${specialtyImpl.shortName}</TH>
                 </TR>
                 <TR>
                     <TH>Квалификация</TH>
-                    <TH>${specialty.qualification}</TH>
+                    <TH>${specialtyImpl.qualification}</TH>
                 </TR>
                 <TR>
                     <TH>Направление специальности</TH>
-                    <TH>${specialty.specialtyDirection}</TH>
+                    <TH>${specialtyImpl.specialtyDirection}</TH>
                 </TR>
             </TABLE>
         </c:when>

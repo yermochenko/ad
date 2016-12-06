@@ -1,27 +1,28 @@
 package ad.dao.mysql;
 
 import ad.dao.SpecialtyDao;
-import ad.objects.Specialty;
+import ad.objects.bean.SpecialtyImpl;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class SpecialtyDaoImpl extends BasicStorage implements SpecialtyDao{
-    public int create(ad.objects.Specialty specialty) throws SQLException {
+    public int create(SpecialtyImpl specialtyImpl) throws SQLException {
         String sql = "INSERT INTO specialties (code, name, parent_id, qualification, shortname, specialty_direction) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement s = null;
         try {
             s = connection.prepareStatement(sql);
-            s.setString(1, specialty.getCode());
-            s.setString(2,specialty.getName());
-            if(specialty.getParent()==null){
+            s.setString(1, specialtyImpl.getCode());
+            s.setString(2, specialtyImpl.getName());
+            if(specialtyImpl.getParent()==null){
                 s.setString(3,null);
             }else{
-                s.setInt(3,specialty.getParent().getId());
+                s.setInt(3, specialtyImpl.getParent().getId());
             }
-            s.setString(4,specialty.getQualification());
-            s.setString(5, specialty.getShortName());
-            s.setString(6, specialty.getSpecialtyDirection());
+            s.setString(4, specialtyImpl.getQualification());
+            s.setString(5, specialtyImpl.getShortName());
+            s.setString(6, specialtyImpl.getSpecialtyDirection());
             s.executeUpdate();
         } finally {
             try {
@@ -48,24 +49,24 @@ public class SpecialtyDaoImpl extends BasicStorage implements SpecialtyDao{
 
         //specialties.remove(id);
     }
-    public void update(ad.objects.Specialty specialty) throws SQLException {
+    public void update(SpecialtyImpl specialtyImpl) throws SQLException {
         String sql = "UPDATE specialties SET code = ?, id = ?, name = ?, parent_id = ?, qualification = ?, shortname = ?, specialty_direction = ? WHERE id = ?";
         PreparedStatement s = null;
         try {
             s = connection.prepareStatement(sql);
-            s.setString(1, specialty.getCode());
-            s.setInt(2, specialty.getId());
-            s.setString(3,specialty.getName());
-            if(specialty.getParent()==null){
+            s.setString(1, specialtyImpl.getCode());
+            s.setInt(2, specialtyImpl.getId());
+            s.setString(3, specialtyImpl.getName());
+            if(specialtyImpl.getParent()==null){
                 s.setString(4,null);
                 s.setNull(4, Types.INTEGER);
             }else{
-                s.setInt(4,specialty.getParent().getId());
+                s.setInt(4, specialtyImpl.getParent().getId());
             }
-            s.setString(5,specialty.getQualification());
-            s.setString(6, specialty.getShortName());
-            s.setString(7, specialty.getSpecialtyDirection());
-            s.setInt(8, specialty.getId());
+            s.setString(5, specialtyImpl.getQualification());
+            s.setString(6, specialtyImpl.getShortName());
+            s.setString(7, specialtyImpl.getSpecialtyDirection());
+            s.setInt(8, specialtyImpl.getId());
             s.executeUpdate();
         } finally {
             try {
@@ -74,9 +75,9 @@ public class SpecialtyDaoImpl extends BasicStorage implements SpecialtyDao{
             }
         }
 
-        //specialties.put(specialty.getId(), specialty);
+        //specialties.put(specialtyImpl.getId(), specialtyImpl);
     }
-    public ad.objects.Specialty read(int id) throws SQLException {
+    public SpecialtyImpl read(int id) throws SQLException {
         String sql = "SELECT  id, code, name, parent_id, qualification, shortname, specialty_direction FROM specialties WHERE id = ?";
         PreparedStatement s = null;
         ResultSet r = null;
@@ -84,18 +85,18 @@ public class SpecialtyDaoImpl extends BasicStorage implements SpecialtyDao{
             s = connection.prepareStatement(sql);
             s.setInt(1, id);
             r = s.executeQuery();
-            Specialty specialty = null;
+            SpecialtyImpl specialtyImpl = null;
             if (r.next()) {
-                specialty = new Specialty();
-                specialty.setId(r.getInt("id"));
-                specialty.setCode(r.getString("code"));
-                specialty.setName(r.getString("name"));
-                specialty.setParent(read(r.getInt("parent_id")));
-                specialty.setQualification(r.getString("qualification"));
-                specialty.setShortName(r.getString("shortname"));
-                specialty.setSpecialtyDirection(r.getString("specialty_direction"));
+                specialtyImpl = new SpecialtyImpl();
+                specialtyImpl.setId(r.getInt("id"));
+                specialtyImpl.setCode(r.getString("code"));
+                specialtyImpl.setName(r.getString("name"));
+                specialtyImpl.setParent(read(r.getInt("parent_id")));
+                specialtyImpl.setQualification(r.getString("qualification"));
+                specialtyImpl.setShortName(r.getString("shortname"));
+                specialtyImpl.setSpecialtyDirection(r.getString("specialty_direction"));
             }
-            return specialty;
+            return specialtyImpl;
         } finally {
             try {
                 r.close();
@@ -109,24 +110,24 @@ public class SpecialtyDaoImpl extends BasicStorage implements SpecialtyDao{
 
         //return specialties.get(id);
     }
-    public Collection<Specialty> readAll() throws SQLException {
+    public Collection<SpecialtyImpl> readAll() throws SQLException {
         String sql = "SELECT  id, code, name, parent_id, qualification, shortname, specialty_direction FROM specialties";
         Statement s = null;
         ResultSet r = null;
         try {
             s = connection.createStatement();
             r = s.executeQuery(sql);
-            Collection<Specialty> specialties = new ArrayList<>();
+            Collection<SpecialtyImpl> specialties = new ArrayList<>();
             while (r.next()) {
-                Specialty specialty=new Specialty();
-                specialty.setId(r.getInt("id"));
-                specialty.setCode(r.getString("code"));
-                specialty.setName(r.getString("name"));
-                specialty.setParent(read(r.getInt("parent_id")));
-                specialty.setQualification(r.getString("qualification"));
-                specialty.setShortName(r.getString("shortname"));
-                specialty.setSpecialtyDirection(r.getString("specialty_direction"));
-                specialties.add(specialty);
+                SpecialtyImpl specialtyImpl =new SpecialtyImpl();
+                specialtyImpl.setId(r.getInt("id"));
+                specialtyImpl.setCode(r.getString("code"));
+                specialtyImpl.setName(r.getString("name"));
+                specialtyImpl.setParent(read(r.getInt("parent_id")));
+                specialtyImpl.setQualification(r.getString("qualification"));
+                specialtyImpl.setShortName(r.getString("shortname"));
+                specialtyImpl.setSpecialtyDirection(r.getString("specialty_direction"));
+                specialties.add(specialtyImpl);
             }
             return specialties;
         } finally {

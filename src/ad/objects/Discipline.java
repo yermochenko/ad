@@ -1,38 +1,12 @@
 package ad.objects;
 
-/*
-* Дисциплины
-* */
-public class Discipline {
-	private Integer id;
-	private String name;
-	private String shortname;
-	
-	public Discipline(){}
+/**
+ * Created by HomeInc on 06.12.2016.
+ */
+public interface Discipline extends Entity {
+    String getName();
+    void setName(String name);
 
-	public Discipline(String name, String shortname){
-		this.name = name;
-		this.shortname = shortname;
-	}
-
-	public Integer getId(){
-		return id;
-	}
-	public void setId(Integer id){
-		this.id=id;
-	}
-	
-	public String getName(){
-		return name;
-	}
-	public void setName(String name){
-		this.name=name;
-	}
-	
-	public String getShortName(){
-		return shortname;
-	}
-	public void setShortName(String shortname){
-		this.shortname=shortname;
-	}
+    String getShortName();
+    void setShortName(String shortname);
 }

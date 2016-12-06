@@ -1,55 +1,14 @@
 package ad.objects;
 
-import java.util.List;
-/*
-* Учебные планы
-* List <CurriculumDiscipline> curriculumDisciplines - список дисциплин
-* */
-public class Curriculum {
-	private Integer id;
-	private Specialty specialty;
-	private Integer year;
-	private List <CurriculumDiscipline> curriculumDisciplines;
+import ad.objects.bean.SpecialtyImpl;
 
-	public Curriculum(Specialty specialty, Integer year){
-		this.specialty = specialty;
-		this.year = year;
-	}
+/**
+ * Created by HomeInc on 06.12.2016.
+ */
+public interface Curriculum extends Entity {
+    Integer getYear();
+    void setYear(Integer year);
 
-
-	public Integer getId(){
-		return id;
-	}
-	public void setId(Integer id){
-		this.id=id;
-	}
-	
-	public Integer getYear(){
-		return year;
-	}
-	public void setYear(Integer year){
-		this.year=year;
-	}
-	
-	public Specialty getSpecialty(){
-		return specialty;
-	}
-	public void setSpecialty(Specialty specialty){
-		this.specialty=specialty;
-	}
-	
-	public List <CurriculumDiscipline> getAllCurriculumDisciplines(){
-		return curriculumDisciplines;
-	}
-	public void addCurriculumDiscipline(CurriculumDiscipline curriculumDiscipline){
-		curriculumDisciplines.add(curriculumDiscipline);
-	}
-	public void deleteCurriculumDisciplineById(Integer id){
-		for(CurriculumDiscipline curriculumDiscipline : curriculumDisciplines){
-			if(curriculumDiscipline.getId()==id){
-				curriculumDisciplines.remove(curriculumDiscipline);
-				break;
-			}
-		}
-	}
+    SpecialtyImpl getSpecialtyImpl();
+    void setSpecialtyImpl(SpecialtyImpl specialtyImpl);
 }

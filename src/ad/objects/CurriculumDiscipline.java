@@ -1,45 +1,18 @@
 package ad.objects;
 
-/*
-* Дисциплина учебного плана
-* */
-public class CurriculumDiscipline {
-	private Integer id;
-	private Curriculum curriculum;
-	private Discipline discipline;
-	private Integer semester;
+import ad.objects.bean.CurriculumImpl;
+import ad.objects.bean.DisciplineImpl;
 
-	public CurriculumDiscipline(Curriculum curriculum,Discipline discipline,Integer semester){
-		this.curriculum = curriculum;
-		this.discipline = discipline;
-		this.semester = semester;
-	}
-	
-	public Integer getId(){
-		return id;
-	}
-	public void setId(Integer id){
-		this.id=id;
-	}
-	
-	public Curriculum getCurriculum(){
-		return curriculum;
-	}
-	public void setCurriculum(Curriculum curriculum){
-		this.curriculum=curriculum;
-	}
-	
-	public Discipline getDiscipline(){
-		return discipline;
-	}
-	public void setDiscipline(Discipline discipline){
-		this.discipline=discipline;
-	}
-	
-	public Integer getSemester(){
-		return semester;
-	}
-	public void setSemester(Integer semester){
-		this.semester=semester;
-	}
+/**
+ * Created by HomeInc on 06.12.2016.
+ */
+public interface CurriculumDiscipline extends Entity {
+    CurriculumImpl getCurriculumImpl();
+    void setCurriculumImpl(CurriculumImpl curriculumImpl);
+
+    DisciplineImpl getDisciplineImpl();
+    void setDisciplineImpl(DisciplineImpl disciplineImpl);
+
+    Integer getSemester();
+    void setSemester(Integer semester);
 }
