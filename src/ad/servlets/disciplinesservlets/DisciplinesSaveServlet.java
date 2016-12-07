@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ad.dao.exception.DaoException;
 import ad.dao.mysql.Connector;
 import ad.dao.mysql.DisciplineDaoImpl;
+import ad.objects.Discipline;
 import ad.objects.bean.DisciplineImpl;
+import ad.objects.factory.SimpleEntityFactory;
 
 public class DisciplinesSaveServlet extends HttpServlet {
 	@Override
@@ -26,6 +29,9 @@ public class DisciplinesSaveServlet extends HttpServlet {
 			Connection c=Connector.getConnection();
 			DisciplineDaoImpl dao=new DisciplineDaoImpl();
 			dao.setConnection(c);
+			SimpleEntityFactory<Discipline> disciplineFactory = new SimpleEntityFactory<>();
+			disciplineFactory.setEntityClass(DisciplineImpl.class);
+			dao.setDisciplineFactory(disciplineFactory);
 			if (disciplineImpl.getId() == null) {
 				dao.create(disciplineImpl);
 			} else {
@@ -33,7 +39,7 @@ public class DisciplinesSaveServlet extends HttpServlet {
 			}
 			c.close();
 			resp.sendRedirect(req.getContextPath() + "/disciplines.html");			
-		} catch (SQLException e) {
+		} catch (SQLException | DaoException e) {
 			throw new ServletException(e);
 		}
 	}

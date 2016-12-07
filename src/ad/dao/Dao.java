@@ -1,8 +1,12 @@
 package ad.dao;
 
-public interface Dao <T> {
-	T read(int id) throws Exception;
-	int create(T object) throws Exception;
-	void update(T object) throws Exception;
-	void delete(int id) throws Exception;
+import ad.dao.exception.DaoException;
+import ad.objects.Entity;
+import ad.objects.bean.DisciplineImpl;
+
+public interface Dao <T extends Entity> {
+	T read(int id) throws DaoException;
+	int create(T object) throws DaoException;
+	void update(T object) throws DaoException;
+	void delete(int id) throws DaoException;
 }

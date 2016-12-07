@@ -2,8 +2,9 @@ package ad.dao;
 
 import java.util.Collection;
 
-import ad.objects.bean.DisciplineImpl;
+import ad.dao.exception.DaoException;
+import ad.objects.Discipline;
 
-public interface DisciplineDao extends Dao<DisciplineImpl> {
-	Collection <DisciplineImpl> readAll() throws Exception;
+public interface DisciplineDao extends Dao<Discipline> {
+	Collection <Discipline> readAll() throws DaoException;
 }

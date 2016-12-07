@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ad.dao.exception.DaoException;
 import ad.dao.mysql.Connector;
 import ad.dao.mysql.DisciplineDaoImpl;
+import ad.objects.Discipline;
 import ad.objects.bean.DisciplineImpl;
+import ad.objects.factory.SimpleEntityFactory;
 
 public class DisciplinesEditServlet extends HttpServlet {
 	@Override
@@ -21,11 +24,14 @@ public class DisciplinesEditServlet extends HttpServlet {
 			Connection c=Connector.getConnection();
 			DisciplineDaoImpl dao=new DisciplineDaoImpl();
 			dao.setConnection(c);
-			DisciplineImpl disciplineImpl =dao.read(id);
+			SimpleEntityFactory<Discipline> disciplineFactory = new SimpleEntityFactory<>();
+			disciplineFactory.setEntityClass(DisciplineImpl.class);
+			dao.setDisciplineFactory(disciplineFactory);
+			DisciplineImpl disciplineImpl =(DisciplineImpl)dao.read(id);
 			c.close();
 			req.setAttribute("disciplineImpl", disciplineImpl);
 		} catch (NumberFormatException e) {
-		} catch (SQLException e) {
+		} catch (SQLException |DaoException e) {
 			throw new ServletException(e);
 		}
 		getServletContext().getRequestDispatcher("/WEB-INF/jsp/editdiscipline.jsp").forward(req, resp);

@@ -1,5 +1,6 @@
 package ad.dao.mysql;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,25 +9,39 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import ad.dao.DisciplineDao;
-import ad.objects.bean.DisciplineImpl;
+import ad.dao.exception.DaoException;
+import ad.objects.Discipline;
+import ad.objects.factory.EntityFactory;
+import ad.objects.factory.exception.EntityCreateException;
 
-public class DisciplineDaoImpl extends BasicStorage implements DisciplineDao {
-	public DisciplineImpl read(int id) throws SQLException{
+public class DisciplineDaoImpl extends DaoImpl<Discipline> implements DisciplineDao {
+	private EntityFactory<Discipline> disciplineFactory;
+
+	public void setDisciplineFactory(EntityFactory<Discipline> disciplineFactory) {
+		this.disciplineFactory = disciplineFactory;
+	}
+
+	@Override
+	protected Discipline readRaw(int id) throws DaoException {
 		String sql = "SELECT id, name, shortname FROM disciplines WHERE id = ?";
+		Connection c = null;
 		PreparedStatement s = null;
 		ResultSet r = null;
 		try {
-			s = connection.prepareStatement(sql);
+			c = getConnection();
+			s = c.prepareStatement(sql);
 			s.setInt(1, id);
 			r = s.executeQuery();
-			DisciplineImpl disciplineImpl = null;
+			Discipline discipline = null;
 			if (r.next()) {
-				disciplineImpl = new DisciplineImpl();
-				disciplineImpl.setId(r.getInt("id"));
-				disciplineImpl.setName(r.getString("name"));
-				disciplineImpl.setShortName(r.getString("shortname"));
+				discipline = disciplineFactory.create();
+				discipline.setId(r.getInt("id"));
+				discipline.setName(r.getString("name"));
+				discipline.setShortName(r.getString("shortname"));
 			}
-			return disciplineImpl;
+			return discipline;
+		}catch(SQLException | EntityCreateException e) {
+            throw new DaoException(e);
 		} finally {
 			try {
 				r.close();
@@ -38,15 +53,20 @@ public class DisciplineDaoImpl extends BasicStorage implements DisciplineDao {
 			}
 		}
 	}
-	
-	public int create(DisciplineImpl disciplineImpl) throws SQLException{
+
+	@Override
+	protected int createRaw(Discipline discipline) throws DaoException {
 		String sql = "INSERT INTO disciplines (name, shortname) VALUES (?, ?)";
+		Connection c = null;
 		PreparedStatement s = null;
 		try {
-			s = connection.prepareStatement(sql);
-			s.setString(1, disciplineImpl.getName());
-			s.setString(2, disciplineImpl.getShortName());
+			c=getConnection();
+			s = c.prepareStatement(sql);
+			s.setString(1, discipline.getName());
+			s.setString(2, discipline.getShortName());
 			s.executeUpdate();
+		}catch(SQLException e) {
+            throw new DaoException(e);
 		} finally {
 			try {
 				s.close();
@@ -55,16 +75,21 @@ public class DisciplineDaoImpl extends BasicStorage implements DisciplineDao {
 		}
 		return 1;
 	}
-	
-	public void update(DisciplineImpl disciplineImpl) throws SQLException{
+
+	@Override
+	protected void updateRaw(Discipline discipline) throws DaoException {
 		String sql = "UPDATE disciplines SET name = ?, shortname = ? WHERE id = ?";
+		Connection c=null;
 		PreparedStatement s = null;
 		try {
-			s = connection.prepareStatement(sql);
-			s.setString(1, disciplineImpl.getName());
-			s.setString(2, disciplineImpl.getShortName());
-			s.setInt(3, disciplineImpl.getId());
+			c=getConnection();
+			s = c.prepareStatement(sql);
+			s.setString(1, discipline.getName());
+			s.setString(2, discipline.getShortName());
+			s.setInt(3, discipline.getId());
 			s.executeUpdate();
+		}catch(SQLException e) {
+            throw new DaoException(e);
 		} finally {
 			try {
 				s.close();
@@ -72,14 +97,19 @@ public class DisciplineDaoImpl extends BasicStorage implements DisciplineDao {
 			}
 		}
 	}
-	
-	public void delete(int id) throws SQLException{
+
+	@Override
+	protected void deleteRaw(int id) throws DaoException {
 		String sql = "DELETE FROM disciplines WHERE id=?";
+		Connection c=null;
 		PreparedStatement s = null;
 		try {
-			s = connection.prepareStatement(sql);
+			c=getConnection();
+			s = c.prepareStatement(sql);
 			s.setInt(1, id);
 			s.executeUpdate();
+		} catch(SQLException e) {
+            throw new DaoException(e);
 		} finally {
 			try {
 				s.close();
@@ -87,24 +117,28 @@ public class DisciplineDaoImpl extends BasicStorage implements DisciplineDao {
 			}
 		}
 	}
-	
-	public Collection <DisciplineImpl> readAll() throws SQLException{
+
+	public Collection<Discipline> readAll() throws DaoException {
 		String sql = "SELECT id, name, shortname FROM disciplines";
+		Connection c=null;
 		Statement s = null;
 		ResultSet r = null;
 		try {
-			s = connection.createStatement();
+			c=getConnection();
+			s = c.createStatement();
 			r = s.executeQuery(sql);
-			Collection<DisciplineImpl> disciplineImpls = new ArrayList<>();
+			Collection<Discipline> disciplines = new ArrayList<>();
 			while (r.next()) {
-				DisciplineImpl disciplineImpl =new DisciplineImpl();
-				disciplineImpl.setId(r.getInt("id"));
-				disciplineImpl.setName(r.getString("name"));
-				disciplineImpl.setShortName(r.getString("shortname"));
-				disciplineImpls.add(disciplineImpl);
+				Discipline discipline = disciplineFactory.create();
+				discipline.setId(r.getInt("id"));
+				discipline.setName(r.getString("name"));
+				discipline.setShortName(r.getString("shortname"));
+				disciplines.add(discipline);
 			}
-			return disciplineImpls;
-		} finally {
+			return disciplines;
+		}catch(SQLException | EntityCreateException e) {
+            throw new DaoException(e);
+		}  finally {
 			try {
 				r.close();
 			} catch (NullPointerException | SQLException e) {

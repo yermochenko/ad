@@ -18,7 +18,8 @@
 	<P>Название</P>
 	<c:choose>
 		<c:when test="${not empty disciplineImpl}">
-			<INPUT type="text" name="name" value="${disciplineImpl.name}" required>
+			<INPUT type="text" name="name" value="${disciplineImpl.name}"
+				required>
 		</c:when>
 		<c:otherwise>
 			<INPUT type="text" name="name" value="" required>
@@ -27,8 +28,8 @@
 	<P>Сокращенное название</P>
 	<c:choose>
 		<c:when test="${not empty disciplineImpl}">
-			<INPUT type="text" name="shortname" value="${disciplineImpl.shortName}"
-				required>
+			<INPUT type="text" name="shortname"
+				value="${disciplineImpl.shortName}" required>
 		</c:when>
 		<c:otherwise>
 			<INPUT type="text" name="shortname" value="" required>

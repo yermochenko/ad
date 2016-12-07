@@ -18,11 +18,11 @@ public class CurriculumDisciplinesServlet extends HttpServlet {
         w.println("<HEAD>");
         w.println("<META http-equiv=\"Content-Type\"");
         w.println("      content=\"text/html; charset=UTF-8\"/>");
-        w.println("<TITLE>Дисциплины учебных планов</TITLE>");
+        w.println("<TITLE>Р”РёСЃС†РёРїР»РёРЅС‹ СѓС‡РµР±РЅРѕРіРѕ РїР»Р°РЅР°</TITLE>");
         w.println("</HEAD>");
         w.println("<BODY>");
         w.println("<P>CurriculumDisciplinesPage...</P>");
-        w.println("<FORM><BUTTON formaction=\"index.html\">Вернуться на главную страницу</BUTTON></FORM>");
+        w.println("<FORM><BUTTON formaction=\"index.html\">Р’РµСЂРЅСѓС‚СЊСЃСЏ РЅР° РіР»Р°РІРЅСѓСЋ СЃС‚СЂР°РЅРёС†Сѓ</BUTTON></FORM>");
         w.println("</BODY>");
         w.println("</HTML>");
     }
