@@ -1,8 +1,6 @@
 package ad.servlets.disciplinesservlets;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,11 +11,7 @@ import ad.dao.DaoContainer;
 import ad.dao.DaoContainerFactory;
 import ad.dao.DisciplineDao;
 import ad.dao.exception.DaoException;
-import ad.dao.mysql.Connector;
-import ad.dao.mysql.DisciplineDaoImpl;
 import ad.objects.Discipline;
-import ad.objects.bean.DisciplineImpl;
-import ad.objects.factory.SimpleEntityFactory;
 
 public class DisciplinesEditServlet extends HttpServlet {
 	@Override
