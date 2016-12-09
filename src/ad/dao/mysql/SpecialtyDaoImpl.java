@@ -1,14 +1,18 @@
 package ad.dao.mysql;
 
 import ad.dao.SpecialtyDao;
+import ad.dao.exception.DaoException;
+import ad.objects.Discipline;
+import ad.objects.Specialty;
 import ad.objects.bean.SpecialtyImpl;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class SpecialtyDaoImpl extends BasicStorage implements SpecialtyDao{
-    public int create(SpecialtyImpl specialtyImpl) throws SQLException {
+public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao{
+    @Override
+    protected int createRaw(Specialty specialtyImpl) throws DaoException {
         String sql = "INSERT INTO specialties (code, name, parent_id, qualification, shortname, specialty_direction) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement s = null;
         try {
@@ -24,6 +28,8 @@ public class SpecialtyDaoImpl extends BasicStorage implements SpecialtyDao{
             s.setString(5, specialtyImpl.getShortName());
             s.setString(6, specialtyImpl.getSpecialtyDirection());
             s.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
             try {
                 s.close();
@@ -33,23 +39,25 @@ public class SpecialtyDaoImpl extends BasicStorage implements SpecialtyDao{
         }
         return 1;
     }
-    public void delete(int id) throws SQLException {
+    @Override
+    protected void deleteRaw(int id) throws DaoException {
         String sql = "DELETE FROM specialties WHERE id=?";
         PreparedStatement s = null;
         try {
             s = connection.prepareStatement(sql);
             s.setInt(1, id);
             s.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
             try {
                 s.close();
             } catch (NullPointerException | SQLException e) {
             }
         }
-
-        //specialties.remove(id);
     }
-    public void update(SpecialtyImpl specialtyImpl) throws SQLException {
+    @Override
+    protected void updateRaw(Specialty specialtyImpl) throws DaoException {
         String sql = "UPDATE specialties SET code = ?, id = ?, name = ?, parent_id = ?, qualification = ?, shortname = ?, specialty_direction = ? WHERE id = ?";
         PreparedStatement s = null;
         try {
@@ -68,6 +76,8 @@ public class SpecialtyDaoImpl extends BasicStorage implements SpecialtyDao{
             s.setString(7, specialtyImpl.getSpecialtyDirection());
             s.setInt(8, specialtyImpl.getId());
             s.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
             try {
                 s.close();
@@ -77,7 +87,8 @@ public class SpecialtyDaoImpl extends BasicStorage implements SpecialtyDao{
 
         //specialties.put(specialtyImpl.getId(), specialtyImpl);
     }
-    public SpecialtyImpl read(int id) throws SQLException {
+    @Override
+    protected Specialty readRaw(int id) throws DaoException {
         String sql = "SELECT  id, code, name, parent_id, qualification, shortname, specialty_direction FROM specialties WHERE id = ?";
         PreparedStatement s = null;
         ResultSet r = null;
@@ -91,12 +102,15 @@ public class SpecialtyDaoImpl extends BasicStorage implements SpecialtyDao{
                 specialtyImpl.setId(r.getInt("id"));
                 specialtyImpl.setCode(r.getString("code"));
                 specialtyImpl.setName(r.getString("name"));
-                specialtyImpl.setParent(read(r.getInt("parent_id")));
+                specialtyImpl.setParent((SpecialtyImpl) read(r.getInt("parent_id")));
                 specialtyImpl.setQualification(r.getString("qualification"));
                 specialtyImpl.setShortName(r.getString("shortname"));
                 specialtyImpl.setSpecialtyDirection(r.getString("specialty_direction"));
             }
             return specialtyImpl;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         } finally {
             try {
                 r.close();
@@ -110,26 +124,30 @@ public class SpecialtyDaoImpl extends BasicStorage implements SpecialtyDao{
 
         //return specialties.get(id);
     }
-    public Collection<SpecialtyImpl> readAll() throws SQLException {
+
+    public Collection<Specialty> readAll() throws  DaoException {
         String sql = "SELECT  id, code, name, parent_id, qualification, shortname, specialty_direction FROM specialties";
         Statement s = null;
         ResultSet r = null;
         try {
             s = connection.createStatement();
             r = s.executeQuery(sql);
-            Collection<SpecialtyImpl> specialties = new ArrayList<>();
+            Collection<Specialty> specialties = new ArrayList<>();
             while (r.next()) {
                 SpecialtyImpl specialtyImpl =new SpecialtyImpl();
                 specialtyImpl.setId(r.getInt("id"));
                 specialtyImpl.setCode(r.getString("code"));
                 specialtyImpl.setName(r.getString("name"));
-                specialtyImpl.setParent(read(r.getInt("parent_id")));
+                specialtyImpl.setParent((SpecialtyImpl) read(r.getInt("parent_id")));
                 specialtyImpl.setQualification(r.getString("qualification"));
                 specialtyImpl.setShortName(r.getString("shortname"));
                 specialtyImpl.setSpecialtyDirection(r.getString("specialty_direction"));
                 specialties.add(specialtyImpl);
             }
             return specialties;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         } finally {
             try {
                 r.close();
@@ -140,7 +158,6 @@ public class SpecialtyDaoImpl extends BasicStorage implements SpecialtyDao{
             } catch (NullPointerException | SQLException e) {
             }
         }
-
-        //return specialties.values();
     }
+
 }

@@ -1,7 +1,9 @@
 package ad.servlets.specialtyservlets;
 
+import ad.dao.exception.DaoException;
 import ad.dao.mysql.Connector;
 import ad.dao.mysql.SpecialtyDaoImpl;
+import ad.objects.Specialty;
 import ad.objects.bean.SpecialtyImpl;
 
 import java.io.IOException;
@@ -24,7 +26,7 @@ public class SpecialtiesEditServlet extends HttpServlet {
             sdao.setConnection(c);
             if (req.getParameter("check") == null || req.getParameter("check").equals("")) {
                 Integer id = Integer.parseInt(req.getParameter("id"));
-                SpecialtyImpl specialtyImpl = sdao.read(id);
+                SpecialtyImpl specialtyImpl = (SpecialtyImpl) sdao.read(id);
                 req.setAttribute("specialtyImpl", specialtyImpl);
 
             }
@@ -32,8 +34,10 @@ public class SpecialtiesEditServlet extends HttpServlet {
         } catch (NumberFormatException e) {
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (DaoException e) {
+            e.printStackTrace();
         }
-        Collection<SpecialtyImpl> specialities= null;
+        Collection<Specialty> specialities= null;
         try {
             SpecialtyDaoImpl sdao = new SpecialtyDaoImpl();
             Connection c= Connector.getConnection();
@@ -41,6 +45,8 @@ public class SpecialtiesEditServlet extends HttpServlet {
             specialities = sdao.readAll();
             c.close();
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (DaoException e) {
             e.printStackTrace();
         }
         req.setAttribute("specialties", specialities);

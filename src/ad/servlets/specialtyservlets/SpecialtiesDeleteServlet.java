@@ -1,5 +1,6 @@
 package ad.servlets.specialtyservlets;
 
+import ad.dao.exception.DaoException;
 import ad.dao.mysql.Connector;
 import ad.dao.mysql.SpecialtyDaoImpl;
 import ad.objects.bean.SpecialtyImpl;
@@ -21,7 +22,7 @@ public class SpecialtiesDeleteServlet extends HttpServlet {
             Connection c= Connector.getConnection();
             sdao.setConnection(c);
 
-            SpecialtyImpl specialtyImpl = sdao.read(Integer.parseInt(req.getParameter("id")));
+            SpecialtyImpl specialtyImpl = (SpecialtyImpl) sdao.read(Integer.parseInt(req.getParameter("id")));
             if(specialtyImpl.getParent()!=null){
                 specialtyImpl.getParent().deleteChild(specialtyImpl);
             }
@@ -33,6 +34,8 @@ public class SpecialtiesDeleteServlet extends HttpServlet {
             sdao.delete(Integer.parseInt(req.getParameter("id")));
             c.close();
         } catch(NumberFormatException e) {} catch (SQLException e) {
+            e.printStackTrace();
+        } catch (DaoException e) {
             e.printStackTrace();
         }
         resp.sendRedirect(req.getContextPath() + "/specialties.html");

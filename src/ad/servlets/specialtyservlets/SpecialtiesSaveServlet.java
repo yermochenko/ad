@@ -1,6 +1,7 @@
 package ad.servlets.specialtyservlets;
 
 
+import ad.dao.exception.DaoException;
 import ad.dao.mysql.Connector;
 import ad.dao.mysql.SpecialtyDaoImpl;
 import ad.objects.bean.SpecialtyImpl;
@@ -51,13 +52,13 @@ public class SpecialtiesSaveServlet extends HttpServlet {
         if(specialtyImpl.getId() == null) {
             try {
                 sdao.create(specialtyImpl);
-            } catch (SQLException e) {
+            } catch (DaoException e) {
                 e.printStackTrace();
             }
         } else {
             try {
                 sdao.update(specialtyImpl);
-            } catch (SQLException e) {
+            } catch (DaoException e) {
                 e.printStackTrace();
             }
         }

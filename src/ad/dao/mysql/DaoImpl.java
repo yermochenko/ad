@@ -43,7 +43,12 @@ abstract public class DaoImpl<T extends Entity> implements Dao<T> {
     }
 
     protected void addToCache(T entity) {
-        cache.put(entity.getId(), entity);
+        if(entity!=null){
+            cache.put(entity.getId(), entity);
+        }else{
+            System.out.println("Попытка добавить пустой элемент в кэш специальости");
+        }
+
     }
     protected void deleteFromCache(int id) {
         cache.remove(id);

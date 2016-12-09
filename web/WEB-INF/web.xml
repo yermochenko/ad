@@ -32,15 +32,6 @@
 			Дисциплина
 		-->
 	<servlet>
-		<servlet-name>DisciplinesCheckServlet</servlet-name>
-		<servlet-class>ad.servlets.disciplinesservlets.DisciplinesCheckServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>DisciplinesCheckServlet</servlet-name>
-		<url-pattern>/check.html</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
 		<servlet-name>DisciplinesDeleteServlet</servlet-name>
 		<servlet-class>ad.servlets.disciplinesservlets.DisciplinesDeleteServlet</servlet-class>
 	</servlet>
