@@ -1,5 +1,8 @@
-package ad.dao;
+package ad.dao.mysql;
 
+import ad.dao.DaoContainer;
+import ad.dao.DisciplineDao;
+import ad.dao.SpecialtyDao;
 import ad.dao.exception.DaoException;
 import ad.dao.mysql.Connector;
 import ad.dao.mysql.DisciplineDaoImpl;
