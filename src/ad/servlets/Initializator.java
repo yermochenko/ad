@@ -1,9 +1,9 @@
 package ad.servlets;
 
-import ad.dao.mysql.Connector;
-
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+
+import ad.dao.mysql.Connector;
 
 /**
  * Created by HomeInc on 25.11.2016.

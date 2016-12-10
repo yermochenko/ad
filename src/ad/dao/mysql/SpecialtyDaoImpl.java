@@ -1,15 +1,18 @@
 package ad.dao.mysql;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Types;
+import java.util.ArrayList;
+import java.util.Collection;
+
 import ad.dao.SpecialtyDao;
 import ad.dao.exception.DaoException;
-import ad.objects.Discipline;
 import ad.objects.Specialty;
 import ad.objects.bean.SpecialtyImpl;
 import ad.objects.factory.EntityFactory;
-
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collection;
 
 public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao{
     private EntityFactory<Specialty> specialtyFactory;

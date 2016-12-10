@@ -2,7 +2,6 @@ package ad.dao;
 
 import ad.dao.exception.DaoException;
 import ad.objects.Entity;
-import ad.objects.bean.DisciplineImpl;
 
 public interface Dao <T extends Entity> {
 	T read(int id) throws DaoException;

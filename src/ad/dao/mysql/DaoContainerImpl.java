@@ -1,21 +1,18 @@
 package ad.dao.mysql;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import ad.dao.DaoContainer;
 import ad.dao.DisciplineDao;
 import ad.dao.SpecialtyDao;
 import ad.dao.exception.DaoException;
-import ad.dao.mysql.Connector;
-import ad.dao.mysql.DisciplineDaoImpl;
-import ad.dao.mysql.SpecialtyDaoImpl;
 import ad.objects.Discipline;
 import ad.objects.Specialty;
 import ad.objects.bean.DisciplineImpl;
 import ad.objects.bean.SpecialtyImpl;
 import ad.objects.factory.EntityFactory;
 import ad.objects.factory.SimpleEntityFactory;
-
-import java.sql.Connection;
-import java.sql.SQLException;
 
 /**
  * Created by HomeInc on 09.12.2016.

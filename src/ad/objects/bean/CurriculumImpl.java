@@ -1,8 +1,8 @@
 package ad.objects.bean;
 
-import ad.objects.Curriculum;
-
 import java.util.List;
+
+import ad.objects.Curriculum;
 /*
 * Учебные планы
 * List <CurriculumDisciplineImpl> curriculumDisciplineImpls - список дисциплин
