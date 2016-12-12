@@ -1,8 +1,6 @@
 package ad.servlets.disciplinesservlets;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Collection;
 
 import javax.servlet.ServletException;
@@ -10,29 +8,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ad.dao.DaoContainer;
+import ad.dao.DaoContainerFactory;
+import ad.dao.DisciplineDao;
 import ad.dao.exception.DaoException;
-import ad.dao.mysql.Connector;
-import ad.dao.mysql.DisciplineDaoImpl;
 import ad.objects.Discipline;
-import ad.objects.bean.DisciplineImpl;
-import ad.objects.factory.SimpleEntityFactory;
 
 public class DisciplinesServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		DaoContainer container = DaoContainerFactory.create();
 		try {
-			Connection c = Connector.getConnection();
-			DisciplineDaoImpl dao = new DisciplineDaoImpl();
-			dao.setConnection(c);
-			SimpleEntityFactory<Discipline> disciplineFactory = new SimpleEntityFactory<>();
-			disciplineFactory.setEntityClass(DisciplineImpl.class);
-			dao.setDisciplineFactory(disciplineFactory);
-			Collection<Discipline> disciplineImpls = dao.readAll();
-			c.close();
-			req.setAttribute("disciplineImpls", disciplineImpls);
+			DisciplineDao dao = container.getDisciplineDao();
+			Collection<Discipline> disciplines = dao.readAll();
+			req.setAttribute("disciplines", disciplines);
 			getServletContext().getRequestDispatcher("/WEB-INF/jsp/disciplines.jsp").forward(req, resp);
-		} catch (SQLException | DaoException e) {
+		} catch (DaoException e) {
 			throw new ServletException(e);
+		} finally {
+			// TODO: container.close();
 		}
 	}
 }

@@ -5,7 +5,7 @@
 <u:html title="Дисциплины" stylesheet="table.css">
 <CENTER>
 	<c:choose>
-		<c:when test="${not empty disciplineImpls}">
+		<c:when test="${not empty disciplines}">
 			<FORM action="editdiscipline.html" method="post">
 				<TABLE>
 					<TR>
@@ -13,18 +13,18 @@
 						<TH>Название</TH>
 						<TH>Сокращенное название</TH>
 					</TR>
-					<c:forEach var="disciplineImpl" items="${disciplineImpls}">
+					<c:forEach var="discipline" items="${disciplines}">
 						<TR>
 							<TD>
 								<CENTER>
-									<A href="editdiscipline.html?id=${disciplineImpl.id}">${disciplineImpl.id}</A>
+									<A href="editdiscipline.html?id=${discipline.id}">${discipline.id}</A>
 								</CENTER>
 							</TD>
 							<TD>
-								<CENTER>${disciplineImpl.name}</CENTER>
+								<CENTER>${discipline.name}</CENTER>
 							</TD>
 							<TD>
-								<CENTER>${disciplineImpl.shortName}</CENTER>
+								<CENTER>${discipline.shortName}</CENTER>
 							</TD>
 						</TR>
 					</c:forEach>

@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib tagdir="/WEB-INF/tags" prefix="u"%>
 <c:choose>
-	<c:when test="${not empty disciplineImpl}">
+	<c:when test="${not empty discipline}">
 		<c:set var="title" value="Редактирование дисциплины" />
 	</c:when>
 	<c:otherwise>
@@ -12,13 +12,13 @@
 </c:choose>
 <u:html title="${title}">
 <FORM action="save.html" method="post">
-	<c:if test="${not empty disciplineImpl }">
-		<INPUT type="hidden" name="id" value="${disciplineImpl.id}">
+	<c:if test="${not empty discipline }">
+		<INPUT type="hidden" name="id" value="${discipline.id}">
 	</c:if>
 	<P>Название</P>
 	<c:choose>
-		<c:when test="${not empty disciplineImpl}">
-			<INPUT type="text" name="name" value="${disciplineImpl.name}"
+		<c:when test="${not empty discipline}">
+			<INPUT type="text" name="name" value="${discipline.name}"
 				required>
 		</c:when>
 		<c:otherwise>
@@ -27,9 +27,9 @@
 	</c:choose>
 	<P>Сокращенное название</P>
 	<c:choose>
-		<c:when test="${not empty disciplineImpl}">
+		<c:when test="${not empty discipline}">
 			<INPUT type="text" name="shortname"
-				value="${disciplineImpl.shortName}" required>
+				value="${discipline.shortName}" required>
 		</c:when>
 		<c:otherwise>
 			<INPUT type="text" name="shortname" value="" required>
@@ -37,8 +37,8 @@
 	</c:choose>
 	<P>
 		<BUTTON type="submit">Сохранить</BUTTON>
-		<c:if test="${not empty disciplineImpl }">
-			<BUTTON formaction="delete.html?id=${disciplineImpl.id}">Удалить</BUTTON>
+		<c:if test="${not empty discipline }">
+			<BUTTON formaction="delete.html?id=${discipline.id}">Удалить</BUTTON>
 		</c:if>
 	</P>
 </FORM>

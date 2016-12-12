@@ -21,7 +21,7 @@ public class DisciplinesEditServlet extends HttpServlet {
 			Integer id = Integer.parseInt(req.getParameter("id"));
 			DisciplineDao dao = container.getDisciplineDao();
 			Discipline discipline = dao.read(id);
-			req.setAttribute("disciplineImpl", discipline);
+			req.setAttribute("discipline", discipline);
 		} catch (NumberFormatException e) {
 		} catch (DaoException e) {
 			throw new ServletException(e);
