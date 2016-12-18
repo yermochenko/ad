@@ -10,27 +10,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ad.dao.DaoContainer;
+import ad.dao.DaoContainerFactory;
+import ad.dao.DisciplineDao;
+import ad.dao.SpecialtyDao;
 import ad.dao.exception.DaoException;
 import ad.dao.mysql.Connector;
 import ad.dao.mysql.SpecialtyDaoImpl;
+import ad.objects.Discipline;
 import ad.objects.Specialty;
 
 public class SpecialtiesServlet extends HttpServlet {
 	 @Override
 	 protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 	                                    throws ServletException, IOException {
-		 Collection<Specialty> specialities= null;
 
+		 Collection<Specialty> specialities= null;
+		 DaoContainer container = DaoContainerFactory.create();
 		 try {
-			 SpecialtyDaoImpl sdao = new SpecialtyDaoImpl();
-			 Connection c= Connector.getConnection();
-			 sdao.setConnection(c);
+			 SpecialtyDao sdao = container.getSpecialtyDao();
 			 specialities = sdao.readAll();
-			 c.close();
-		 } catch (SQLException e) {
-			 e.printStackTrace();
 		 } catch (DaoException e) {
-			 e.printStackTrace();
+			 throw new ServletException(e);
+		 } finally {
+			 // TODO: container.close();
 		 }
 		 req.setAttribute("specialities", specialities);
 		 getServletContext().getRequestDispatcher("/WEB-INF/jsp/specialities.jsp").forward(req,  resp);

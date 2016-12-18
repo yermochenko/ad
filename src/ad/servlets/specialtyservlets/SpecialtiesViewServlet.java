@@ -17,6 +17,9 @@ import ad.objects.bean.SpecialtyImpl;
 /**
  * Created by HomeInc on 28.10.2016.
  */
+/*
+* Пока не используется
+* */
 public class SpecialtiesViewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
