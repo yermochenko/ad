@@ -1,8 +1,6 @@
 package ad.servlets.specialtyservlets;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Collection;
 
 import javax.servlet.ServletException;
@@ -12,12 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import ad.dao.DaoContainer;
 import ad.dao.DaoContainerFactory;
-import ad.dao.DisciplineDao;
 import ad.dao.SpecialtyDao;
 import ad.dao.exception.DaoException;
-import ad.dao.mysql.Connector;
-import ad.dao.mysql.SpecialtyDaoImpl;
-import ad.objects.Discipline;
 import ad.objects.Specialty;
 
 public class SpecialtiesServlet extends HttpServlet {

@@ -13,6 +13,7 @@ import ad.dao.exception.DaoException;
 import ad.objects.Specialty;
 import ad.objects.bean.SpecialtyImpl;
 import ad.objects.factory.EntityFactory;
+import ad.objects.factory.exception.EntityCreateException;
 
 public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao{
     private EntityFactory<Specialty> specialtyFactory;
@@ -106,9 +107,9 @@ public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao
             s = connection.prepareStatement(sql);
             s.setInt(1, id);
             r = s.executeQuery();
-            SpecialtyImpl specialtyImpl = null;
+            Specialty specialtyImpl = null;
             if (r.next()) {
-                specialtyImpl = new SpecialtyImpl();
+                specialtyImpl = specialtyFactory.create();
                 specialtyImpl.setId(r.getInt("id"));
                 specialtyImpl.setCode(r.getString("code"));
                 specialtyImpl.setName(r.getString("name"));
@@ -118,7 +119,7 @@ public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao
                 specialtyImpl.setSpecialtyDirection(r.getString("specialty_direction"));
             }
             return specialtyImpl;
-        } catch (SQLException e) {
+        } catch (SQLException| EntityCreateException e) {
             e.printStackTrace();
             return null;
         } finally {
@@ -144,7 +145,7 @@ public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao
             r = s.executeQuery(sql);
             Collection<Specialty> specialties = new ArrayList<>();
             while (r.next()) {
-                SpecialtyImpl specialtyImpl =new SpecialtyImpl();
+                Specialty specialtyImpl =specialtyFactory.create();
                 specialtyImpl.setId(r.getInt("id"));
                 specialtyImpl.setCode(r.getString("code"));
                 specialtyImpl.setName(r.getString("name"));
@@ -155,7 +156,7 @@ public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao
                 specialties.add(specialtyImpl);
             }
             return specialties;
-        } catch (SQLException e) {
+        } catch (SQLException | EntityCreateException e) {
             e.printStackTrace();
             return null;
         } finally {
