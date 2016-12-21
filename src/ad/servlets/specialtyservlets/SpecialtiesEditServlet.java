@@ -1,6 +1,7 @@
 package ad.servlets.specialtyservlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.servlet.ServletException;
@@ -21,14 +22,52 @@ public class SpecialtiesEditServlet extends HttpServlet {
         DaoContainer container = DaoContainerFactory.create();
         try {
             SpecialtyDao dao = container.getSpecialtyDao();
-            if (req.getParameter("check") == null || req.getParameter("check").equals("")) {
-                Integer id = Integer.parseInt(req.getParameter("id"));
-                Specialty specialty = dao.read(id);
-                req.setAttribute("specialtyImpl", specialty);
+            try{
+                Specialty specialty = null;
+                if (req.getParameter("check") == null || req.getParameter("check").equals("")) {
+                    Integer id = Integer.parseInt(req.getParameter("id"));
+                    specialty = dao.read(id);
+                    req.setAttribute("specialtyImpl", specialty);
+                }
+
+                Collection<Specialty> specialities = dao.readAll();
+                ArrayList<Specialty> arrSpec = new ArrayList<>();
+                for (Specialty s: specialities) {
+                    if(s!=null && specialty!=null){
+                        if(s.getParent()!=null){
+                            if(s.getParent().getId()!=specialty.getId()){
+                                if(s.getId() != specialty.getId()) {
+                                    if(specialty.getParent()!=null){
+                                        if(specialty.getParent().getId()!=s.getId()){
+                                            arrSpec.add(s);
+                                        }
+                                    }else{
+                                        arrSpec.add(s);
+                                    }
+                                }
+                            }
+                        }else{
+                            if(s.getId() != specialty.getId()){
+                                if(specialty.getParent()!=null) {
+                                    if (specialty.getParent().getId() != s.getId()) {
+                                        arrSpec.add(s);
+                                    }
+                                }else{
+                                    arrSpec.add(s);
+                                }
+
+                            }
+                        }
+                    }
+
+                }
+
+                req.setAttribute("specialties", arrSpec);
+            }catch (NumberFormatException e) {
+                Collection<Specialty> specialities = dao.readAll();
+                req.setAttribute("specialties", specialities);
             }
-            Collection<Specialty> specialities = dao.readAll();
-            req.setAttribute("specialties", specialities);
-        } catch (NumberFormatException e) {
+
         } catch (DaoException e) {
             throw new ServletException(e);
         }finally {
@@ -38,3 +77,4 @@ public class SpecialtiesEditServlet extends HttpServlet {
         getServletContext().getRequestDispatcher("/WEB-INF/jsp/editspecialities.jsp").forward(req, resp);
     }
 }
+

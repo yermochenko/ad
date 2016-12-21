@@ -31,5 +31,6 @@ public class SpecialtiesServlet extends HttpServlet {
 		 }
 		 req.setAttribute("specialities", specialities);
 		 getServletContext().getRequestDispatcher("/WEB-INF/jsp/specialities.jsp").forward(req,  resp);
+
 	    }
 }
