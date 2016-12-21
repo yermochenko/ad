@@ -43,12 +43,11 @@
                     </c:choose>
 
                     <c:forEach var="special" items="${specialties}">
-                        <c:if test="${special.id != specialtyImpl.id}">
                             <option>${special.id} ${special.name}</option>
-                        </c:if>
-
                     </c:forEach>
                 </select>
+
+
 
                 <P>
                     <BUTTON type="submit">Сохранить</BUTTON>
