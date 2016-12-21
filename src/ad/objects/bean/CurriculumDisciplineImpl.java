@@ -1,19 +1,21 @@
 package ad.objects.bean;
 
+import ad.objects.Curriculum;
 import ad.objects.CurriculumDiscipline;
+import ad.objects.Discipline;
 
 /*
 * Дисциплина учебного плана
 * */
 public class CurriculumDisciplineImpl implements CurriculumDiscipline{
 	private Integer id;
-	private CurriculumImpl curriculumImpl;
-	private DisciplineImpl disciplineImpl;
+	private Curriculum curriculum;
+	private Discipline discipline;
 	private Integer semester;
 
-	public CurriculumDisciplineImpl(CurriculumImpl curriculumImpl, DisciplineImpl disciplineImpl, Integer semester){
-		this.curriculumImpl = curriculumImpl;
-		this.disciplineImpl = disciplineImpl;
+	public CurriculumDisciplineImpl(Curriculum curriculum, Discipline discipline, Integer semester){
+		this.curriculum = curriculum;
+		this.discipline = discipline;
 		this.semester = semester;
 	}
 	
@@ -24,18 +26,18 @@ public class CurriculumDisciplineImpl implements CurriculumDiscipline{
 		this.id=id;
 	}
 	
-	public CurriculumImpl getCurriculumImpl(){
-		return curriculumImpl;
+	public Curriculum getCurriculum(){
+		return curriculum;
 	}
-	public void setCurriculumImpl(CurriculumImpl curriculumImpl){
-		this.curriculumImpl = curriculumImpl;
+	public void setCurriculum(Curriculum curriculum){
+		this.curriculum = curriculum;
 	}
 	
-	public DisciplineImpl getDisciplineImpl(){
-		return disciplineImpl;
+	public Discipline getDiscipline(){
+		return discipline;
 	}
-	public void setDisciplineImpl(DisciplineImpl disciplineImpl){
-		this.disciplineImpl = disciplineImpl;
+	public void setDiscipline(Discipline discipline){
+		this.discipline = discipline;
 	}
 	
 	public Integer getSemester(){

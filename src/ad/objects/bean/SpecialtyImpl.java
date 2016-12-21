@@ -82,10 +82,10 @@ public class SpecialtyImpl implements Specialty {
 		this.specialtyDirection=specialtyDirection;
 	}
 	
-	public SpecialtyImpl getParent(){
+	public Specialty getParent(){
 		return parent;
 	}
-	public void setParent(SpecialtyImpl parent){
+	public void setParent(Specialty parent){
 		this.parent=parent;
 	}
 

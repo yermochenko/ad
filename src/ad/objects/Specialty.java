@@ -1,7 +1,5 @@
 package ad.objects;
 
-import ad.objects.bean.SpecialtyImpl;
-
 /**
  * Created by HomeInc on 06.12.2016.
  */
@@ -21,6 +19,6 @@ public interface Specialty extends Entity {
     String getSpecialtyDirection();
     void setSpecialtyDirection(String specialtyDirection);
 
-    SpecialtyImpl getParent();
-    void setParent(SpecialtyImpl parent);
+    Specialty getParent();
+    void setParent(Specialty parent);
 }

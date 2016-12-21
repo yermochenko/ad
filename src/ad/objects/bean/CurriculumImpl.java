@@ -3,18 +3,20 @@ package ad.objects.bean;
 import java.util.List;
 
 import ad.objects.Curriculum;
+import ad.objects.CurriculumDiscipline;
+import ad.objects.Specialty;
 /*
 * Учебные планы
 * List <CurriculumDisciplineImpl> curriculumDisciplineImpls - список дисциплин
 * */
 public class CurriculumImpl implements Curriculum {
 	private Integer id;
-	private SpecialtyImpl specialtyImpl;
+	private Specialty specialty;
 	private Integer year;
-	private List <CurriculumDisciplineImpl> curriculumDisciplineImpls;
+	private List <CurriculumDiscipline> curriculumDisciplines;
 
-	public CurriculumImpl(SpecialtyImpl specialtyImpl, Integer year){
-		this.specialtyImpl = specialtyImpl;
+	public CurriculumImpl(Specialty specialty, Integer year){
+		this.specialty = specialty;
 		this.year = year;
 	}
 
@@ -33,23 +35,23 @@ public class CurriculumImpl implements Curriculum {
 		this.year=year;
 	}
 	
-	public SpecialtyImpl getSpecialtyImpl(){
-		return specialtyImpl;
+	public Specialty getSpecialty(){
+		return specialty;
 	}
-	public void setSpecialtyImpl(SpecialtyImpl specialtyImpl){
-		this.specialtyImpl = specialtyImpl;
+	public void setSpecialty(Specialty specialty){
+		this.specialty = specialty;
 	}
 	
-	public List <CurriculumDisciplineImpl> getAllCurriculumDisciplines(){
-		return curriculumDisciplineImpls;
+	public List <CurriculumDiscipline> getAllCurriculumDisciplines(){
+		return curriculumDisciplines;
 	}
-	public void addCurriculumDiscipline(CurriculumDisciplineImpl curriculumDisciplineImpl){
-		curriculumDisciplineImpls.add(curriculumDisciplineImpl);
+	public void addCurriculumDiscipline(CurriculumDiscipline curriculumDiscipline){
+		curriculumDisciplines.add(curriculumDiscipline);
 	}
 	public void deleteCurriculumDisciplineById(Integer id){
-		for(CurriculumDisciplineImpl curriculumDisciplineImpl : curriculumDisciplineImpls){
-			if(curriculumDisciplineImpl.getId()==id){
-				curriculumDisciplineImpls.remove(curriculumDisciplineImpl);
+		for(CurriculumDiscipline curriculumDiscipline : curriculumDisciplines){
+			if(curriculumDiscipline.getId()==id){
+				curriculumDisciplines.remove(curriculumDiscipline);
 				break;
 			}
 		}
