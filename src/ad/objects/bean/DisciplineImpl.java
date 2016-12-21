@@ -2,9 +2,7 @@ package ad.objects.bean;
 
 import ad.objects.Discipline;
 
-/*
-* Дисциплины
-* */
+/*Дисциплины*/
 public class DisciplineImpl implements Discipline {
 	private Integer id;
 	private String name;
