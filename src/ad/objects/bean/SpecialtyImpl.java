@@ -17,8 +17,8 @@ public class SpecialtyImpl implements Specialty {
 	private String shortName;
 	private String qualification;
 	private String specialtyDirection;
-	private SpecialtyImpl parent = null;
-	private ArrayList<SpecialtyImpl> children;
+	private Specialty parent = null;
+	private ArrayList<Specialty> children;
 
 	public SpecialtyImpl(){
 		id=-1;
@@ -30,7 +30,7 @@ public class SpecialtyImpl implements Specialty {
 		//parent = new SpecialtyImpl();
 		children = new ArrayList<>();
 	}
-	public SpecialtyImpl(String code, String name, String shortname, String qualification, String specialtyDirection, SpecialtyImpl parent){
+	public SpecialtyImpl(String code, String name, String shortname, String qualification, String specialtyDirection, Specialty parent){
 		this.code = code;
 		this.name = name;
 		this.shortName = shortname;
@@ -89,22 +89,22 @@ public class SpecialtyImpl implements Specialty {
 		this.parent=parent;
 	}
 
-	public ArrayList<SpecialtyImpl> getChildren() {
+	public ArrayList<Specialty> getChildren() {
 		return children;
 	}
-	public void addChild(SpecialtyImpl child){
+	public void addChild(Specialty child){
 		children.add(child);
 	}
 	public void deleteChildById(Integer id){
-		for(SpecialtyImpl child : children){
+		for(Specialty child : children){
 			if(child.getId()==id){
 				children.remove(child);
 				break;
 			}
 		}
 	}
-	public void deleteChild(SpecialtyImpl specialtyImpl){
-		children.remove(specialtyImpl);
+	public void deleteChild(Specialty specialty){
+		children.remove(specialty);
 	}
 
 	@Override
