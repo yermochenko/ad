@@ -2,37 +2,30 @@ package ad.domain.bean;
 
 import ad.domain.Discipline;
 
-/*Дисциплины*/
-public class DisciplineImpl implements Discipline {
-	private Integer id;
-	private String name;
-	private String shortname;
-	
-	public DisciplineImpl(){}
+/*
+ * Дисциплины
+ */
+public class DisciplineImpl extends EntityImpl implements Discipline {
+    private String name;
+    private String shortname;
 
-	public DisciplineImpl(String name, String shortname){
-		this.name = name;
-		this.shortname = shortname;
-	}
+    @Override
+    public String getName() {
+        return name;
+    }
 
-	public Integer getId(){
-		return id;
-	}
-	public void setId(Integer id){
-		this.id=id;
-	}
-	
-	public String getName(){
-		return name;
-	}
-	public void setName(String name){
-		this.name=name;
-	}
-	
-	public String getShortName(){
-		return shortname;
-	}
-	public void setShortName(String shortname){
-		this.shortname=shortname;
-	}
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getShortName() {
+        return shortname;
+    }
+
+    @Override
+    public void setShortName(String shortname) {
+        this.shortname = shortname;
+    }
 }

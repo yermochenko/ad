@@ -18,7 +18,9 @@ public class DisciplinesSaveServlet extends HttpServlet {
 		DaoContainer container = DaoContainerFactory.create();
 		try {			
 			req.setCharacterEncoding("UTF-8");
-			DisciplineImpl disciplineImpl = new DisciplineImpl(req.getParameter("name"), req.getParameter("shortname"));
+			DisciplineImpl disciplineImpl = new DisciplineImpl();
+			disciplineImpl.setName(req.getParameter("name"));
+			disciplineImpl.setShortName(req.getParameter("shortname"));
 			try {
 				disciplineImpl.setId(Integer.parseInt(req.getParameter("id")));
 			} catch (NumberFormatException e) {

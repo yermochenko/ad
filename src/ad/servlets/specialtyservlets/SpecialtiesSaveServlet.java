@@ -24,15 +24,16 @@ public class SpecialtiesSaveServlet extends HttpServlet {
             SpecialtyDao dao = container.getSpecialtyDao();
 
             String [] sIndex = req.getParameter("select").split(" ");
-            SpecialtyImpl specialtyImpl;
-            if(sIndex[0]!="") {
+            SpecialtyImpl specialtyImpl = new SpecialtyImpl();
+            specialtyImpl.setCode(req.getParameter("code"));
+            specialtyImpl.setName(req.getParameter("name"));
+            specialtyImpl.setShortName(req.getParameter("shortName"));
+            specialtyImpl.setQualification(req.getParameter("qualification"));
+            specialtyImpl.setSpecialtyDirection(req.getParameter("specialtyDirection"));
+            if(!sIndex[0].isEmpty()) {
                 SpecialtyImpl parent = new SpecialtyImpl();
                 parent.setId(Integer.valueOf(sIndex[0]));
-                specialtyImpl = new SpecialtyImpl(req.getParameter("code"), req.getParameter("name"),
-                        req.getParameter("shortName"), req.getParameter("qualification"), req.getParameter("specialtyDirection"), parent);
-            }else{
-                specialtyImpl = new SpecialtyImpl(req.getParameter("code"), req.getParameter("name"),
-                        req.getParameter("shortName"), req.getParameter("qualification"), req.getParameter("specialtyDirection"), null);
+                specialtyImpl.setParent(parent);
             }
 
             try {

@@ -5,55 +5,42 @@ import java.util.List;
 import ad.domain.Curriculum;
 import ad.domain.CurriculumDiscipline;
 import ad.domain.Specialty;
+
 /*
-* Учебные планы
-* List <CurriculumDisciplineImpl> curriculumDisciplineImpls - список дисциплин
-* */
-public class CurriculumImpl implements Curriculum {
-	private Integer id;
-	private Specialty specialty;
-	private Integer year;
-	private List <CurriculumDiscipline> curriculumDisciplines;
+ * Учебный план
+ */
+public class CurriculumImpl extends EntityImpl implements Curriculum {
+    private Specialty specialty;
+    private Integer year;
+    private List<CurriculumDiscipline> curriculumDisciplines;
 
-	public CurriculumImpl(Specialty specialty, Integer year){
-		this.specialty = specialty;
-		this.year = year;
-	}
+    @Override
+    public Integer getYear() {
+        return year;
+    }
 
+    @Override
+    public void setYear(Integer year) {
+        this.year = year;
+    }
 
-	public Integer getId(){
-		return id;
-	}
-	public void setId(Integer id){
-		this.id=id;
-	}
-	
-	public Integer getYear(){
-		return year;
-	}
-	public void setYear(Integer year){
-		this.year=year;
-	}
-	
-	public Specialty getSpecialty(){
-		return specialty;
-	}
-	public void setSpecialty(Specialty specialty){
-		this.specialty = specialty;
-	}
-	
-	public List <CurriculumDiscipline> getAllCurriculumDisciplines(){
-		return curriculumDisciplines;
-	}
-	public void addCurriculumDiscipline(CurriculumDiscipline curriculumDiscipline){
-		curriculumDisciplines.add(curriculumDiscipline);
-	}
-	public void deleteCurriculumDisciplineById(Integer id){
-		for(CurriculumDiscipline curriculumDiscipline : curriculumDisciplines){
-			if(curriculumDiscipline.getId()==id){
-				curriculumDisciplines.remove(curriculumDiscipline);
-				break;
-			}
-		}
-	}
+    @Override
+    public Specialty getSpecialty() {
+        return specialty;
+    }
+
+    @Override
+    public void setSpecialty(Specialty specialty) {
+        this.specialty = specialty;
+    }
+
+    @Override
+    public List<CurriculumDiscipline> getCurriculumDisciplines() {
+        return curriculumDisciplines;
+    }
+
+    @Override
+    public void setCurriculumDisciplines(List<CurriculumDiscipline> curriculumDisciplines) {
+        this.curriculumDisciplines = curriculumDisciplines;
+    }
 }
