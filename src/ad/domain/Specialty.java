@@ -1,24 +1,16 @@
 package ad.domain;
 
-/**
- * Created by HomeInc on 06.12.2016.
- */
 public interface Specialty extends Entity {
     String getCode();
     void setCode(String code);
-
-    String getName();
-    void setName(String name);
-
     String getShortName();
     void setShortName(String shortName);
-
-    String getQualification();
-    void setQualification(String qualification);
-
+    String getName();
+    void setName(String name);
     String getSpecialtyDirection();
     void setSpecialtyDirection(String specialtyDirection);
-
     Specialty getParent();
     void setParent(Specialty parent);
+    String getQualification();
+    void setQualification(String qualification);
 }
