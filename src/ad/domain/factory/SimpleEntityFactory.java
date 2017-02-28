@@ -1,7 +1,7 @@
-package ad.objects.factory;
+package ad.domain.factory;
 
-import ad.objects.Entity;
-import ad.objects.factory.exception.EntityCreateException;
+import ad.domain.Entity;
+import ad.domain.factory.exception.EntityCreateException;
 
 public class SimpleEntityFactory<T extends Entity> implements EntityFactory<T> {
     private Class<?> entityClass;

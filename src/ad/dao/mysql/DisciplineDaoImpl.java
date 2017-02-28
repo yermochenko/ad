@@ -10,9 +10,9 @@ import java.util.Collection;
 
 import ad.dao.DisciplineDao;
 import ad.dao.exception.DaoException;
-import ad.objects.Discipline;
-import ad.objects.factory.EntityFactory;
-import ad.objects.factory.exception.EntityCreateException;
+import ad.domain.Discipline;
+import ad.domain.factory.EntityFactory;
+import ad.domain.factory.exception.EntityCreateException;
 
 public class DisciplineDaoImpl extends DaoImpl<Discipline> implements DisciplineDao {
 	private EntityFactory<Discipline> disciplineFactory;

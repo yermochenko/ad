@@ -12,7 +12,7 @@ import ad.dao.DaoContainer;
 import ad.dao.DaoContainerFactory;
 import ad.dao.SpecialtyDao;
 import ad.dao.exception.DaoException;
-import ad.objects.bean.SpecialtyImpl;
+import ad.domain.bean.SpecialtyImpl;
 
 public class SpecialtiesSaveServlet extends HttpServlet {
     @Override

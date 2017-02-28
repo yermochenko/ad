@@ -1,8 +1,8 @@
-package ad.objects.bean;
+package ad.domain.bean;
 
 import java.util.ArrayList;
 
-import ad.objects.Specialty;
+import ad.domain.Specialty;
 
 /*
 * Специальность

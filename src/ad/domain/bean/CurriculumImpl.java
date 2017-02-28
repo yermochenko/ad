@@ -1,10 +1,10 @@
-package ad.objects.bean;
+package ad.domain.bean;
 
 import java.util.List;
 
-import ad.objects.Curriculum;
-import ad.objects.CurriculumDiscipline;
-import ad.objects.Specialty;
+import ad.domain.Curriculum;
+import ad.domain.CurriculumDiscipline;
+import ad.domain.Specialty;
 /*
 * Учебные планы
 * List <CurriculumDisciplineImpl> curriculumDisciplineImpls - список дисциплин

@@ -1,4 +1,4 @@
-package ad.objects;
+package ad.domain;
 
 /**
  * Created by HomeInc on 06.12.2016.

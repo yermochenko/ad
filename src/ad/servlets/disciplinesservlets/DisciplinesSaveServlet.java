@@ -10,7 +10,7 @@ import ad.dao.DaoContainer;
 import ad.dao.DaoContainerFactory;
 import ad.dao.DisciplineDao;
 import ad.dao.exception.DaoException;
-import ad.objects.bean.DisciplineImpl;
+import ad.domain.bean.DisciplineImpl;
 
 public class DisciplinesSaveServlet extends HttpServlet {
 	@Override

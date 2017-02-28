@@ -13,7 +13,7 @@ import ad.dao.DaoContainer;
 import ad.dao.DaoContainerFactory;
 import ad.dao.SpecialtyDao;
 import ad.dao.exception.DaoException;
-import ad.objects.Specialty;
+import ad.domain.Specialty;
 
 public class SpecialtiesEditServlet extends HttpServlet {
     @Override

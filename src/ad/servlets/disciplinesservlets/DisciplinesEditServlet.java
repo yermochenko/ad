@@ -11,7 +11,7 @@ import ad.dao.DaoContainer;
 import ad.dao.DaoContainerFactory;
 import ad.dao.DisciplineDao;
 import ad.dao.exception.DaoException;
-import ad.objects.Discipline;
+import ad.domain.Discipline;
 
 public class DisciplinesEditServlet extends HttpServlet {
 	@Override

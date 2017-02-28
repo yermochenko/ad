@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import ad.dao.exception.DaoException;
 import ad.dao.mysql.Connector;
 import ad.dao.mysql.SpecialtyDaoImpl;
-import ad.objects.bean.SpecialtyImpl;
+import ad.domain.bean.SpecialtyImpl;
 
 /**
  * Created by HomeInc on 28.10.2016.

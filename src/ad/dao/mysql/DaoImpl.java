@@ -6,7 +6,7 @@ import java.util.Map;
 
 import ad.dao.Dao;
 import ad.dao.exception.DaoException;
-import ad.objects.Entity;
+import ad.domain.Entity;
 
 abstract public class DaoImpl<T extends Entity> implements Dao<T> {
     protected Connection connection;

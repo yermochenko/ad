@@ -3,9 +3,9 @@ package ad.dao;
 import java.sql.Connection;
 
 import ad.dao.exception.DaoException;
-import ad.objects.Discipline;
-import ad.objects.Specialty;
-import ad.objects.factory.EntityFactory;
+import ad.domain.Discipline;
+import ad.domain.Specialty;
+import ad.domain.factory.EntityFactory;
 
 /**
  * Created by HomeInc on 09.12.2016.

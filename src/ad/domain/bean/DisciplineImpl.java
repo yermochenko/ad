@@ -1,6 +1,6 @@
-package ad.objects.bean;
+package ad.domain.bean;
 
-import ad.objects.Discipline;
+import ad.domain.Discipline;
 
 /*Дисциплины*/
 public class DisciplineImpl implements Discipline {

@@ -1,8 +1,8 @@
-package ad.objects.bean;
+package ad.domain.bean;
 
-import ad.objects.Curriculum;
-import ad.objects.CurriculumDiscipline;
-import ad.objects.Discipline;
+import ad.domain.Curriculum;
+import ad.domain.CurriculumDiscipline;
+import ad.domain.Discipline;
 
 /*
 * Дисциплина учебного плана

@@ -7,12 +7,12 @@ import ad.dao.DaoContainer;
 import ad.dao.DisciplineDao;
 import ad.dao.SpecialtyDao;
 import ad.dao.exception.DaoException;
-import ad.objects.Discipline;
-import ad.objects.Specialty;
-import ad.objects.bean.DisciplineImpl;
-import ad.objects.bean.SpecialtyImpl;
-import ad.objects.factory.EntityFactory;
-import ad.objects.factory.SimpleEntityFactory;
+import ad.domain.Discipline;
+import ad.domain.Specialty;
+import ad.domain.bean.DisciplineImpl;
+import ad.domain.bean.SpecialtyImpl;
+import ad.domain.factory.EntityFactory;
+import ad.domain.factory.SimpleEntityFactory;
 
 /**
  * Created by HomeInc on 09.12.2016.

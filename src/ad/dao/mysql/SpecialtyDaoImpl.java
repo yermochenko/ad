@@ -10,10 +10,10 @@ import java.util.Collection;
 
 import ad.dao.SpecialtyDao;
 import ad.dao.exception.DaoException;
-import ad.objects.Specialty;
-import ad.objects.bean.SpecialtyImpl;
-import ad.objects.factory.EntityFactory;
-import ad.objects.factory.exception.EntityCreateException;
+import ad.domain.Specialty;
+import ad.domain.bean.SpecialtyImpl;
+import ad.domain.factory.EntityFactory;
+import ad.domain.factory.exception.EntityCreateException;
 
 public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao{
     private EntityFactory<Specialty> specialtyFactory;
