@@ -15,22 +15,21 @@ import ad.dao.exception.DaoException;
 import ad.domain.Specialty;
 
 public class SpecialtiesServlet extends HttpServlet {
-	 @Override
-	 protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-	                                    throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		 Collection<Specialty> specialities= null;
-		 DaoContainer container = DaoContainerFactory.create();
-		 try {
-			 SpecialtyDao sdao = container.getSpecialtyDao();
-			 specialities = sdao.readAll();
-		 } catch (DaoException e) {
-			 throw new ServletException(e);
-		 } finally {
-			 // TODO: container.close();
-		 }
-		 req.setAttribute("specialities", specialities);
-		 getServletContext().getRequestDispatcher("/WEB-INF/jsp/specialities.jsp").forward(req,  resp);
+        Collection<Specialty> specialities = null;
+        DaoContainer container = DaoContainerFactory.create();
+        try {
+            SpecialtyDao sdao = container.getSpecialtyDao();
+            specialities = sdao.readAll();
+        } catch(DaoException e) {
+            throw new ServletException(e);
+        } finally {
+            // TODO: container.close();
+        }
+        req.setAttribute("specialities", specialities);
+        getServletContext().getRequestDispatcher("/WEB-INF/jsp/specialities.jsp").forward(req, resp);
 
-	    }
+    }
 }

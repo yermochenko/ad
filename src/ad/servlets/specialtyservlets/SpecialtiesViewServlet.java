@@ -18,25 +18,24 @@ import ad.domain.bean.SpecialtyImpl;
  * Created by HomeInc on 28.10.2016.
  */
 /*
-* Пока не используется
-* */
+ * Пока не используется
+ */
 public class SpecialtiesViewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             SpecialtyDaoImpl sdao = new SpecialtyDaoImpl();
-            Connection c= Connector.getConnection();
+            Connection c = Connector.getConnection();
             sdao.setConnection(c);
-            if (req.getParameter("check") == null || req.getParameter("check").equals("")) {
+            if(req.getParameter("check") == null || req.getParameter("check").equals("")) {
                 Integer id = Integer.parseInt(req.getParameter("id"));
-                SpecialtyImpl specialtyImpl = (SpecialtyImpl) sdao.read(id);
+                SpecialtyImpl specialtyImpl = (SpecialtyImpl)sdao.read(id);
                 req.setAttribute("specialtyImpl", specialtyImpl);
             }
             c.close();
-        } catch (NumberFormatException e) {
-        } catch (SQLException e) {
+        } catch(NumberFormatException e) {} catch(SQLException e) {
             e.printStackTrace();
-        } catch (DaoException e) {
+        } catch(DaoException e) {
             e.printStackTrace();
         }
         getServletContext().getRequestDispatcher("/WEB-INF/jsp/viewSpecialities.jsp").forward(req, resp);

@@ -1,21 +1,21 @@
 package ad.dao.mysql;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 import ad.dao.SpecialtyDao;
 import ad.dao.exception.DaoException;
 import ad.domain.Specialty;
-import ad.domain.bean.SpecialtyImpl;
 import ad.domain.factory.EntityFactory;
 import ad.domain.factory.exception.EntityCreateException;
 
-public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao{
+public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao {
     private EntityFactory<Specialty> specialtyFactory;
 
     public void setSpecialtyFactory(EntityFactory<Specialty> specialtyFactory) {
@@ -23,152 +23,163 @@ public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao
     }
 
     @Override
-    protected int createRaw(Specialty specialtyImpl) throws DaoException {
-        String sql = "INSERT INTO specialties (code, name, parent_id, qualification, shortname, specialty_direction) VALUES (?, ?, ?, ?, ?, ?)";
-        PreparedStatement s = null;
+    protected Integer createRaw(Specialty specialty) throws DaoException {
+        String sql = "INSERT INTO `specialties` (`code`, `name`, `parent_id`, `qualification`, `shortname`, `specialty_direction`) VALUES (?, ?, ?, ?, ?, ?)";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
         try {
-            s = connection.prepareStatement(sql);
-            s.setString(1, specialtyImpl.getCode());
-            s.setString(2, specialtyImpl.getName());
-            if(specialtyImpl.getParent()==null){
-                s.setString(3,null);
-            }else{
-                s.setInt(3, specialtyImpl.getParent().getId());
+            connection = getConnection();
+            statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            statement.setString(1, specialty.getCode());
+            statement.setString(2, specialty.getName());
+            if(specialty.getParent() != null) {
+                statement.setInt(3, specialty.getParent().getId());
+            } else {
+                statement.setNull(3, Types.INTEGER);
             }
-            s.setString(4, specialtyImpl.getQualification());
-            s.setString(5, specialtyImpl.getShortName());
-            s.setString(6, specialtyImpl.getSpecialtyDirection());
-            s.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            statement.setString(4, specialty.getQualification());
+            statement.setString(5, specialty.getShortName());
+            statement.setString(6, specialty.getSpecialtyDirection());
+            statement.executeUpdate();
+            resultSet = statement.getGeneratedKeys();
+            if(resultSet.next()) {
+                return resultSet.getInt(1);
+            } else {
+                return null;
+            }
+        } catch(SQLException e) {
+            throw new DaoException(e);
         } finally {
             try {
-                s.close();
-            } catch (NullPointerException | SQLException e) {
-                return 0;
-            }
-        }
-        return 1;
-    }
-    @Override
-    protected void deleteRaw(int id) throws DaoException {
-        String sql = "DELETE FROM specialties WHERE id=?";
-        PreparedStatement s = null;
-        try {
-            s = connection.prepareStatement(sql);
-            s.setInt(1, id);
-            s.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
+                resultSet.close();
+            } catch(NullPointerException | SQLException e) {}
             try {
-                s.close();
-            } catch (NullPointerException | SQLException e) {
-            }
+                statement.close();
+            } catch(NullPointerException | SQLException e) {}
         }
-    }
-    @Override
-    protected void updateRaw(Specialty specialtyImpl) throws DaoException {
-        String sql = "UPDATE specialties SET code = ?, id = ?, name = ?, parent_id = ?, qualification = ?, shortname = ?, specialty_direction = ? WHERE id = ?";
-        PreparedStatement s = null;
-        try {
-            s = connection.prepareStatement(sql);
-            s.setString(1, specialtyImpl.getCode());
-            s.setInt(2, specialtyImpl.getId());
-            s.setString(3, specialtyImpl.getName());
-            if(specialtyImpl.getParent()==null){
-                s.setString(4,null);
-                s.setNull(4, Types.INTEGER);
-            }else{
-                s.setInt(4, specialtyImpl.getParent().getId());
-            }
-            s.setString(5, specialtyImpl.getQualification());
-            s.setString(6, specialtyImpl.getShortName());
-            s.setString(7, specialtyImpl.getSpecialtyDirection());
-            s.setInt(8, specialtyImpl.getId());
-            s.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                s.close();
-            } catch (NullPointerException | SQLException e) {
-            }
-        }
-
-        //specialties.put(specialtyImpl.getId(), specialtyImpl);
-    }
-    @Override
-    protected Specialty readRaw(int id) throws DaoException {
-        String sql = "SELECT  id, code, name, parent_id, qualification, shortname, specialty_direction FROM specialties WHERE id = ?";
-        PreparedStatement s = null;
-        ResultSet r = null;
-        try {
-            s = connection.prepareStatement(sql);
-            s.setInt(1, id);
-            r = s.executeQuery();
-            Specialty specialtyImpl = null;
-            if (r.next()) {
-                specialtyImpl = specialtyFactory.create();
-                specialtyImpl.setId(r.getInt("id"));
-                specialtyImpl.setCode(r.getString("code"));
-                specialtyImpl.setName(r.getString("name"));
-                specialtyImpl.setParent((SpecialtyImpl) read(r.getInt("parent_id")));
-                specialtyImpl.setQualification(r.getString("qualification"));
-                specialtyImpl.setShortName(r.getString("shortname"));
-                specialtyImpl.setSpecialtyDirection(r.getString("specialty_direction"));
-            }
-            return specialtyImpl;
-        } catch (SQLException| EntityCreateException e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            try {
-                r.close();
-            } catch (NullPointerException | SQLException e) {
-            }
-            try {
-                s.close();
-            } catch (NullPointerException | SQLException e) {
-            }
-        }
-
-        //return specialties.get(id);
     }
 
-    public Collection<Specialty> readAll() throws  DaoException {
-        String sql = "SELECT  id, code, name, parent_id, qualification, shortname, specialty_direction FROM specialties";
-        Statement s = null;
-        ResultSet r = null;
+    @Override
+    protected void deleteRaw(Integer id) throws DaoException {
+        String sql = "DELETE FROM `specialties` WHERE `id` = ?";
+        Connection connection = null;
+        PreparedStatement statement = null;
         try {
-            s = connection.createStatement();
-            r = s.executeQuery(sql);
-            Collection<Specialty> specialties = new ArrayList<>();
-            while (r.next()) {
-                Specialty specialtyImpl =specialtyFactory.create();
-                specialtyImpl.setId(r.getInt("id"));
-                specialtyImpl.setCode(r.getString("code"));
-                specialtyImpl.setName(r.getString("name"));
-                specialtyImpl.setParent((SpecialtyImpl) read(r.getInt("parent_id")));
-                specialtyImpl.setQualification(r.getString("qualification"));
-                specialtyImpl.setShortName(r.getString("shortname"));
-                specialtyImpl.setSpecialtyDirection(r.getString("specialty_direction"));
-                specialties.add(specialtyImpl);
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch(SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            try {
+                statement.close();
+            } catch(NullPointerException | SQLException e) {}
+        }
+    }
+
+    @Override
+    protected void updateRaw(Specialty specialty) throws DaoException {
+        String sql = "UPDATE `specialties` SET `code` = ?, `name` = ?, `parent_id` = ?, `qualification` = ?, `shortname` = ?, `specialty_direction` = ? WHERE `id` = ?";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, specialty.getCode());
+            statement.setString(2, specialty.getName());
+            if(specialty.getParent() != null) {
+                statement.setInt(3, specialty.getParent().getId());
+            } else {
+                statement.setNull(3, Types.INTEGER);
+            }
+            statement.setString(4, specialty.getQualification());
+            statement.setString(5, specialty.getShortName());
+            statement.setString(6, specialty.getSpecialtyDirection());
+            statement.setInt(7, specialty.getId());
+            statement.executeUpdate();
+        } catch(SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            try {
+                statement.close();
+            } catch(NullPointerException | SQLException e) {}
+        }
+    }
+
+    @Override
+    protected Specialty readRaw(Integer id) throws DaoException {
+        String sql = "SELECT `code`, `name`, `parent_id`, `qualification`, `shortname`, `specialty_direction` FROM `specialties` WHERE `id` = ?";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
+            Specialty specialty = null;
+            if(resultSet.next()) {
+                specialty = specialtyFactory.create();
+                specialty.setId(id);
+                specialty.setCode(resultSet.getString("code"));
+                specialty.setName(resultSet.getString("name"));
+                Integer parentId = resultSet.getInt("parent_id");
+                if(!resultSet.wasNull()) {
+                    specialty.getParent().setId(parentId);
+                }
+                specialty.setQualification(resultSet.getString("qualification"));
+                specialty.setShortName(resultSet.getString("shortname"));
+                specialty.setSpecialtyDirection(resultSet.getString("specialty_direction"));
+            }
+            return specialty;
+        } catch(SQLException | EntityCreateException e) {
+            throw new DaoException(e);
+        } finally {
+            try {
+                resultSet.close();
+            } catch(NullPointerException | SQLException e) {}
+            try {
+                statement.close();
+            } catch(NullPointerException | SQLException e) {}
+        }
+    }
+
+    public List<Specialty> readAll() throws DaoException {
+        String sql = "SELECT `id`, `code`, `name`, `parent_id`, `qualification`, `shortname`, `specialty_direction` FROM `specialties`";
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = getConnection();
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sql);
+            List<Specialty> specialties = new ArrayList<>();
+            while(resultSet.next()) {
+                Specialty specialty = specialtyFactory.create();
+                specialty.setId(resultSet.getInt("id"));
+                specialty.setCode(resultSet.getString("code"));
+                specialty.setName(resultSet.getString("name"));
+                Integer parentId = resultSet.getInt("parent_id");
+                if(!resultSet.wasNull()) {
+                    specialty.getParent().setId(parentId);
+                }
+                specialty.setQualification(resultSet.getString("qualification"));
+                specialty.setShortName(resultSet.getString("shortname"));
+                specialty.setSpecialtyDirection(resultSet.getString("specialty_direction"));
+                specialties.add(specialty);
             }
             return specialties;
-        } catch (SQLException | EntityCreateException e) {
-            e.printStackTrace();
-            return null;
+        } catch(SQLException | EntityCreateException e) {
+            throw new DaoException(e);
         } finally {
             try {
-                r.close();
-            } catch (NullPointerException | SQLException e) {
-            }
+                resultSet.close();
+            } catch(NullPointerException | SQLException e) {}
             try {
-                s.close();
-            } catch (NullPointerException | SQLException e) {
-            }
+                statement.close();
+            } catch(NullPointerException | SQLException e) {}
         }
     }
-
 }

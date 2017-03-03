@@ -15,18 +15,18 @@ import ad.dao.exception.DaoException;
 import ad.domain.Discipline;
 
 public class DisciplinesServlet extends HttpServlet {
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		DaoContainer container = DaoContainerFactory.create();
-		try {
-			DisciplineDao dao = container.getDisciplineDao();
-			Collection<Discipline> disciplines = dao.readAll();
-			req.setAttribute("disciplines", disciplines);
-			getServletContext().getRequestDispatcher("/WEB-INF/jsp/disciplines.jsp").forward(req, resp);
-		} catch (DaoException e) {
-			throw new ServletException(e);
-		} finally {
-			// TODO: container.close();
-		}
-	}
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        DaoContainer container = DaoContainerFactory.create();
+        try {
+            DisciplineDao dao = container.getDisciplineDao();
+            Collection<Discipline> disciplines = dao.readAll();
+            req.setAttribute("disciplines", disciplines);
+            getServletContext().getRequestDispatcher("/WEB-INF/jsp/disciplines.jsp").forward(req, resp);
+        } catch(DaoException e) {
+            throw new ServletException(e);
+        } finally {
+            // TODO: container.close();
+        }
+    }
 }

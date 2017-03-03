@@ -1,10 +1,10 @@
 package ad.dao;
 
-import java.util.Collection;
+import java.util.List;
 
 import ad.dao.exception.DaoException;
 import ad.domain.Specialty;
 
 public interface SpecialtyDao extends Dao<Specialty> {
-    Collection<Specialty> readAll() throws DaoException;
+    List<Specialty> readAll() throws DaoException;
 }

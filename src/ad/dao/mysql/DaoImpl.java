@@ -1,37 +1,40 @@
 package ad.dao.mysql;
 
 import java.sql.Connection;
-import java.util.HashMap;
-import java.util.Map;
 
 import ad.dao.Dao;
+import ad.dao.cache.Cache;
 import ad.dao.exception.DaoException;
 import ad.domain.Entity;
 
 abstract public class DaoImpl<T extends Entity> implements Dao<T> {
-    protected Connection connection;
-    private Map<Integer, T> cache = new HashMap<Integer, T>();
-    public T read(int id) throws DaoException {
+    private Connection connection;
+    private Cache<T> cache;
+
+    final public T read(Integer id) throws DaoException {
         T entity = cache.get(id);
         if(entity == null) {
             entity = readRaw(id);
-            addToCache(entity);
+            cache.set(entity);
         }
         return entity;
     }
-    public int create(T object) throws DaoException {
-        int id = createRaw(object);
-        object.setId(id);
-        addToCache(object);
+
+    final public Integer create(T entity) throws DaoException {
+        Integer id = createRaw(entity);
+        entity.setId(id);
+        onCreate(entity);
         return id;
     }
-    public void update(T object) throws DaoException {
-        updateRaw(object);
-        addToCache(object);
+
+    final public void update(T entity) throws DaoException {
+        updateRaw(entity);
+        onUpdate(entity);
     }
-    public void delete(int id) throws DaoException {
-        deleteFromCache(id);
+
+    final public void delete(Integer id) throws DaoException {
         deleteRaw(id);
+        onDelete(id);
     }
 
     public Connection getConnection() {
@@ -42,19 +45,29 @@ abstract public class DaoImpl<T extends Entity> implements Dao<T> {
         this.connection = connection;
     }
 
-    protected void addToCache(T entity) {
-        if(entity!=null){
-            cache.put(entity.getId(), entity);
-        }
+    public Cache<T> getCache() {
+        return cache;
     }
-    protected void deleteFromCache(int id) {
-        cache.remove(id);
+
+    public void setCache(Cache<T> cache) {
+        this.cache = cache;
     }
-    protected void clearCache() {
-        cache.clear();
+
+    protected void onCreate(T entity) {}
+
+    protected void onUpdate(T entity) {
+        cache.delete(entity.getId());
     }
-    abstract protected T readRaw(int id) throws DaoException;
-    abstract protected int createRaw(T object) throws DaoException;
-    abstract protected void updateRaw(T object) throws DaoException;
-    abstract protected void deleteRaw(int id) throws DaoException;
+
+    protected void onDelete(Integer id) {
+        cache.delete(id);
+    }
+
+    abstract protected T readRaw(Integer id) throws DaoException;
+
+    abstract protected Integer createRaw(T entity) throws DaoException;
+
+    abstract protected void updateRaw(T entity) throws DaoException;
+
+    abstract protected void deleteRaw(Integer id) throws DaoException;
 }

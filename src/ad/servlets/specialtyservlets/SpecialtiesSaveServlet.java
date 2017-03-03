@@ -1,6 +1,5 @@
 package ad.servlets.specialtyservlets;
 
-
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -23,7 +22,7 @@ public class SpecialtiesSaveServlet extends HttpServlet {
         try {
             SpecialtyDao dao = container.getSpecialtyDao();
 
-            String [] sIndex = req.getParameter("select").split(" ");
+            String[] sIndex = req.getParameter("select").split(" ");
             SpecialtyImpl specialtyImpl = new SpecialtyImpl();
             specialtyImpl.setCode(req.getParameter("code"));
             specialtyImpl.setName(req.getParameter("name"));
@@ -38,26 +37,24 @@ public class SpecialtiesSaveServlet extends HttpServlet {
 
             try {
                 specialtyImpl.setId(Integer.parseInt(req.getParameter("id")));
-            } catch (NumberFormatException e) {
-            }
+            } catch(NumberFormatException e) {}
             if(specialtyImpl.getId() == null) {
                 try {
                     dao.create(specialtyImpl);
-                } catch (DaoException e) {
+                } catch(DaoException e) {
                     e.printStackTrace();
                 }
             } else {
                 try {
                     dao.update(specialtyImpl);
-                } catch (DaoException e) {
+                } catch(DaoException e) {
                     e.printStackTrace();
                 }
             }
             resp.sendRedirect(req.getContextPath() + "/specialties.html");
-        } catch (DaoException e) {
+        } catch(DaoException e) {
             throw new ServletException(e);
-        }
-        finally {
+        } finally {
             // TODO: container.close();
         }
     }

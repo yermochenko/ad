@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 import ad.dao.DisciplineDao;
 import ad.dao.exception.DaoException;
@@ -15,138 +15,140 @@ import ad.domain.factory.EntityFactory;
 import ad.domain.factory.exception.EntityCreateException;
 
 public class DisciplineDaoImpl extends DaoImpl<Discipline> implements DisciplineDao {
-	private EntityFactory<Discipline> disciplineFactory;
+    private EntityFactory<Discipline> disciplineFactory;
 
-	public void setDisciplineFactory(EntityFactory<Discipline> disciplineFactory) {
-		this.disciplineFactory = disciplineFactory;
-	}
+    public void setDisciplineFactory(EntityFactory<Discipline> disciplineFactory) {
+        this.disciplineFactory = disciplineFactory;
+    }
 
-	@Override
-	protected Discipline readRaw(int id) throws DaoException {
-		String sql = "SELECT id, name, shortname FROM disciplines WHERE id = ?";
-		Connection c = null;
-		PreparedStatement s = null;
-		ResultSet r = null;
-		try {
-			c = getConnection();
-			s = c.prepareStatement(sql);
-			s.setInt(1, id);
-			r = s.executeQuery();
-			Discipline discipline = null;
-			if (r.next()) {
-				discipline = disciplineFactory.create();
-				discipline.setId(r.getInt("id"));
-				discipline.setName(r.getString("name"));
-				discipline.setShortName(r.getString("shortname"));
-			}
-			return discipline;
-		}catch(SQLException | EntityCreateException e) {
+    @Override
+    protected Discipline readRaw(Integer id) throws DaoException {
+        String sql = "SELECT `name`, `shortname` FROM `disciplines` WHERE `id` = ?";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
+            Discipline discipline = null;
+            if(resultSet.next()) {
+                discipline = disciplineFactory.create();
+                discipline.setId(id);
+                discipline.setName(resultSet.getString("name"));
+                discipline.setShortName(resultSet.getString("shortname"));
+            }
+            return discipline;
+        } catch(SQLException | EntityCreateException e) {
             throw new DaoException(e);
-		} finally {
-			try {
-				r.close();
-			} catch (NullPointerException | SQLException e) {
-			}
-			try {
-				s.close();
-			} catch (NullPointerException | SQLException e) {
-			}
-		}
-	}
+        } finally {
+            try {
+                resultSet.close();
+            } catch(NullPointerException | SQLException e) {}
+            try {
+                statement.close();
+            } catch(NullPointerException | SQLException e) {}
+        }
+    }
 
-	@Override
-	protected int createRaw(Discipline discipline) throws DaoException {
-		String sql = "INSERT INTO disciplines (name, shortname) VALUES (?, ?)";
-		Connection c = null;
-		PreparedStatement s = null;
-		try {
-			c=getConnection();
-			s = c.prepareStatement(sql);
-			s.setString(1, discipline.getName());
-			s.setString(2, discipline.getShortName());
-			s.executeUpdate();
-		}catch(SQLException e) {
+    @Override
+    protected Integer createRaw(Discipline discipline) throws DaoException {
+        String sql = "INSERT INTO `disciplines` (`name`, `shortname`) VALUES (?, ?)";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            statement.setString(1, discipline.getName());
+            statement.setString(2, discipline.getShortName());
+            statement.executeUpdate();
+            resultSet = statement.getGeneratedKeys();
+            if(resultSet.next()) {
+                return resultSet.getInt(1);
+            } else {
+                return null;
+            }
+        } catch(SQLException e) {
             throw new DaoException(e);
-		} finally {
-			try {
-				s.close();
-			} catch (NullPointerException | SQLException e) {
-			}
-		}
-		return 1;
-	}
+        } finally {
+            try {
+                resultSet.close();
+            } catch(NullPointerException | SQLException e) {}
+            try {
+                statement.close();
+            } catch(NullPointerException | SQLException e) {}
+        }
+    }
 
-	@Override
-	protected void updateRaw(Discipline discipline) throws DaoException {
-		String sql = "UPDATE disciplines SET name = ?, shortname = ? WHERE id = ?";
-		Connection c=null;
-		PreparedStatement s = null;
-		try {
-			c=getConnection();
-			s = c.prepareStatement(sql);
-			s.setString(1, discipline.getName());
-			s.setString(2, discipline.getShortName());
-			s.setInt(3, discipline.getId());
-			s.executeUpdate();
-		}catch(SQLException e) {
+    @Override
+    protected void updateRaw(Discipline discipline) throws DaoException {
+        String sql = "UPDATE `disciplines` SET `name` = ?, `shortname` = ? WHERE `id` = ?";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, discipline.getName());
+            statement.setString(2, discipline.getShortName());
+            statement.setInt(3, discipline.getId());
+            statement.executeUpdate();
+        } catch(SQLException e) {
             throw new DaoException(e);
-		} finally {
-			try {
-				s.close();
-			} catch (NullPointerException | SQLException e) {
-			}
-		}
-	}
+        } finally {
+            try {
+                statement.close();
+            } catch(NullPointerException | SQLException e) {}
+        }
+    }
 
-	@Override
-	protected void deleteRaw(int id) throws DaoException {
-		String sql = "DELETE FROM disciplines WHERE id=?";
-		Connection c=null;
-		PreparedStatement s = null;
-		try {
-			c=getConnection();
-			s = c.prepareStatement(sql);
-			s.setInt(1, id);
-			s.executeUpdate();
-		} catch(SQLException e) {
+    @Override
+    protected void deleteRaw(Integer id) throws DaoException {
+        String sql = "DELETE FROM `disciplines` WHERE `id` = ?";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch(SQLException e) {
             throw new DaoException(e);
-		} finally {
-			try {
-				s.close();
-			} catch (NullPointerException | SQLException e) {
-			}
-		}
-	}
+        } finally {
+            try {
+                statement.close();
+            } catch(NullPointerException | SQLException e) {}
+        }
+    }
 
-	public Collection<Discipline> readAll() throws DaoException {
-		String sql = "SELECT id, name, shortname FROM disciplines";
-		Connection c=null;
-		Statement s = null;
-		ResultSet r = null;
-		try {
-			c=getConnection();
-			s = c.createStatement();
-			r = s.executeQuery(sql);
-			Collection<Discipline> disciplines = new ArrayList<>();
-			while (r.next()) {
-				Discipline discipline = disciplineFactory.create();
-				discipline.setId(r.getInt("id"));
-				discipline.setName(r.getString("name"));
-				discipline.setShortName(r.getString("shortname"));
-				disciplines.add(discipline);
-			}
-			return disciplines;
-		}catch(SQLException | EntityCreateException e) {
+    public List<Discipline> readAll() throws DaoException {
+        String sql = "SELECT `id`, `name`, `shortname` FROM `disciplines`";
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = getConnection();
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sql);
+            List<Discipline> disciplines = new ArrayList<>();
+            while(resultSet.next()) {
+                Discipline discipline = disciplineFactory.create();
+                discipline.setId(resultSet.getInt("id"));
+                discipline.setName(resultSet.getString("name"));
+                discipline.setShortName(resultSet.getString("shortname"));
+                disciplines.add(discipline);
+            }
+            return disciplines;
+        } catch(SQLException | EntityCreateException e) {
             throw new DaoException(e);
-		}  finally {
-			try {
-				r.close();
-			} catch (NullPointerException | SQLException e) {
-			}
-			try {
-				s.close();
-			} catch (NullPointerException | SQLException e) {
-			}
-		}
-	}
+        } finally {
+            try {
+                resultSet.close();
+            } catch(NullPointerException | SQLException e) {}
+            try {
+                statement.close();
+            } catch(NullPointerException | SQLException e) {}
+        }
+    }
 }

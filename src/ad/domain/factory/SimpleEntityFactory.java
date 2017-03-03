@@ -11,11 +11,11 @@ public class SimpleEntityFactory<T extends Entity> implements EntityFactory<T> {
     }
 
     @SuppressWarnings("unchecked")
-	@Override
+    @Override
     public T create() throws EntityCreateException {
         try {
             return (T)entityClass.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
+        } catch(InstantiationException | IllegalAccessException e) {
             throw new EntityCreateException(e);
         }
     }

@@ -13,31 +13,29 @@ import ad.dao.exception.DaoException;
 import ad.domain.bean.DisciplineImpl;
 
 public class DisciplinesSaveServlet extends HttpServlet {
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		DaoContainer container = DaoContainerFactory.create();
-		try {			
-			req.setCharacterEncoding("UTF-8");
-			DisciplineImpl disciplineImpl = new DisciplineImpl();
-			disciplineImpl.setName(req.getParameter("name"));
-			disciplineImpl.setShortName(req.getParameter("shortname"));
-			try {
-				disciplineImpl.setId(Integer.parseInt(req.getParameter("id")));
-			} catch (NumberFormatException e) {
-			}
-			
-			DisciplineDao dao = container.getDisciplineDao();
-			if (disciplineImpl.getId() == null) {
-				dao.create(disciplineImpl);
-			} else {
-				dao.update(disciplineImpl);
-			}
-			resp.sendRedirect(req.getContextPath() + "/disciplines.html");			
-		} catch (DaoException e) {
-			throw new ServletException(e);
-		}
-		finally {
-			// TODO: container.close();
-		}
-	}
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        DaoContainer container = DaoContainerFactory.create();
+        try {
+            req.setCharacterEncoding("UTF-8");
+            DisciplineImpl disciplineImpl = new DisciplineImpl();
+            disciplineImpl.setName(req.getParameter("name"));
+            disciplineImpl.setShortName(req.getParameter("shortname"));
+            try {
+                disciplineImpl.setId(Integer.parseInt(req.getParameter("id")));
+            } catch(NumberFormatException e) {}
+
+            DisciplineDao dao = container.getDisciplineDao();
+            if(disciplineImpl.getId() == null) {
+                dao.create(disciplineImpl);
+            } else {
+                dao.update(disciplineImpl);
+            }
+            resp.sendRedirect(req.getContextPath() + "/disciplines.html");
+        } catch(DaoException e) {
+            throw new ServletException(e);
+        } finally {
+            // TODO: container.close();
+        }
+    }
 }
