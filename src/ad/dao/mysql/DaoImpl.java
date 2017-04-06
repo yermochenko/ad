@@ -6,10 +6,12 @@ import ad.dao.Dao;
 import ad.dao.cache.Cache;
 import ad.dao.exception.DaoException;
 import ad.domain.Entity;
+import ad.domain.factory.EntityFactory;
 
 abstract public class DaoImpl<T extends Entity> implements Dao<T> {
     private Connection connection;
     private Cache<T> cache;
+    private EntityFactory<T> entityFactory;
 
     final public T read(Integer id) throws DaoException {
         T entity = cache.get(id);
@@ -51,6 +53,14 @@ abstract public class DaoImpl<T extends Entity> implements Dao<T> {
 
     public void setCache(Cache<T> cache) {
         this.cache = cache;
+    }
+
+    public EntityFactory<T> getEntityFactory() {
+        return entityFactory;
+    }
+
+    public void setEntityFactory(EntityFactory<T> entityFactory) {
+        this.entityFactory = entityFactory;
     }
 
     protected void onCreate(T entity) {}

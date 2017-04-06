@@ -11,16 +11,9 @@ import java.util.List;
 import ad.dao.DisciplineDao;
 import ad.dao.exception.DaoException;
 import ad.domain.Discipline;
-import ad.domain.factory.EntityFactory;
 import ad.domain.factory.exception.EntityCreateException;
 
 public class DisciplineDaoImpl extends DaoImpl<Discipline> implements DisciplineDao {
-    private EntityFactory<Discipline> disciplineFactory;
-
-    public void setDisciplineFactory(EntityFactory<Discipline> disciplineFactory) {
-        this.disciplineFactory = disciplineFactory;
-    }
-
     @Override
     protected Discipline readRaw(Integer id) throws DaoException {
         String sql = "SELECT `name`, `shortname` FROM `disciplines` WHERE `id` = ?";
@@ -34,7 +27,7 @@ public class DisciplineDaoImpl extends DaoImpl<Discipline> implements Discipline
             resultSet = statement.executeQuery();
             Discipline discipline = null;
             if(resultSet.next()) {
-                discipline = disciplineFactory.create();
+                discipline = getEntityFactory().create();
                 discipline.setId(id);
                 discipline.setName(resultSet.getString("name"));
                 discipline.setShortName(resultSet.getString("shortname"));
@@ -133,7 +126,7 @@ public class DisciplineDaoImpl extends DaoImpl<Discipline> implements Discipline
             resultSet = statement.executeQuery(sql);
             List<Discipline> disciplines = new ArrayList<>();
             while(resultSet.next()) {
-                Discipline discipline = disciplineFactory.create();
+                Discipline discipline = getEntityFactory().create();
                 discipline.setId(resultSet.getInt("id"));
                 discipline.setName(resultSet.getString("name"));
                 discipline.setShortName(resultSet.getString("shortname"));

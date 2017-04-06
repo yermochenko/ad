@@ -12,16 +12,9 @@ import java.util.List;
 import ad.dao.SpecialtyDao;
 import ad.dao.exception.DaoException;
 import ad.domain.Specialty;
-import ad.domain.factory.EntityFactory;
 import ad.domain.factory.exception.EntityCreateException;
 
 public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao {
-    private EntityFactory<Specialty> specialtyFactory;
-
-    public void setSpecialtyFactory(EntityFactory<Specialty> specialtyFactory) {
-        this.specialtyFactory = specialtyFactory;
-    }
-
     @Override
     protected Integer createRaw(Specialty specialty) throws DaoException {
         String sql = "INSERT INTO `specialties` (`code`, `name`, `parent_id`, `qualification`, `shortname`, `specialty_direction`) VALUES (?, ?, ?, ?, ?, ?)";
@@ -121,7 +114,7 @@ public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao
             resultSet = statement.executeQuery();
             Specialty specialty = null;
             if(resultSet.next()) {
-                specialty = specialtyFactory.create();
+                specialty = getEntityFactory().create();
                 specialty.setId(id);
                 specialty.setCode(resultSet.getString("code"));
                 specialty.setName(resultSet.getString("name"));
@@ -157,7 +150,7 @@ public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao
             resultSet = statement.executeQuery(sql);
             List<Specialty> specialties = new ArrayList<>();
             while(resultSet.next()) {
-                Specialty specialty = specialtyFactory.create();
+                Specialty specialty = getEntityFactory().create();
                 specialty.setId(resultSet.getInt("id"));
                 specialty.setCode(resultSet.getString("code"));
                 specialty.setName(resultSet.getString("name"));

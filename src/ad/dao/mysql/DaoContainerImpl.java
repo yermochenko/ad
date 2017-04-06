@@ -43,7 +43,7 @@ public class DaoContainerImpl implements DaoContainer {
         if(disciplineDao == null) {
             DisciplineDaoImpl disciplineDaoImpl = new DisciplineDaoImpl();
             disciplineDaoImpl.setConnection(getConnection());
-            disciplineDaoImpl.setDisciplineFactory(getDisciplineFactory());
+            disciplineDaoImpl.setEntityFactory(getDisciplineFactory());
             disciplineDaoImpl.setCache(getDisciplineCache());
             disciplineDao = disciplineDaoImpl;
         }
@@ -75,7 +75,7 @@ public class DaoContainerImpl implements DaoContainer {
         if(specialtyDao == null) {
             SpecialtyDaoImpl specialtyDaoImpl = new SpecialtyDaoImpl();
             specialtyDaoImpl.setConnection(getConnection());
-            specialtyDaoImpl.setSpecialtyFactory(getSpecialtyFactory());
+            specialtyDaoImpl.setEntityFactory(getSpecialtyFactory());
             specialtyDaoImpl.setCache(getSpecialtyCache());
             specialtyDao = specialtyDaoImpl;
         }
