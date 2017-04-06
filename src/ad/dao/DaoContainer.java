@@ -19,7 +19,7 @@ public interface DaoContainer {
 
     SpecialtyDao getSpecialtyDao() throws DaoException;
 
-    EntityFactory<Specialty> getSpecialtyFactory();
+    EntityFactory<Specialty> getSpecialtyFactory() throws DaoException;
 
     Cache<Specialty> getSpecialtyCache();
 

@@ -42,10 +42,10 @@ public class DaoContainerImpl implements DaoContainer {
     public DisciplineDao getDisciplineDao() throws DaoException {
         if(disciplineDao == null) {
             DisciplineDaoImpl disciplineDaoImpl = new DisciplineDaoImpl();
+            disciplineDao = disciplineDaoImpl;
             disciplineDaoImpl.setConnection(getConnection());
             disciplineDaoImpl.setEntityFactory(getDisciplineFactory());
             disciplineDaoImpl.setCache(getDisciplineCache());
-            disciplineDao = disciplineDaoImpl;
         }
         return disciplineDao;
     }
@@ -54,8 +54,8 @@ public class DaoContainerImpl implements DaoContainer {
     public EntityFactory<Discipline> getDisciplineFactory() {
         if(disciplineFactory == null) {
             SimpleEntityFactory<Discipline> simpleDisciplineFactory = new SimpleEntityFactory<>();
-            simpleDisciplineFactory.setEntityClass(DisciplineImpl.class);
             disciplineFactory = simpleDisciplineFactory;
+            simpleDisciplineFactory.setEntityClass(DisciplineImpl.class);
         }
         return disciplineFactory;
     }
@@ -74,18 +74,20 @@ public class DaoContainerImpl implements DaoContainer {
     public SpecialtyDao getSpecialtyDao() throws DaoException {
         if(specialtyDao == null) {
             SpecialtyDaoImpl specialtyDaoImpl = new SpecialtyDaoImpl();
+            specialtyDao = specialtyDaoImpl;
             specialtyDaoImpl.setConnection(getConnection());
             specialtyDaoImpl.setEntityFactory(getSpecialtyFactory());
             specialtyDaoImpl.setCache(getSpecialtyCache());
-            specialtyDao = specialtyDaoImpl;
         }
         return specialtyDao;
     }
 
     @Override
-    public EntityFactory<Specialty> getSpecialtyFactory() {
+    public EntityFactory<Specialty> getSpecialtyFactory() throws DaoException {
         if(specialtyFactory == null) {
-            specialtyFactory = new SpecialtyFactory();
+            SpecialtyFactory specialtyFactory = new SpecialtyFactory();
+            this.specialtyFactory = specialtyFactory;
+            specialtyFactory.setSpecialtyDao(getSpecialtyDao());
         }
         return specialtyFactory;
     }
@@ -94,8 +96,8 @@ public class DaoContainerImpl implements DaoContainer {
     public Cache<Specialty> getSpecialtyCache() {
         if(specialtyCache == null) {
             MapCacheImpl<Specialty> cacheImpl = new MapCacheImpl<>();
-            cacheImpl.setCache(new HashMap<Integer, Specialty>());
             specialtyCache = cacheImpl;
+            cacheImpl.setCache(new HashMap<Integer, Specialty>());
         }
         return specialtyCache;
     }

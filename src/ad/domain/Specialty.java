@@ -2,6 +2,8 @@ package ad.domain;
 
 import java.util.List;
 
+import ad.dao.exception.DaoException;
+
 public interface Specialty extends Entity {
     String getCode();
 
@@ -19,11 +21,11 @@ public interface Specialty extends Entity {
 
     void setQualification(String qualification);
 
-    Specialty getParent();
+    Specialty getParent() throws DaoException;
 
     void setParent(Specialty parent);
 
-    List<Specialty> getChildren();
+    List<Specialty> getChildren() throws DaoException;
 
     void setChildren(List<Specialty> children);
 }

@@ -118,7 +118,9 @@ public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao
                 specialty.setName(resultSet.getString("name"));
                 Integer parentId = resultSet.getInt("parent_id");
                 if(!resultSet.wasNull()) {
-                    specialty.getParent().setId(parentId);
+                    Specialty parent = getEntityFactory().create();
+                    parent.setId(parentId);
+                    specialty.setParent(parent);
                 }
                 specialty.setQualification(resultSet.getString("qualification"));
                 specialty.setShortName(resultSet.getString("shortname"));
@@ -136,8 +138,9 @@ public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao
         }
     }
 
+    @Override
     public List<Specialty> readAll() throws DaoException {
-        String sql = "SELECT `id`, `code`, `name`, `parent_id`, `qualification`, `shortname` FROM `specialties`";
+        String sql = "SELECT `id`, `code`, `name`, `qualification`, `shortname` FROM `specialties` WHERE `parent_id` IS NULL";
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -151,12 +154,47 @@ public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao
                 specialty.setId(resultSet.getInt("id"));
                 specialty.setCode(resultSet.getString("code"));
                 specialty.setName(resultSet.getString("name"));
-                Integer parentId = resultSet.getInt("parent_id");
-                if(!resultSet.wasNull()) {
-                    specialty.getParent().setId(parentId);
-                }
                 specialty.setQualification(resultSet.getString("qualification"));
                 specialty.setShortName(resultSet.getString("shortname"));
+                getCache().set(specialty);
+                specialties.add(specialty);
+            }
+            return specialties;
+        } catch(SQLException | EntityCreateException e) {
+            throw new DaoException(e);
+        } finally {
+            try {
+                resultSet.close();
+            } catch(NullPointerException | SQLException e) {}
+            try {
+                statement.close();
+            } catch(NullPointerException | SQLException e) {}
+        }
+    }
+
+    @Override
+    public List<Specialty> readByParent(Integer parentId) throws DaoException {
+        String sql = "SELECT `id`, `code`, `name`, `qualification`, `shortname` FROM `specialties` WHERE `parent_id` = ?";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, parentId);
+            resultSet = statement.executeQuery();
+            List<Specialty> specialties = new ArrayList<>();
+            while(resultSet.next()) {
+                Specialty specialty = getEntityFactory().create();
+                specialty.setId(resultSet.getInt("id"));
+                specialty.setCode(resultSet.getString("code"));
+                specialty.setName(resultSet.getString("name"));
+                Specialty parent = getEntityFactory().create();
+                parent.setId(parentId);
+                specialty.setParent(parent);
+                specialty.setQualification(resultSet.getString("qualification"));
+                specialty.setShortName(resultSet.getString("shortname"));
+                getCache().set(specialty);
                 specialties.add(specialty);
             }
             return specialties;
