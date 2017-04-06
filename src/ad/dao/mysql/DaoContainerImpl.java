@@ -13,9 +13,9 @@ import ad.dao.exception.DaoException;
 import ad.domain.Discipline;
 import ad.domain.Specialty;
 import ad.domain.bean.DisciplineImpl;
-import ad.domain.bean.SpecialtyImpl;
 import ad.domain.factory.EntityFactory;
 import ad.domain.factory.SimpleEntityFactory;
+import ad.domain.factory.SpecialtyFactory;
 
 public class DaoContainerImpl implements DaoContainer {
     private Connection connection;
@@ -85,9 +85,7 @@ public class DaoContainerImpl implements DaoContainer {
     @Override
     public EntityFactory<Specialty> getSpecialtyFactory() {
         if(specialtyFactory == null) {
-            SimpleEntityFactory<Specialty> simpleDisciplineFactory = new SimpleEntityFactory<>();
-            simpleDisciplineFactory.setEntityClass(SpecialtyImpl.class);
-            specialtyFactory = simpleDisciplineFactory;
+            specialtyFactory = new SpecialtyFactory();
         }
         return specialtyFactory;
     }
