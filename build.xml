@@ -8,7 +8,7 @@
 	<property name="tomcat-manager-url" value="http://${tomcat-host}:${tomcat-port}/manager/text"/>
 
 	<!-- targets for database processing -->
-	<!--target name="Init data base">
+	<target name="Init data base">
 		<sql driver="com.mysql.jdbc.Driver"
 				url="${mysql-jdbc-url}"
 				userid="${mysql-user}"
@@ -21,7 +21,7 @@
 				<fileset dir="sql" includes="*.sql"/>
 			</sort>
 		</sql>
-	</target-->
+	</target>
 
 	<!-- targets for web-application processing -->
 	<taskdef name="reload" classname="org.apache.catalina.ant.ReloadTask">

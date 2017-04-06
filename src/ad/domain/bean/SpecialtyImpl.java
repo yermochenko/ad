@@ -12,7 +12,6 @@ public class SpecialtyImpl extends EntityImpl implements Specialty {
     private String name;
     private String shortName;
     private String qualification;
-    private String specialtyDirection;
     private Specialty parent;
     private List<Specialty> children;
 
@@ -54,16 +53,6 @@ public class SpecialtyImpl extends EntityImpl implements Specialty {
     @Override
     public void setQualification(String qualification) {
         this.qualification = qualification;
-    }
-
-    @Override
-    public String getSpecialtyDirection() {
-        return specialtyDirection;
-    }
-
-    @Override
-    public void setSpecialtyDirection(String specialtyDirection) {
-        this.specialtyDirection = specialtyDirection;
     }
 
     @Override

@@ -28,7 +28,6 @@ public class SpecialtiesSaveServlet extends HttpServlet {
             specialtyImpl.setName(req.getParameter("name"));
             specialtyImpl.setShortName(req.getParameter("shortName"));
             specialtyImpl.setQualification(req.getParameter("qualification"));
-            specialtyImpl.setSpecialtyDirection(req.getParameter("specialtyDirection"));
             if(!sIndex[0].isEmpty()) {
                 SpecialtyImpl parent = new SpecialtyImpl();
                 parent.setId(Integer.valueOf(sIndex[0]));

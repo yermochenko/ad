@@ -17,7 +17,7 @@ import ad.domain.factory.exception.EntityCreateException;
 public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao {
     @Override
     protected Integer createRaw(Specialty specialty) throws DaoException {
-        String sql = "INSERT INTO `specialties` (`code`, `name`, `parent_id`, `qualification`, `shortname`, `specialty_direction`) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO `specialties` (`code`, `name`, `parent_id`, `qualification`, `shortname`) VALUES (?, ?, ?, ?, ?)";
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -33,7 +33,6 @@ public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao
             }
             statement.setString(4, specialty.getQualification());
             statement.setString(5, specialty.getShortName());
-            statement.setString(6, specialty.getSpecialtyDirection());
             statement.executeUpdate();
             resultSet = statement.getGeneratedKeys();
             if(resultSet.next()) {
@@ -74,7 +73,7 @@ public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao
 
     @Override
     protected void updateRaw(Specialty specialty) throws DaoException {
-        String sql = "UPDATE `specialties` SET `code` = ?, `name` = ?, `parent_id` = ?, `qualification` = ?, `shortname` = ?, `specialty_direction` = ? WHERE `id` = ?";
+        String sql = "UPDATE `specialties` SET `code` = ?, `name` = ?, `parent_id` = ?, `qualification` = ?, `shortname` = ? WHERE `id` = ?";
         Connection connection = null;
         PreparedStatement statement = null;
         try {
@@ -89,8 +88,7 @@ public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao
             }
             statement.setString(4, specialty.getQualification());
             statement.setString(5, specialty.getShortName());
-            statement.setString(6, specialty.getSpecialtyDirection());
-            statement.setInt(7, specialty.getId());
+            statement.setInt(6, specialty.getId());
             statement.executeUpdate();
         } catch(SQLException e) {
             throw new DaoException(e);
@@ -103,7 +101,7 @@ public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao
 
     @Override
     protected Specialty readRaw(Integer id) throws DaoException {
-        String sql = "SELECT `code`, `name`, `parent_id`, `qualification`, `shortname`, `specialty_direction` FROM `specialties` WHERE `id` = ?";
+        String sql = "SELECT `code`, `name`, `parent_id`, `qualification`, `shortname` FROM `specialties` WHERE `id` = ?";
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -124,7 +122,6 @@ public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao
                 }
                 specialty.setQualification(resultSet.getString("qualification"));
                 specialty.setShortName(resultSet.getString("shortname"));
-                specialty.setSpecialtyDirection(resultSet.getString("specialty_direction"));
             }
             return specialty;
         } catch(SQLException | EntityCreateException e) {
@@ -140,7 +137,7 @@ public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao
     }
 
     public List<Specialty> readAll() throws DaoException {
-        String sql = "SELECT `id`, `code`, `name`, `parent_id`, `qualification`, `shortname`, `specialty_direction` FROM `specialties`";
+        String sql = "SELECT `id`, `code`, `name`, `parent_id`, `qualification`, `shortname` FROM `specialties`";
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -160,7 +157,6 @@ public class SpecialtyDaoImpl extends DaoImpl<Specialty> implements SpecialtyDao
                 }
                 specialty.setQualification(resultSet.getString("qualification"));
                 specialty.setShortName(resultSet.getString("shortname"));
-                specialty.setSpecialtyDirection(resultSet.getString("specialty_direction"));
                 specialties.add(specialty);
             }
             return specialties;

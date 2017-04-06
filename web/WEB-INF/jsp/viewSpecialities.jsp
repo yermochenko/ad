@@ -24,10 +24,6 @@
                     <TH>Квалификация</TH>
                     <TH>${specialtyImpl.qualification}</TH>
                 </TR>
-                <TR>
-                    <TH>Направление специальности</TH>
-                    <TH>${specialtyImpl.specialtyDirection}</TH>
-                </TR>
             </TABLE>
         </c:when>
         <c:otherwise>

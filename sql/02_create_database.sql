@@ -1,0 +1,11 @@
+CREATE DATABASE `ad` DEFAULT CHARACTER SET utf8;
+
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON `ad`.*
+TO ad_user@localhost
+IDENTIFIED BY 'ad_password';
+
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON `ad`.*
+TO ad_user@'%'
+IDENTIFIED BY 'ad_password';

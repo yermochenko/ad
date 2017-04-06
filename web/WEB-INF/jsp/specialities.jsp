@@ -18,7 +18,6 @@
                             <TH>Название специальности</TH>
                             <TH>Сокращенное название</TH>
                             <TH>Квалификация</TH>
-                            <TH>Направление специальности</TH>
                         </TR>
                         <c:forEach var="special" items="${specialities}">
                             <TR>
@@ -27,7 +26,6 @@
                                 <TD>${special.name}</TD>
                                 <TD>${special.shortName}</TD>
                                 <TD>${special.qualification}</TD>
-                                <TD>${special.specialtyDirection}</TD>
                             </TR>
                         </c:forEach>
                     </TABLE>

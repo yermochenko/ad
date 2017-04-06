@@ -14,14 +14,12 @@
                         <P>Название специальности: <INPUT type="text" name="name" value="${specialtyImpl.name}" required></P>
                         <P>Сокращенное название: <INPUT type="text" name="shortName" value="${specialtyImpl.shortName}" required></P>
                         <P>Квалификация: <INPUT type="text" name="qualification" value="${specialtyImpl.qualification}" required></P>
-                        <P>Направление специальности: <INPUT type="text" name="specialtyDirection" value="${specialtyImpl.specialtyDirection}" required></P>
                     </c:when>
                     <c:otherwise>
                         <P>Код специальности: <INPUT type="text" name="code" value="" required></P></P>
                         <P>Название специальности: <INPUT type="text" name="name" value="" required></P>
                         <P>Сокращенное название: <INPUT type="text" name="shortName" value="" required></P>
                         <P>Квалификация: <INPUT type="text" name="qualification" value="" required></P>
-                        <P>Направление специальности: <INPUT type="text" name="specialtyDirection" value="" required></P>
                     </c:otherwise>
                 </c:choose>
 

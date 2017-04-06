@@ -15,10 +15,6 @@ public interface Specialty extends Entity {
 
     void setName(String name);
 
-    String getSpecialtyDirection();
-
-    void setSpecialtyDirection(String specialtyDirection);
-
     String getQualification();
 
     void setQualification(String qualification);
