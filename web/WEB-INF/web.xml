@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 	<display-name>Документооборот кафедры</display-name>
+	
+	<servlet>
+		<servlet-name>DisciplineServlet</servlet-name>
+		<servlet-class>ad.servlets.DisciplineServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DisciplineServlet</servlet-name>
+		<url-pattern>/discipline.html</url-pattern>
+		</servlet-mapping>
 
 	<servlet>
 		<servlet-name>MainPage</servlet-name>
