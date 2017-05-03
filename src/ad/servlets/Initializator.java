@@ -1,24 +1,21 @@
 package ad.servlets;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import ad.dao.mysql.Connector;
 
-/**
- * Created by HomeInc on 25.11.2016.
- */
 public class Initializator implements ServletContextListener {
-    public static final String DRIVER = "com.mysql.jdbc.Driver";
-    public static final String URL = "jdbc:mysql://localhost/ad?useUnicode=true&characterEncoding=UTF-8";
-    public static final String USER = "root";
-    public static final String PASSWORD = "";
-
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         try {
-            Class.forName(DRIVER);
-            Connector.init(DRIVER, URL, USER, PASSWORD);
+            ServletContext context = servletContextEvent.getServletContext();
+            String jdbcDriver = context.getInitParameter("jdbc-driver");
+            String jdbcUrl = context.getInitParameter("jdbc-url");
+            String jdbcUser = context.getInitParameter("jdbc-user");
+            String jdbcPassword = context.getInitParameter("jdbc-password");
+            Connector.init(jdbcDriver, jdbcUrl, jdbcUser, jdbcPassword);
         } catch(ClassNotFoundException e) {
             e.printStackTrace(System.out);
         }
