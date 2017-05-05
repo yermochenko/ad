@@ -8,21 +8,14 @@
     <H1>Список дисциплин</H1>
     <c:choose>
         <c:when test="${not empty disciplines}">
-            <TABLE>
-                <TR>
-                    <TH>Название</TH>
-                    <TH>Сокращенное название</TH>
-                </TR>
+            <UL>
                 <c:forEach var="discipline" items="${disciplines}">
                     <c:url var="editUrl" value="/discipline/edit.html">
                         <c:param name="id" value="${discipline.id}"/>
                     </c:url>
-                    <TR>
-                        <TD><A href="${editUrl}">${discipline.name}</A></TD>
-                        <TD><A href="${editUrl}">${discipline.shortName}</A></TD>
-                    </TR>
+                    <LI><A href="${editUrl}">${discipline.name}</A></LI>
                 </c:forEach>
-            </TABLE>
+            </UL>
         </c:when>
         <c:otherwise>
             <P>Список дисциплин пока пуст</P>
