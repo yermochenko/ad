@@ -3,8 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib tagdir="/WEB-INF/tags" prefix="u"%>
 
-<c:url var="cssUrl" value="/table.css"/>
-<u:html title="Дисциплины" stylesheet="${cssUrl}">
+<u:html title="Дисциплины">
     <H1>Список дисциплин</H1>
     <c:choose>
         <c:when test="${not empty disciplines}">
