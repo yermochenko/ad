@@ -1,4 +1,4 @@
-package ad.servlets.specialtyservlets;
+package ad.servlets.jsp.specialty;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -9,27 +9,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ad.dao.DaoContainer;
-import ad.dao.DaoContainerFactory;
 import ad.dao.SpecialtyDao;
 import ad.dao.exception.DaoException;
 import ad.domain.Specialty;
 
-public class SpecialtiesServlet extends HttpServlet {
+public class SpecialtyListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        Collection<Specialty> specialities = null;
-        DaoContainer container = DaoContainerFactory.create();
+        DaoContainer container = (DaoContainer)req.getAttribute("dao-container");
         try {
-            SpecialtyDao sdao = container.getSpecialtyDao();
-            specialities = sdao.readAll();
+            SpecialtyDao dao = container.getSpecialtyDao();
+            Collection<Specialty> specialties = dao.readAll();
+            req.setAttribute("specialties", specialties);
+            getServletContext().getRequestDispatcher("/WEB-INF/jsp/specialty/list.jsp").forward(req, resp);
         } catch(DaoException e) {
             throw new ServletException(e);
-        } finally {
-            // TODO: container.close();
         }
-        req.setAttribute("specialities", specialities);
-        getServletContext().getRequestDispatcher("/WEB-INF/jsp/specialities.jsp").forward(req, resp);
-
     }
 }

@@ -43,6 +43,11 @@
         <url-pattern>*.html</url-pattern>
     </filter-mapping>
 
+    <error-page>
+        <exception-type>javax.servlet.ServletException</exception-type>
+        <location>/WEB-INF/jsp/error.jsp</location>
+    </error-page>
+
     <!-- РЕГИСТРАЦИЯ СЕРВЛЕТОВ ДЛЯ РАБОТЫ С JSP -->
 
     <servlet>
@@ -92,6 +97,17 @@
     </servlet-mapping>
     <!-- конец блока описания сервлетов для управления дисциплинами -->
 
+    <!-- начало блока описания сервлетов для управления специальностями -->
+    <servlet>
+        <servlet-name>SpecialtyListServlet</servlet-name>
+        <servlet-class>ad.servlets.jsp.specialty.SpecialtyListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SpecialtyListServlet</servlet-name>
+        <url-pattern>/specialty/list.html</url-pattern>
+    </servlet-mapping>
+    <!-- конец блока описания сервлетов для управления специальностями -->
+
     <servlet>
         <servlet-name>CurriculumsServlet</servlet-name>
         <servlet-class>ad.servlets.CurriculumsServlet</servlet-class>
@@ -112,17 +128,8 @@
 
     <!-- Специальность -->
     <servlet>
-        <servlet-name>SpecialtiesServlet</servlet-name>
-        <servlet-class>ad.servlets.specialtyservlets.SpecialtiesServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>SpecialtiesServlet</servlet-name>
-        <url-pattern>/specialties.html</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>SpecialtiesEditServlet</servlet-name>
-        <servlet-class>ad.servlets.specialtyservlets.SpecialtiesEditServlet</servlet-class>
+        <servlet-class>ad.servlets.jsp.specialty.SpecialtiesEditServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SpecialtiesEditServlet</servlet-name>
@@ -131,7 +138,7 @@
 
     <servlet>
         <servlet-name>SpecialtiesDeleteServlet</servlet-name>
-        <servlet-class>ad.servlets.specialtyservlets.SpecialtiesDeleteServlet</servlet-class>
+        <servlet-class>ad.servlets.jsp.specialty.SpecialtiesDeleteServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SpecialtiesDeleteServlet</servlet-name>
@@ -140,7 +147,7 @@
 
     <servlet>
         <servlet-name>SpecialtiesSaveServlet</servlet-name>
-        <servlet-class>ad.servlets.specialtyservlets.SpecialtiesSaveServlet</servlet-class>
+        <servlet-class>ad.servlets.jsp.specialty.SpecialtiesSaveServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SpecialtiesSaveServlet</servlet-name>
@@ -149,7 +156,7 @@
 
     <servlet>
         <servlet-name>SpecialtiesViewServlet</servlet-name>
-        <servlet-class>ad.servlets.specialtyservlets.SpecialtiesViewServlet</servlet-class>
+        <servlet-class>ad.servlets.jsp.specialty.SpecialtiesViewServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SpecialtiesViewServlet</servlet-name>
@@ -166,9 +173,4 @@
         <servlet-name>DisciplineServlet</servlet-name>
         <url-pattern>/discipline</url-pattern>
     </servlet-mapping>
-
-    <error-page>
-        <exception-type>javax.servlet.ServletException</exception-type>
-        <location>/WEB-INF/jsp/error.jsp</location>
-    </error-page>
 </web-app>
