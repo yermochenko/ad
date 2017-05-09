@@ -12,20 +12,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import ad.dao.DaoContainer;
-import ad.dao.DisciplineDao;
+import ad.dao.SpecialtyDao;
 import ad.dao.exception.DaoException;
-import ad.domain.Discipline;
+import ad.domain.Specialty;
 import ad.domain.factory.exception.EntityCreateException;
 
-public class DisciplineServlet extends HttpServlet {
+public class SpecialtyServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		DaoContainer container = (DaoContainer) req.getAttribute("dao-container");
 		try {
-			DisciplineDao dao = container.getDisciplineDao();
-			List<Discipline> disciplines = dao.readAll();
+			SpecialtyDao dao = container.getSpecialtyDao();
+			List<Specialty> specialties = dao.readAll();
 			resp.setCharacterEncoding("UTF-8");
-			new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT).writeValue(resp.getOutputStream(), disciplines);
+			new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT).writeValue(resp.getOutputStream(), specialties);
 		} catch (DaoException e) {
 			throw new ServletException(e);
 		}
@@ -35,13 +35,13 @@ public class DisciplineServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		DaoContainer container = (DaoContainer) req.getAttribute("dao-container");
 		try {
-			Discipline discipline = new ObjectMapper().readValue(req.getReader(), container.getDisciplineFactory().create().getClass());
-			DisciplineDao dao = container.getDisciplineDao();
-			if (discipline.getId() == null) {
-				dao.create(discipline);
+			Specialty specialty = new ObjectMapper().readValue(req.getReader(), container.getSpecialtyFactory().create().getClass());
+			SpecialtyDao dao = container.getSpecialtyDao();
+			if (specialty.getId() == null) {
+				dao.create(specialty);
 				resp.setStatus(201);
 			} else {
-				dao.update(discipline);
+				dao.update(specialty);
 				resp.setStatus(200);
 			}
 		} catch (EntityCreateException | DaoException e) {
