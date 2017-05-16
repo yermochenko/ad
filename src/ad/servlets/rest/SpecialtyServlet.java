@@ -12,8 +12,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import ad.dao.DaoContainer;
+import ad.dao.DisciplineDao;
 import ad.dao.SpecialtyDao;
 import ad.dao.exception.DaoException;
+import ad.domain.Discipline;
 import ad.domain.Specialty;
 import ad.domain.factory.exception.EntityCreateException;
 
@@ -23,9 +25,21 @@ public class SpecialtyServlet extends HttpServlet {
 		DaoContainer container = (DaoContainer) req.getAttribute("dao-container");
 		try {
 			SpecialtyDao dao = container.getSpecialtyDao();
-			List<Specialty> specialties = dao.readAll();
 			resp.setCharacterEncoding("UTF-8");
-			new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT).writeValue(resp.getOutputStream(), specialties);
+
+			String stringId = req.getParameter("id");
+
+			if (stringId == null || stringId.isEmpty()) {
+				List<Specialty> specialties = dao.readAll();
+				new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT).writeValue(resp.getOutputStream(),
+						specialties);
+			} else {
+				Integer id = Integer.parseInt(stringId);
+				Specialty specialty = dao.read(id);
+				new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT).writeValue(resp.getOutputStream(),
+						specialty);
+			}
+		} catch (NumberFormatException e) {
 		} catch (DaoException e) {
 			throw new ServletException(e);
 		}
@@ -35,7 +49,8 @@ public class SpecialtyServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		DaoContainer container = (DaoContainer) req.getAttribute("dao-container");
 		try {
-			Specialty specialty = new ObjectMapper().readValue(req.getReader(), container.getSpecialtyFactory().create().getClass());
+			Specialty specialty = new ObjectMapper().readValue(req.getReader(),
+					container.getSpecialtyFactory().create().getClass());
 			SpecialtyDao dao = container.getSpecialtyDao();
 			if (specialty.getId() == null) {
 				dao.create(specialty);
@@ -51,6 +66,14 @@ public class SpecialtyServlet extends HttpServlet {
 
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO: реализовать удаление
+		DaoContainer container = (DaoContainer) req.getAttribute("dao-container");
+		try {
+			Integer id = Integer.parseInt(req.getParameter("id"));
+			SpecialtyDao dao = container.getSpecialtyDao();
+			dao.delete(id);
+		} catch (NumberFormatException e) {
+		} catch (DaoException e) {
+			throw new ServletException(e);
+		}
 	}
 }

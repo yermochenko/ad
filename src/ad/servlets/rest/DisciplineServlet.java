@@ -23,9 +23,21 @@ public class DisciplineServlet extends HttpServlet {
 		DaoContainer container = (DaoContainer) req.getAttribute("dao-container");
 		try {
 			DisciplineDao dao = container.getDisciplineDao();
-			List<Discipline> disciplines = dao.readAll();
 			resp.setCharacterEncoding("UTF-8");
-			new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT).writeValue(resp.getOutputStream(), disciplines);
+
+			String stringId = req.getParameter("id");
+
+			if (stringId == null || stringId.isEmpty()) {
+				List<Discipline> disciplines = dao.readAll();
+				new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT).writeValue(resp.getOutputStream(),
+						disciplines);
+			} else {
+				Integer id = Integer.parseInt(stringId);
+				Discipline discipline = dao.read(id);
+				new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT).writeValue(resp.getOutputStream(),
+						discipline);
+			}
+		} catch (NumberFormatException e) {
 		} catch (DaoException e) {
 			throw new ServletException(e);
 		}
@@ -35,7 +47,8 @@ public class DisciplineServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		DaoContainer container = (DaoContainer) req.getAttribute("dao-container");
 		try {
-			Discipline discipline = new ObjectMapper().readValue(req.getReader(), container.getDisciplineFactory().create().getClass());
+			Discipline discipline = new ObjectMapper().readValue(req.getReader(),
+					container.getDisciplineFactory().create().getClass());
 			DisciplineDao dao = container.getDisciplineDao();
 			if (discipline.getId() == null) {
 				dao.create(discipline);
@@ -51,6 +64,14 @@ public class DisciplineServlet extends HttpServlet {
 
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO: реализовать удаление
+		DaoContainer container = (DaoContainer) req.getAttribute("dao-container");
+		try {
+			Integer id = Integer.parseInt(req.getParameter("id"));
+			DisciplineDao dao = container.getDisciplineDao();
+			dao.delete(id);
+		} catch (NumberFormatException e) {
+		} catch (DaoException e) {
+			throw new ServletException(e);
+		}
 	}
 }

@@ -173,4 +173,13 @@
         <servlet-name>DisciplineServlet</servlet-name>
         <url-pattern>/discipline</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>SpecialtyServlet</servlet-name>
+        <servlet-class>ad.servlets.rest.SpecialtyServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SpecialtyServlet</servlet-name>
+        <url-pattern>/specialty</url-pattern>
+    </servlet-mapping>
 </web-app>
