@@ -3,10 +3,12 @@ package ad.domain.bean;
 import java.util.List;
 
 import ad.domain.Specialty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /*
  * Специальность
  */
+
 public class SpecialtyImpl extends EntityImpl implements Specialty {
     private String code;
     private String name;

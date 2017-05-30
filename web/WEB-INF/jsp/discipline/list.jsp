@@ -5,6 +5,9 @@
 
 <u:html title="Дисциплины">
     <H1>Список дисциплин</H1>
+    <button id="createTableDiscipline">Загрузить таблицу дисциплин</button>
+    <button id="createSpecialtyDiscipline">Загрузить таблицу специальностей</button>
+    <div id="tableBlock"></div>
     <c:choose>
         <c:when test="${not empty disciplines}">
             <UL>
@@ -26,4 +29,6 @@
     </FORM>
     <c:url var="backUrl" value="/"/>
     <P><A href="${backUrl}">Вернуться на главную страницу</A></P>
+
+
 </u:html>

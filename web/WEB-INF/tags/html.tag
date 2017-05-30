@@ -12,6 +12,14 @@
         <c:if test="${not empty stylesheet}">
             <LINK rel="stylesheet" type="text/css" href="${stylesheet}">
         </c:if>
+
+        <LINK rel="stylesheet" type="text/css" href="/ad/css/bootstrap.css">
+
+        <script type="text/javascript" src="/ad/js/controllers/MainController.js"></script>
+        <script type="text/javascript" src="/ad/js/View/View.js"></script>
+        <script type="text/javascript" src="/ad/js/View/DOMView/Table.js"></script>
+        <script type="text/javascript" src="/ad/js/View/DOMView/Form.js"></script>
+        <script type="text/javascript" src="/ad/js/Rest.js"></script>
     </HEAD>
     <BODY>
         <jsp:doBody/>

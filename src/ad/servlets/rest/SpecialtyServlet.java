@@ -23,6 +23,10 @@ public class SpecialtyServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		DaoContainer container = (DaoContainer) req.getAttribute("dao-container");
+
+		System.out.println("\n\n" + "GET SPECIALTY2");
+
+
 		try {
 			SpecialtyDao dao = container.getSpecialtyDao();
 			resp.setCharacterEncoding("UTF-8");

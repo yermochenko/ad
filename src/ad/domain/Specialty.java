@@ -3,7 +3,9 @@ package ad.domain;
 import java.util.List;
 
 import ad.dao.exception.DaoException;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(value = { "parent","entity" })
 public interface Specialty extends Entity {
     String getCode();
 

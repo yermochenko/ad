@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Connector {
-    private static String jdbcUrl = null;
-    private static String jdbcUser = null;
+    private static String jdbcUrl = "root";
+    private static String jdbcUser = "";
     private static String jdbcPassword = null;
 
     public static void init(String jdbcDriver, String jdbcUrl, String jdbcUser, String jdbcPassword) throws ClassNotFoundException {

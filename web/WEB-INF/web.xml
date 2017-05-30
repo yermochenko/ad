@@ -48,6 +48,17 @@
         <location>/WEB-INF/jsp/error.jsp</location>
     </error-page>
 
+    <!-- РЕГИСТРАЦИЯ СЕРВЛЕТОВ ДЛЯ РАБОЫ С HTML -->
+
+    <servlet>
+        <servlet-name>HtmlPage</servlet-name>
+        <servlet-class>ad.servlets.rest.html.HtmlServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HtmlPage</servlet-name>
+        <url-pattern>/indexh.html</url-pattern>
+    </servlet-mapping>
+
     <!-- РЕГИСТРАЦИЯ СЕРВЛЕТОВ ДЛЯ РАБОТЫ С JSP -->
 
     <servlet>
@@ -129,7 +140,7 @@
     <!-- Специальность -->
     <servlet>
         <servlet-name>SpecialtiesEditServlet</servlet-name>
-        <servlet-class>ad.servlets.jsp.specialty.SpecialtiesEditServlet</servlet-class>
+        <servlet-class>ad.servlets.specialtyservlets.SpecialtiesEditServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SpecialtiesEditServlet</servlet-name>
@@ -138,7 +149,7 @@
 
     <servlet>
         <servlet-name>SpecialtiesDeleteServlet</servlet-name>
-        <servlet-class>ad.servlets.jsp.specialty.SpecialtiesDeleteServlet</servlet-class>
+        <servlet-class>ad.servlets.specialtyservlets.SpecialtiesDeleteServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SpecialtiesDeleteServlet</servlet-name>
@@ -147,7 +158,7 @@
 
     <servlet>
         <servlet-name>SpecialtiesSaveServlet</servlet-name>
-        <servlet-class>ad.servlets.jsp.specialty.SpecialtiesSaveServlet</servlet-class>
+        <servlet-class>ad.servlets.specialtyservlets.SpecialtiesSaveServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SpecialtiesSaveServlet</servlet-name>
@@ -156,7 +167,7 @@
 
     <servlet>
         <servlet-name>SpecialtiesViewServlet</servlet-name>
-        <servlet-class>ad.servlets.jsp.specialty.SpecialtiesViewServlet</servlet-class>
+        <servlet-class>ad.servlets.specialtyservlets.SpecialtiesViewServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SpecialtiesViewServlet</servlet-name>
